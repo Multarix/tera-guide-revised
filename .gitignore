@@ -1,0 +1,6 @@
+.git
+node_modules
+config.json
+module.config.json
+convert.js
+modules/stuff.js
