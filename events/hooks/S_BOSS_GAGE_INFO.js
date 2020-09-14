@@ -1,4 +1,5 @@
 exports.func = (mod, extras, evt) => {
+	// Return if any of the below is false
 	if(!mod.settings.enabled || !extras.active_guide || !extras.verbose) return;
 
 	const { entity } = mod.require.library; // Honestly, I still have no idea what this does, it's not my code
