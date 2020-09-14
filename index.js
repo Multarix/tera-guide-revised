@@ -16,18 +16,21 @@ module.exports = function TeraGuide(mod){
 		spawning: false, // If the dungeon has object spawning disabled
 		sp: false, // for sp guides
 		es: false, // for es guides
-		mobHP: {}
+		mobHP: {} // Mob hps
 	};
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
 
 	const init = async () => {
-		// Load the names of the available guides
+		// Load the ids of the available guides
 		const guideFiles = await readdir(path.resolve(__dirname, "./guides/"));
 		for(const file of guideFiles){
 			if(file.split(".").slice(-1)[0] !== "js") continue;
 			const guideName = file.split(".")[0];
 			extras.guides.push(guideName);
+
+			// If the dungeon doesn't exist within the settings, we can add it, through we're missing it's name, we'll deal with that later.
+			if(!mod.settings.dungeons[guideName]) mod.settings.dungeons[guideName] = { name: undefined, verbose: true, spawnObject: true };
 		}
 
 		// Load "game" events
