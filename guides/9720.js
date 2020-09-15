@@ -2,7 +2,7 @@
 //
 // made by Yuyuko / HSDN
 
-const { SpawnMarker, SpawnVector, SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -35,7 +35,7 @@ module.exports = (mod) => {
 
 		// 2 BOSS
 		"s-720-2000-106-0": [{ "type": "text", "message": "Spin Attack" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 320, 0, 3500) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 320, 0, 3500] }],
 		"s-720-2000-105-0": [{ "type": "text", "message": "Back Attack" }],
 		"s-720-2000-104-0": [{ "type": "text", "message": "Random Jump" }],
 		"s-720-2000-112-0": [{ "type": "text", "message": "Right Slash" }],
@@ -53,16 +53,16 @@ module.exports = (mod) => {
 		"s-720-3000-109-0": [{ "type": "text", "class_position":"tank", "message": "Right Safe" },
 			{ "type": "text", "class_position":"dps", "message": "Left Safe" },
 			{ "type": "text", "class_position":"heal", "message": "Left Safe" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 90, -250, 0, 2500, true, null) },
-			{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 180, 500, 0, 2500) },
-			{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 0, 500, 0, 2500) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 90, -250, 0, 2500, true, null] },
+			{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 180, 500, 0, 2500] },
+			{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 0, 500, 0, 2500] }],
 		// heart thrust+clockwise spin+left swipe
 		"s-720-3000-111-0": [{ "type": "text", "class_position":"tank", "message": "Left Safe" },
 			{ "type": "text", "class_position":"dps", "message": "Right Safe" },
 			{ "type": "text", "class_position":"heal", "message": "Right Safe" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 270, -250, 0, 2500, true, null) },
-			{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 180, 500, 0, 2500) },
-			{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 0, 500, 0, 2500) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 270, -250, 0, 2500, true, null] },
+			{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 180, 500, 0, 2500] },
+			{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 0, 500, 0, 2500] }],
 		"s-720-3000-113-0": [{ "type": "text", "message": "Front | Back Slam" }],
 		"s-720-3000-115-0": [{ "type": "text", "message": "Spinning Attack" }],
 		"s-720-3000-104-0": [{ "type": "function", "function": thirdboss_backattack_event }],

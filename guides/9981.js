@@ -2,7 +2,7 @@
 //
 // made by michengs / HSDN
 
-const { SpawnMarker, SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -74,23 +74,23 @@ module.exports = (mod) => {
 
 		// 1 BOSS
 		"s-981-1000-2401": [{ "type": "text", "message": "Right" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 300, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 230, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 300, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 230, 100, 0, 2000, true, null] }],
 		"s-981-1000-2402": [{ "type": "text", "message": "Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 60, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 130, 100, 0, 2000, true, null) }],
-		"s-981-1000-2304-0": [{ "type": "text", "message": "Flying" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 6000) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 60, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 130, 100, 0, 2000, true, null] }],
+		"s-981-1000-2304-0": [{ "type": "text", "message": "Flying" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 6000] }],
 		"s-981-1000-2303-0": [{ "type": "text", "message": "Spin" }],
 		"s-981-1000-2113-0": [{ "type": "text", "message": "Front + AoEs" }],
 		"s-981-1000-2308-0": [{ "type": "text", "message": "OUT" }],
 		"s-981-1000-2309-0": [{ "type": "text", "message": "IN" }],
 		"s-981-1000-1401": [{ "type": "text", "message": "Right" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 300, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 230, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 300, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 230, 100, 0, 2000, true, null] }],
 		"s-981-1000-1402": [{ "type": "text", "message": "Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 60, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 130, 100, 0, 2000, true, null) }],
-		"s-981-1000-1304-0": [{ "type": "text", "message": "Flying" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 6000) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 60, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 130, 100, 0, 2000, true, null] }],
+		"s-981-1000-1304-0": [{ "type": "text", "message": "Flying" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 6000] }],
 		"s-981-1000-1303-0": [{ "type": "text", "message": "Spin" }],
 		"s-981-1000-1113-0": [{ "type": "text", "message": "Front + AoEs" }],
 		"s-981-1000-1308-0": [{ "type": "text", "message": "OUT" }],
@@ -111,13 +111,13 @@ module.exports = (mod) => {
 			{ "type": "text", "delay": 1000, "message": "3" },
 			{ "type": "text", "delay": 2000, "message": "2" },
 			{ "type": "text", "delay": 3000, "message": "1" }],
-		// "s-981-2000-1112-0": [{ "type": "function", "function": single_stage_callout.bind(null, "STAB + KNOCKUP") }],
+		// "s-981-2000-1112-0": [{ "type": "function", "function": single_stage_callout["STAB + KNOCKUP"] }],
 		"s-981-2000-1130-0": [{ "type": "text", "message": "Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 60, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 130, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 60, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 130, 100, 0, 2000, true, null] }],
 		"s-981-2000-1131-0": [{ "type": "text", "message": "Right" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 300, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 230, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 300, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 230, 100, 0, 2000, true, null] }],
 		// "s-981-2000-2503-0": [{ "type": "text", "message": "坦快跑远" }],
 		"s-981-2000-2106-0": [{ "type": "text", "message": "Back" }],
 		"s-981-2000-2108-0": [{ "type": "text", "message": "Front" }],
@@ -128,11 +128,11 @@ module.exports = (mod) => {
 			{ "type": "text", "delay": 2000, "message": "2" },
 			{ "type": "text", "delay": 3000, "message": "1" }],
 		"s-981-2000-2130-0": [{ "type": "text", "message": "Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 60, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 130, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 60, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 130, 100, 0, 2000, true, null] }],
 		"s-981-2000-2131-0": [{ "type": "text", "message": "Right" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 300, 100, 0, 2000, true, null) },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 230, 100, 0, 2000, true, null) }],
+			{ "type": "function", "function": spawn.marker, "args": [false, 300, 100, 0, 2000, true, null] },
+			{ "type": "function", "function": spawn.marker, "args": [false, 230, 100, 0, 2000, true, null] }],
 		// "s-981-2000-4000-0": [{ "type": "text", "sub_type": "alert", "message": "鉴定！！！！" }],
 		// "dm-0-0-9981022": [{ "type": "text", "sub_type": "alert", "message": "鉴定" }],
 		// "dm-0-0-9981023": [{ "type": "text", "message": "全场鉴定" }],
@@ -143,9 +143,9 @@ module.exports = (mod) => {
 		// 3 BOSS
 		"h-981-3000-99": [{ "type": "function", "function": thirdboss_start_event }],
 		"h-981-3000-50": [{ "type": "function", "function": thirdboss_fifty_event }],
-		"dm-0-0-9981043": [{ "type": "function", "function": thirdboss_message_event.bind(null, 1043) }], // Lakan has noticed you.
-		"dm-0-0-9981044": [{ "type": "function", "function": thirdboss_message_event.bind(null, 1044) }], // Lakan is trying to take you on one at a time.
-		"dm-0-0-9981045": [{ "type": "function", "function": thirdboss_message_event.bind(null, 1045) }], // Lakan intends to kill all of you at once.
+		"dm-0-0-9981043": [{ "type": "function", "function": thirdboss_message_event[1043] }], // Lakan has noticed you.
+		"dm-0-0-9981044": [{ "type": "function", "function": thirdboss_message_event[1044] }], // Lakan is trying to take you on one at a time.
+		"dm-0-0-9981045": [{ "type": "function", "function": thirdboss_message_event[1045] }], // Lakan intends to kill all of you at once.
 		"s-981-3000-1404-0": [{ "type": "text", "message": "(Debuffs) Closest" }],
 		"s-981-3000-1405-0": [{ "type": "text", "message": "(Debuffs) Farthest" }],
 		"s-981-3000-1301-0": [{ "type": "text", "message": "(Bombs) Gather + Cleanse" }],
@@ -162,11 +162,11 @@ module.exports = (mod) => {
 		"s-981-3000-2113-0": [{ "type": "text", "message": "Bait" }],
 		"s-981-3000-1152-0": [{ "type": "text", "message": "Stun + Back" }],
 		"s-981-3000-2152-0": [{ "type": "text", "message": "Stun + Back" }],
-		"s-981-3000-2138-0": [{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 250, 0, 6000) }],
-		"s-981-3000-1138-0": [{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 250, 0, 6000) }],
+		"s-981-3000-2138-0": [{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 250, 0, 6000] }],
+		"s-981-3000-1138-0": [{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 250, 0, 6000] }],
 		"s-981-3000-1144-0": [{ "type": "text", "message": "OUT" }],
 		"s-981-3000-1145-0": [{ "type": "text", "message": "IN" }],
-		"s-981-3000-1240-0": [{ "type": "text", "message": "Donuts" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 350, 0, 6000) }],
+		"s-981-3000-1240-0": [{ "type": "text", "message": "Donuts" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 350, 0, 6000] }],
 		"s-981-3000-1401-0": [{ "type": "text", "message": "Plague/Regress" }],
 		"s-981-3000-1402-0": [{ "type": "text", "message": "Sleep" }]
 	};

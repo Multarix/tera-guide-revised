@@ -54,6 +54,7 @@
 	},
 	"globals": {
 		"eventHandler": false,
-		"sendMessage": false
+		"sendMessage": false,
+		"spawn": false
 	}
 }

@@ -2,7 +2,7 @@
 //
 // made by Yuyuko / HSDN
 
-const { HIGHLIGHT_ITEM, SpawnMarker, SpawnVector, SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -33,7 +33,7 @@ function thirdboss_set_clockwise_event(clockwise, handlers, event, ent, dispatch
 		const colour_rotation = clockwise ? ["red", "yellow", "blue"] : ["blue", "yellow", "red"];
 		for(let i = 0; i < 3; i++){
 			const current_colour = colour_rotation[(colour_rotation.indexOf(colour_to_use) + i) % 3];
-			SpawnMarker(false, COLOURS_OFFSETS[current_colour], 150, i * 2600, (i + 1) * 3000, true, null, handlers, event, ent, dispatch);
+			spawn.marker(false, COLOURS_OFFSETS[current_colour], 150, i * 2600, (i + 1) * 3000, true, null, handlers, event, ent, dispatch);
 		}
 		dispatch.setTimeout(()=> clockwise = null, 12000);
 	}, 1000);
@@ -45,20 +45,20 @@ function thirdboss_change_colour_event(colour){
 const SPAWNING_FIRST_CIRCLE_FLOWERS = [{ "type": "text", "class_position": "tank", "message": "Right Safe > Inward Waves" },
 	{ "type": "text", "class_position": "dps", "message": "Left Safe > Inward Waves" },
 	{ "type": "text", "class_position": "heal", "message": "Left Safe > Inward Waves" },
-	{ "type": "function", "function": SpawnMarker.bind(null, false, 90, -250, 0, 2500, true, null) },
-	{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 180, 500, 0, 2500) },
-	{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 0, 500, 0, 1500) },
-	{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 18, 143, 1500, 5000) },
-	{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 12, 293, 1500, 5000) }];
+	{ "type": "function", "function": spawn.marker, "args": [false, 90, -250, 0, 2500, true, null] },
+	{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 180, 500, 0, 2500] },
+	{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 0, 500, 0, 1500] },
+	{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 18, 143, 1500, 5000] },
+	{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 12, 293, 1500, 5000] }];
 
 const SPAWNING_SECOND_CIRCLE_FLOWERS = [{ "type": "text", "class_position": "tank", "message": "Left Safe > Outward Waves" },
 	{ "type": "text", "class_position": "dps", "message": "Right Safe > Outward Waves" },
 	{ "type": "text", "class_position": "heal", "message": "Right Safe > Outward Waves" },
-	{ "type": "function", "function": SpawnMarker.bind(null, false, 270, -250, 0, 2500, true, null) },
-	{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 180, 500, 0, 2500) },
-	{ "type": "function", "function": SpawnVector.bind(null, 553, 0, 0, 0, 500, 0, 1500) },
-	{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 18, 157, 1500, 5000) },
-	{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 12, 307, 1500, 5000) }];
+	{ "type": "function", "function": spawn.marker, "args": [false, 270, -250, 0, 2500, true, null] },
+	{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 180, 500, 0, 2500] },
+	{ "type": "function", "function": spawn.vector, "args": [553, 0, 0, 0, 500, 0, 1500] },
+	{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 18, 157, 1500, 5000] },
+	{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 12, 307, 1500, 5000] }];
 
 module.exports = (mod) => {
 	return {
@@ -83,7 +83,7 @@ module.exports = (mod) => {
 		"s-920-2000-1113-0": [{ "type": "text", "message": "Left Slash" }],
 		"s-920-2000-1114-0": [{ "type": "text", "message": "Right Slash" }],
 		"s-920-2000-1106-0": [{ "type": "text", "message": "Spin Attack" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 320, 0, 3500) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 320, 0, 3500] }],
 		"s-920-2000-1105-0": [{ "type": "text", "message": "Back Attack" }],
 		"s-920-2000-1104-0": [{ "type": "text", "message": "Random Jump" }],
 		"s-920-2000-1110-0": [{ "type": "text", "message": "Stun Attack" }],
@@ -95,7 +95,7 @@ module.exports = (mod) => {
 		"s-920-2000-2113-0": [{ "type": "text", "message": "Left Slash" }],
 		"s-920-2000-2114-0": [{ "type": "text", "message": "Right Slash" }],
 		"s-920-2000-2106-0": [{ "type": "text", "message": "Spin Attack" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 320, 0, 3500) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 320, 0, 3500] }],
 		"s-920-2000-2105-0": [{ "type": "text", "message": "Back Attack" }],
 		"s-920-2000-2104-0": [{ "type": "text", "message": "Random Jump" }],
 		"s-920-2000-2110-0": [{ "type": "text", "message": "Stun Attack" }],
@@ -142,13 +142,13 @@ module.exports = (mod) => {
 		"s-920-3000-1400-0": [{ "type": "text", "message": "Clones: Beam" }],
 		"s-920-3000-1401-0": [{ "type": "text", "message": "Clones: Spin" }],
 		// color marks in cage
-		"ae-0-0-9203037": [{ "type": "text", "message": "Red" }, { "type": "function", "function": thirdboss_change_colour_event.bind(null, "red") }],
-		"ae-0-0-9203038": [{ "type": "text", "message": "Yellow" }, { "type": "function", "function": thirdboss_change_colour_event.bind(null, "yellow") }],
-		"ae-0-0-9203039": [{ "type": "text", "message": "Blue" }, { "type": "function", "function": thirdboss_change_colour_event.bind(null, "blue") }],
+		"ae-0-0-9203037": [{ "type": "text", "message": "Red" }, { "type": "function", "function": thirdboss_change_colour_event["red"] }],
+		"ae-0-0-9203038": [{ "type": "text", "message": "Yellow" }, { "type": "function", "function": thirdboss_change_colour_event["yellow"] }],
+		"ae-0-0-9203039": [{ "type": "text", "message": "Blue" }, { "type": "function", "function": thirdboss_change_colour_event["blue"] }],
 		// anti-clockwise
-		"s-920-3000-1317-0": [{ "type": "function", "function": thirdboss_set_clockwise_event.bind(null, false) }],
+		"s-920-3000-1317-0": [{ "type": "function", "function": thirdboss_set_clockwise_event[false] }],
 		// clockwise
-		"s-920-3000-1318-0": [{ "type": "function", "function": thirdboss_set_clockwise_event.bind(null, true) }]
+		"s-920-3000-1318-0": [{ "type": "function", "function": thirdboss_set_clockwise_event[true] }]
 	};
 
 };

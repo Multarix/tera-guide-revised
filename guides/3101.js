@@ -2,7 +2,7 @@
 //
 // made by michengs
 
-const { SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -29,7 +29,7 @@ module.exports = (mod) => {
 		"s-3101-1000-149-0": [{ "type": "text", "message": "Left Hand (Flying)" }],
 		"s-3101-1000-305-0": [{ "type": "text", "message": "Pizza" }],
 		"s-3101-1000-313-0": [{ "type": "text", "message": "Circles (Slow)" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 75, 10, 300, 0, 6000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 75, 10, 300, 0, 6000] }],
 
 
 		// 2 BOSS
@@ -49,8 +49,8 @@ module.exports = (mod) => {
 		"s-3101-2000-150-0": [{ "type": "text", "message": "Phantom" }],
 		// "s-3101-2000-201-0": [{ "type": "text", "message": "back 8m" }],
 		// "s-3101-2000-202-0": [{ "type": "text", "message": "front 8m" }],
-		// "s-3101-2000-203-0": [{ "type": "function", "function": skilld_event.bind(null, 203) }],
-		// "s-3101-2000-204-0": [{ "type": "function", "function": skilld_event.bind(null, 204) }],
+		// "s-3101-2000-203-0": [{ "type": "function", "function": skilld_event[203] }],
+		// "s-3101-2000-204-0": [{ "type": "function", "function": skilld_event[204] }],
 
 		// "s-3101-2000-211-0": [{ "type": "text", "message": "front" }],
 		// "s-3101-2000-226-0": [{ "type": "text" }],
@@ -58,10 +58,10 @@ module.exports = (mod) => {
 		"s-3101-2000-230-0": [{ "type": "text", "message": "AOE" }],
 
 		"s-3101-2000-231-0": [{ "type": "text", "message": "Out Safe" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 3000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 3000] }],
 		"s-3101-2000-232-0": [{ "type": "text", "message": "In Safe" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 3000) },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 3, 875, 0, 3000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 3000] },
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 3, 875, 0, 3000] }],
 
 		"s-3101-2000-234-0": [{ "type": "text", "message": "Debuffs" }],
 		"s-3101-2000-235-0": [{ "type": "text", "message": "Debuffs" }]

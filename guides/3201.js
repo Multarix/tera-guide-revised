@@ -2,7 +2,7 @@
 //
 // made by michengs
 
-const { SpawnMarker, SpawnVector, SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -215,17 +215,17 @@ module.exports = (mod) => {
 		"s-3201-1000-143-0": [{ "type": "text", "class_position":"tank", "message": "Left > Right" },
 			{ "type": "text", "class_position":"dps", "message": "Right > Left" },
 			{ "type": "text", "class_position":"heal", "message": "Right > Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 150, 300, 100, 2715, true, null) }, // 1
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 225, 300, 2800, 4175, true, null) }, // 6
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 30, 300, 100, 1000, true, null) }, // 1
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 330, 300, 1100, 5000, true, null) }], // 7
+			{ "type": "function", "function": spawn.marker, "args": [false, 150, 300, 100, 2715, true, null] }, // 1
+			{ "type": "function", "function": spawn.marker, "args": [false, 225, 300, 2800, 4175, true, null] }, // 6
+			{ "type": "function", "function": spawn.marker, "args": [false, 30, 300, 100, 1000, true, null] }, // 1
+			{ "type": "function", "function": spawn.marker, "args": [false, 330, 300, 1100, 5000, true, null] }], // 7
 		"s-3201-1000-145-0": [{ "type": "text", "class_position":"tank", "message": "Left > Right" },
 			{ "type": "text", "class_position":"dps", "message": "Right > Left" },
 			{ "type": "text", "class_position":"heal", "message": "Right > Left" },
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 30, 300, 100, 1000, true, null) }, // 1
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 330, 300, 1100, 5000, true, null) }, // 7
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 150, 300, 100, 2000, true, null) }, // 1
-			{ "type": "function", "function": SpawnMarker.bind(null, false, 225, 300, 2500, 5000, true, null) }], // 6
+			{ "type": "function", "function": spawn.marker, "args": [false, 30, 300, 100, 1000, true, null] }, // 1
+			{ "type": "function", "function": spawn.marker, "args": [false, 330, 300, 1100, 5000, true, null] }, // 7
+			{ "type": "function", "function": spawn.marker, "args": [false, 150, 300, 100, 2000, true, null] }, // 1
+			{ "type": "function", "function": spawn.marker, "args": [false, 225, 300, 2500, 5000, true, null] }], // 6
 		"s-3201-1000-148-0": [{ "type": "text", "message": "Right Hand (Flying)" }],
 		"s-3201-1000-149-0": [{ "type": "text", "message": "Left Hand (Flying)" }],
 		"s-3201-1000-151-0": [{ "type": "text", "message": "Stun Attack" }],
@@ -235,9 +235,9 @@ module.exports = (mod) => {
 		"s-3201-1000-312-0": [{ "type": "text" },
 			{ "type": "text", "delay": 2000, "message": "pull" }],
 		"s-3201-1000-313-0": [{ "type": "text", "message": "Circles (Slow)" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 75, 10, 300, 0, 6000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 75, 10, 300, 0, 6000] }],
 		"s-3201-1000-314-0": [{ "type": "text", "message": "Circles (Fast)" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 75, 10, 300, 0, 6000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 75, 10, 300, 0, 6000] }],
 
 
 		// 2 BOSS
@@ -260,14 +260,14 @@ module.exports = (mod) => {
 		"s-3201-2000-150-0": [{ "type": "text", "message": "Phantom" }],
 		// "s-3201-2000-201-0": [{ "type": "text", "message": "back 8m" }],
 		// "s-3201-2000-202-0": [{ "type": "text", "message": "front 8m" }],
-		"s-3201-2000-203-0": [{ "type": "function", "function": skilld_event.bind(null, 203) }],
-		"s-3201-2000-204-0": [{ "type": "function", "function": skilld_event.bind(null, 204) }],
+		"s-3201-2000-203-0": [{ "type": "function", "function": skilld_event[203] }],
+		"s-3201-2000-204-0": [{ "type": "function", "function": skilld_event[204] }],
 
 		"am-3201-320126-32010224": [{ "type": "text", "sub_type": "alert", "message": "Next True" },
-			{ "type": "function", "function": skilld_event.bind(null, 32010224) }],
+			{ "type": "function", "function": skilld_event[32010224] }],
 		"am-3201-2000-32010220": [{ "type": "text", "sub_type": "alert", "message": "Next False" },
-			{ "type": "function", "function": skilld_event.bind(null, 32010220) }],
-		"ae-0-0-9203100": [{ "type": "function", "function": skilld_event.bind(null, 9203100) }],
+			{ "type": "function", "function": skilld_event[32010220] }],
+		"ae-0-0-9203100": [{ "type": "function", "function": skilld_event[9203100] }],
 
 		// "s-3201-2000-211-0": [{ "type": "text", "message": "front" }],
 		// "s-3201-2000-213-0": [{ "type": "text", "message": "back" }],
@@ -281,25 +281,25 @@ module.exports = (mod) => {
 		"s-3201-2000-230-0": [{ "type": "text", "message": "AOE" }],
 
 		"s-3201-2000-231-0": [{ "type": "text", "message": "Out Safe" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 3000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 3000] }],
 		"s-3201-2000-232-0": [{ "type": "text", "message": "In Safe" },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 10, 300, 0, 3000) },
-			{ "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 3, 1000, 0, 3000) }],
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 10, 300, 0, 3000] },
+			{ "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 3, 1000, 0, 3000] }],
 
 		// "s-3201-2000-233-0": [{ "type": "text", "message": "5" }],
 
-		"s-3201-2000-234-0": [{ "type": "function", "function": skilld_event.bind(null, 234) }],
+		"s-3201-2000-234-0": [{ "type": "function", "function": skilld_event[234] }],
 		// "s-3201-2000-235-0": [{ "type": "text", "message": "Debuffs" }]
 		"s-3201-2000-236-0": [{ "type": "text", "message": "Counter" }]
 
-		/* "s-3201-320115-203": [{ "type": "function", "function": SpawnMarker.bind(null, false, 0, 0, 100, 3000, true, null) },
-		{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 15, 125, 0, 3000) }
+		/* "s-3201-320115-203": [{ "type": "function", "function": spawn.marker, "args": [false, 0, 0, 100, 3000, true, null] },
+		{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 15, 125, 0, 3000] }
 	], 	// 	1王水晶位 */
 		// 320124-------------302 301
-	/* "s-3201-320120-204": [{ "type": "function", "function": SpawnMarker.bind(null, false, 0, 0, 10, 1100, false, ["Бомба замедленного действия", "Бомба замедленного действия"]) },  //炸弹慢
-		{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 15, 150, 0, 1100) }],
-	"s-3201-320120-205": [{ "type": "function", "function": SpawnMarker.bind(null, false, 0, 0, 10, 1100, false, ["Бомба", "Бомба"]) },  //炸弹
-		{ "type": "function", "function": SpawnCircle.bind(null, false, 445, 0, 0, 15, 150, 0, 1100) }]*/
+	/* "s-3201-320120-204": [{ "type": "function", "function": spawn.marker, "args": [false, 0, 0, 10, 1100, false, ["Бомба замедленного действия", "Бомба замедленного действия"]] },  //炸弹慢
+		{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 15, 150, 0, 1100] }],
+	"s-3201-320120-205": [{ "type": "function", "function": spawn.marker, "args": [false, 0, 0, 10, 1100, false, ["Бомба", "Бомба"]] },  //炸弹
+		{ "type": "function", "function": spawn.circle, "args": [false, 445, 0, 0, 15, 150, 0, 1100] }]*/
 	};
 
 };

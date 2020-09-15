@@ -1,6 +1,6 @@
 // Ruinous Manor (Hard)
 
-const { SpawnCircle } = require("../lib");
+
 
 let player, entity, library, effect;
 
@@ -64,12 +64,12 @@ module.exports = (mod) => {
 		"s-970-3000-1303-0": [{ "type": "text", "message": "Get Ready! (for in out mechanic)" }],
 
 		// GO OUT then come in
-		"s-970-3000-2113-0": [{ "type": "text", "message": "Out > In" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 15, 300, 0, 5000) }],
-		"s-970-3000-1113-0": [{ "type": "text", "message": "Out > In" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 15, 300, 0, 5000) }],
+		"s-970-3000-2113-0": [{ "type": "text", "message": "Out > In" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 15, 300, 0, 5000] }],
+		"s-970-3000-1113-0": [{ "type": "text", "message": "Out > In" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 15, 300, 0, 5000] }],
 
 		// STAY IN then go out
-		"s-970-3000-2116-0": [{ "type": "text", "message": " In > Out" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 15, 300, 0, 5000) }],
-		"s-970-3000-1116-0": [{ "type": "text", "message": " In > Out" }, { "type": "function", "function": SpawnCircle.bind(null, false, 553, 0, 0, 15, 300, 0, 5000) }],
+		"s-970-3000-2116-0": [{ "type": "text", "message": " In > Out" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 15, 300, 0, 5000] }],
+		"s-970-3000-1116-0": [{ "type": "text", "message": " In > Out" }, { "type": "function", "function": spawn.circle, "args": [false, 553, 0, 0, 15, 300, 0, 5000] }],
 
 		// GET RED SKULL
 		"s-970-3000-1318-0": [{ "type": "text", "message": "Get red skull!" }],
