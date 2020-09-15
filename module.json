@@ -10,8 +10,8 @@
     },
     "author": "Multairx",
     "description": "Display attack notifications and attack zones of boss monsters",
-    "servers": ["https://raw.githubusercontent.com/multarix/tera-guide-custom/master/"],
-    "supportUrl": "https://github.com/multarix/tera-guide-custom/issues",
+    "servers": ["https://raw.githubusercontent.com/multarix/tera-guide-revised/master/"],
+    "supportUrl": "https://github.com/multarix/tera-guide-revised/issues",
     "dependencies": {
         "library": "https://raw.githubusercontent.com/tera-toolbox-mods/library/master/module.json"
     },
