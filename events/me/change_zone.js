@@ -24,6 +24,8 @@ const es_guides = [
 	/* eslint-enable */
 
 module.exports = (mod, extras, zone, quick) => {
+	extras.bonfire = false;
+
 	if(extras.lastLocation === zone) return; // if the zone is the same as the last one, return
 	mod.clearAllTimeouts();
 	mod.clearAllIntervals();

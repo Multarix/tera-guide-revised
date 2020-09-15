@@ -3,6 +3,7 @@ const readdir = promisify(require("fs").readdir);
 const path = require("path");
 
 module.exports = function TeraGuide(mod){
+	const { player } = mod.require.library;
 
 	// Load Misc functions
 	mod.game.initialize("me.abnormalities"); // initilize the stuff we need
@@ -16,7 +17,8 @@ module.exports = function TeraGuide(mod){
 		spawning: false, // If the dungeon has object spawning disabled
 		sp: false, // for sp guides
 		es: false, // for es guides
-		mobHP: {} // Mob hps
+		mobHP: {},
+		bonfire: false // Mob hps
 	};
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
@@ -135,6 +137,7 @@ module.exports = function TeraGuide(mod){
 			}
 			if(!foundDungeon) return cmd.message(`That dungeon doesn't seem to exist, please try again!`);
 		},
+
 		"bonfire": (args) => { // Spawn a bonfire because WHY WOULDN'T YOU WANT THIS???
 			let type = 1;
 			switch(args){
@@ -145,9 +148,32 @@ module.exports = function TeraGuide(mod){
 				case "blue": type = 8; break;
 				case "purple": type = 9; break;
 				case "sacrifice": type = 10; break;
+				case "remove":
+				case "despawn": type = -1; break;
 				default: type = 1; break;
 			}
-			mod.send("S_SPAWN_BONFIRE", 2, { id: type, loc: mod.game.me.loc, status: 0 });
+
+			function despawnBonfire(){
+				mod.send("S_DESPAWN_BONFIRE", 2, { gameId: 0xCEDE5683 });
+				extras.bonfire = false;
+				mod.command.message("Despawned the campfire");
+			}
+
+			if(type === -1){
+				despawnBonfire();
+			} else {
+				if(extras.bonfire) despawnBonfire();
+				mod.send("S_SPAWN_BONFIRE", 2, {
+					gameId: 0xCEDE5683,
+					id: type,
+					loc: player.loc,
+					status: 0
+				});
+
+				extras.bonfire = true;
+				mod.command.message("Spawned a campfire");
+				mod.setTimeout(despawnBonfire, 600000); // Auto remove it after 10 minutes
+			}
 		}
 	});
 
