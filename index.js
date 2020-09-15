@@ -178,8 +178,8 @@ module.exports = function TeraGuide(mod){
 	});
 
 	this.destructor = async () => { // When the mod gets unloaded, clear all the timers & remove the chat command
-		mod.clearAllTimeouts;
-		mod.clearAllInteverals;
+		mod.clearAllTimeouts();
+		mod.clearAllInteverals();
 		cmd.remove("mult");
 	};
 };
