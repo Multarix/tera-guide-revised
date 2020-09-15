@@ -5,16 +5,13 @@ const path = require("path");
 module.exports = function TeraGuide(mod){
 	const { player } = mod.require.library;
 
-	// Load Misc functions
-	mod.game.initialize("me.abnormalities"); // initilize the stuff we need
-
 	// Extra stuff that we need
 	const extras = {
 		guides: [], // The list of guides that we have
 		active_guide: false, // The current active guide, if it doesn't exist, it should be fallse
 		lastLocation: 0, // The last location we were at
 		verbose: false, // If the dungeon has been disabled
-		spawning: false, // If the dungeon has object spawning disabled
+		spawning: true, // If the dungeon has object spawning disabled
 		sp: false, // for sp guides
 		es: false, // for es guides
 		mobHP: {},
@@ -163,23 +160,27 @@ module.exports = function TeraGuide(mod){
 				despawnBonfire();
 			} else {
 				if(extras.bonfire) despawnBonfire();
-				mod.send("S_SPAWN_BONFIRE", 2, {
-					gameId: 0xCEDE5683,
-					id: type,
-					loc: player.loc,
-					status: 0
+				spawnHandler({
+					spawnType: "S_SPAWN_BONFIRE",
+					spawnVersion: 2,
+					despawnType: "S_DESPAWN_BONFIRE",
+					despawnVersion: 2,
+					bonfireType: type,
+					bonfireID: 0xCEDE5683,
+					duration: 600000,
+					ent: {
+						loc: player.loc
+					}
 				});
-
 				extras.bonfire = true;
 				mod.command.message("Spawned a campfire");
-				mod.setTimeout(despawnBonfire, 600000); // Auto remove it after 10 minutes
 			}
 		}
 	});
 
 	this.destructor = async () => { // When the mod gets unloaded, clear all the timers & remove the chat command
 		mod.clearAllTimeouts();
-		mod.clearAllInteverals();
+		mod.clearAllIntervals();
 		cmd.remove("mult");
 	};
 };

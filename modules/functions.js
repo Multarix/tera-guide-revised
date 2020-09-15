@@ -1,5 +1,97 @@
 module.exports = (mod, extras) => {
-	const { player, entity, library, effect } = mod.require.library; // Require the library module
+	const { player, library, effect } = mod.require.library; // Require the library module
+	// const spawn = require("../spawn.js");
+
+	const randomHex = () => {
+		const hexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+		function hexChar(){ return hexArray[Math.floor(Math.random() * hexArray.length)]; }
+		let hex = "0xFFF";
+		for(let i = 0; i < 5; i++) hex += hexChar();
+		return eval(hex); // OOOH SPOOKY EVAL
+	};
+
+	const sendEvent = (type, version, obj) => {
+		mod.send(type, version, obj);
+	};
+
+	global.spawnHandler = (evtData) => {
+		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
+			if(!mod.settings.spawnObject || !extras.spawning) return;
+			if(!evtData.id) return mod.error("No itemID was listed"); // Make sure id is defined
+			if(!evtData.subDelay) return mod.error("No subDelay was listed... Not even sure what it does yet"); // Make sure subDelay is defined
+		}
+		const spawnType = evtData.spawnType || "S_SPAWN_COLLECTION"; // Set spawnType to be collection as default for backward compatibility
+		const spawnVersion = evtData.spawnVersion || 6;
+		const despawnType = evtData.despawnType || "S_DESPAWN_COLLECTION";
+		const despawnVersion = evtData.despawnVersion || 2;
+
+		// The unique spawned id this item will be using.
+		const uniqueIdent = evtData.force_gameId || randomHex(); // Generate some big number
+		let loc = evtData.ent.loc.clone();
+
+		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that (as far as I can tell it's never set?)
+		loc.w = (evtData.ent.loc.w || 0) + (evtData.offset || 0); // ????
+		library.applyDistance(loc, evtData.distance || 0, evtData.degrees || 0); // I have no idea how library works still
+		let spawnEvent = {
+			gameId: uniqueIdent,
+			loc: loc
+		};
+		let despawnEvent = {
+			gameId: uniqueIdent,
+			unk: 0, // used in S_DESPAWN_BUILD_OBJECT
+			collected: false // used in S_DESPAWN_COLLECTION
+		};
+		// Create the sending event
+		switch(spawnType){
+			case "S_SPAWN_COLLECTION":
+				Object.assign(spawnEvent, {
+					id: evtData.id,
+					amount: 1,
+					extractor: false,
+					extractorDisabled: false,
+					extractorDisabledTime: 0
+				});
+				break;
+			case "S_SPAWN_DROPITEM":
+				Object.assign(spawnEvent, {
+					item: evtData.id,
+					amount: 1,
+					expiry: 0,
+					explode: false,
+					masterwork: false,
+					enchant: 0,
+					debug: false,
+					owners: []
+				});
+				break;
+			case "S_SPAWN_BUILD_OBJECT":
+				Object.assign(spawnEvent, {
+					itemId: evtData.id,
+					unk: 0,
+					ownerName: evtData.ownerName || "SafeZone",
+					message: evtData.message || "SafeZone"
+				});
+				break;
+			// Because BONFIRES SON
+			case "S_SPAWN_BONFIRE":
+				spawnEvent = {
+					gameId: evtData.bonfireID,
+					id: evtData.bonfireType,
+					loc: loc,
+					status: 0
+				};
+				despawnEvent = {
+					gameId: evtData.bonfireID
+				};
+				break;
+			default:
+				// spawnType broke apparently
+				return mod.error(`Invalid spawnType for spawn handler: ${evtData.spawnType}`);
+		}
+
+		sendEvent(spawnType, spawnVersion, spawnEvent);
+		mod.setTimeout(sendEvent, evtData.duration, despawnType, despawnVersion, despawnEvent);
+	};
 
 	let voice = null;
 	try { voice = require('../voice'); } catch (e){
@@ -63,25 +155,6 @@ module.exports = (mod, extras) => {
 		return true; // All checks failed, assume the position isn't valid, send to everyone
 	}
 
-	// Determine where to send messages
-	global.sendMessage = (msg) => {
-		if(mod.settings.notice && mod.game.me.party.inParty()){ // If in a party, and the notice setting is on, send to party notice
-			mod.send('S_CHAT', 3, {
-				channel: 21,
-				message: msg,
-				name: "Multarix"
-			});
-		}
-		// Big message on screen
-		mod.send('S_DUNGEON_EVENT_MESSAGE', 2, {
-			type: 31,
-			chat: false,
-			channel: 27,
-			message: msg
-		});
-		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
-	};
-
 	const checkTarget = (obj, data) => {
 		if(!obj.targeted) return true; // If target isn't specified, assume it's for everyone
 		if(data.target.toString() === mod.game.me.gameId.toString()) return true; // If the target is us, return true
@@ -100,11 +173,34 @@ module.exports = (mod, extras) => {
 				// try {	obj.function();	} catch (e){ mod.error(e); }
 				return;
 			}
+			// if(obj.type === "spawn"){
+			// 	try {	new spawn(obj, ent, mod, extras);	} catch (e){ mod.error(e); }
+			// 	return;
+			// }
 			if(obj.type === "text") return sendMessage(obj.message);
 			return mod.warn(`The key "${data.attack}" does not have a proper function, skipping it.`);
 		};
 
 		if(delay){ mod.setTimeout(doAction, delay);	} else { doAction(); }
+	};
+
+	// Determine where to send messages
+	global.sendMessage = (msg) => {
+		if(mod.settings.notice && mod.game.me.party.inParty()){ // If in a party, and the notice setting is on, send to party notice
+			mod.send('S_CHAT', 3, {
+				channel: 21,
+				message: msg,
+				name: "Multarix"
+			});
+		}
+		// Big message on screen
+		mod.send('S_DUNGEON_EVENT_MESSAGE', 2, {
+			type: 31,
+			chat: false,
+			channel: 27,
+			message: msg
+		});
+		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
 
 	global.eventHandler = (data) => {
