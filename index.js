@@ -134,6 +134,20 @@ module.exports = function TeraGuide(mod){
 				return cmd.message(`Spawning objects in ${cp}${dungeon.name}${cw} has been ${dungeon.spawnObject ? cg : cr}${dungeon.spawnObject ? "en" : "dis"}abled`);
 			}
 			if(!foundDungeon) return cmd.message(`That dungeon doesn't seem to exist, please try again!`);
+		},
+		"bonfire": (args) => { // Spawn a bonfire because WHY WOULDN'T YOU WANT THIS???
+			let type = 1;
+			switch(args){
+				case "normal":	type = 1; break;
+				case "friend":
+				case "friendly":
+				case "santa": type = 6; break;
+				case "blue": type = 8; break;
+				case "purple": type = 9; break;
+				case "sacrifice": type = 10; break;
+				default: type = 1; break;
+			}
+			mod.send("S_SPAWN_BONFIRE", 2, { id: type, loc: mod.game.me.loc, status: 0 });
 		}
 	});
 
