@@ -8,6 +8,7 @@ exports.func = (mod, extras, evt) => {
 
 	const { entity } = mod.require.library; // Honestly, I still have no idea what this does, it's not my code
 	const ent = entity["mobs"][evt.gameId.toString()];
+	ent.loc.w = ent.w; // Make fun of this all you want, proxy is 100% fuckin something up
 	if(!ent) return; // I had random errors appear when I didn't do this, still no idea what library does
 
 	const stage = `${evt.stage}`;

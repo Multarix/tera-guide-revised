@@ -25,11 +25,12 @@ module.exports = (mod, extras) => {
 		let loc = evtData.ent.loc.clone();
 
 		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that (as far as I can tell it's never set?)
-		loc.w = (evtData.ent.loc.w || 0) + (evtData.offset || 0); // ????
+		loc.w = (evtData.ent.loc.w || 0) + (evtData.offset || 0);
 		library.applyDistance(loc, evtData.distance || 0, evtData.degrees || 0); // I have no idea how library works still
 		let spawnEvent = {
 			gameId: uniqueIdent,
-			loc: loc
+			loc: loc,
+			w: loc.w
 		};
 		let despawnEvent = {
 			gameId: uniqueIdent,
@@ -167,7 +168,7 @@ module.exports = (mod, extras) => {
 
 		const doAction = () => { // A function so we don't have to write this crap out twice
 			if(obj.type === "function"){ // If the type is a function, try running the function
-				try {	obj.function();	} catch (e){ mod.error(e); }
+				try {	obj.function(...obj.args);	} catch (e){ mod.error(e); }
 				return;
 			}
 

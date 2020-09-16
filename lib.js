@@ -208,9 +208,9 @@ class spawn {
 			// Use "loc" if if it's specified and target is false
 			} else if(self.entity.loc !== undefined){
 				locData = self.entity.loc.clone();
-			} else {
-				locData = self.player.loc.clone();
-			}
+			} else { return; }
+
+			locData.w = self.entity["loc"].w;
 
 			// Apply distance to the binding point
 			applyDistance(locData, offsetDistance, 360 - offsetAngle);

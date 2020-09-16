@@ -175,6 +175,11 @@ module.exports = function TeraGuide(mod){
 				extras.bonfire = true;
 				mod.command.message("Spawned a campfire");
 			}
+		},
+
+		"test": (args) => { // Test a key with the player as the target entity
+			cmd.message(`Running event with key "${args}"`);
+			eventHandler({ event: args, target: false, ent: player });
 		}
 	});
 
