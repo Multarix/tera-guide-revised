@@ -7,7 +7,7 @@ exports.func = (mod, extras, evt) => {
 	if(!result[1]) return;
 
 	msgKey = `qb-${result[1]}`;
-	return eventHandler({ event: msgKey, target: false });
+	return eventHandler({ event: msgKey, target: false, ent: { huntingZoneId: 0, templateId: 0 } });
 };
 
 exports.version = 2;

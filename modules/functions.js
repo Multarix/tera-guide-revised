@@ -1,32 +1,27 @@
 module.exports = (mod, extras) => {
 	const { player, library, effect } = mod.require.library; // Require the library module
-	// const spawn = require("../spawn.js");
+	const lib = require("../lib");
+	const { spawn } = lib;
 
-	const randomHex = () => {
-		const hexArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-		function hexChar(){ return hexArray[Math.floor(Math.random() * hexArray.length)]; }
-		let hex = "0xFFF";
-		for(let i = 0; i < 5; i++) hex += hexChar();
-		return eval(hex); // OOOH SPOOKY EVAL
-	};
+	let uint64 = 0xFFFFFFFA;
 
 	const sendEvent = (type, version, obj) => {
 		mod.send(type, version, obj);
 	};
 
+
 	global.spawnHandler = (evtData) => {
 		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
 			if(!mod.settings.spawnObject || !extras.spawning) return;
 			if(!evtData.id) return mod.error("No itemID was listed"); // Make sure id is defined
-			if(!evtData.subDelay) return mod.error("No subDelay was listed... Not even sure what it does yet"); // Make sure subDelay is defined
 		}
 		const spawnType = evtData.spawnType || "S_SPAWN_COLLECTION"; // Set spawnType to be collection as default for backward compatibility
-		const spawnVersion = evtData.spawnVersion || 6;
+		const spawnVersion = evtData.spawnVersion || 4;
 		const despawnType = evtData.despawnType || "S_DESPAWN_COLLECTION";
 		const despawnVersion = evtData.despawnVersion || 2;
 
 		// The unique spawned id this item will be using.
-		const uniqueIdent = evtData.force_gameId || randomHex(); // Generate some big number
+		const uniqueIdent = evtData.force_gameId || uint64--; // uint64 in js... what a pain
 		let loc = evtData.ent.loc.clone();
 
 		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that (as far as I can tell it's never set?)
@@ -104,6 +99,7 @@ module.exports = (mod, extras) => {
 		return this.replace(/([^\W_]+[^\s-]*) */g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 	};
 
+
 	// Check if the class matches the class position
 	function positionCheck(position){
 		const tanks = [1, 10]; // Tanks (Lancer + Brawler)
@@ -152,8 +148,9 @@ module.exports = (mod, extras) => {
 				mod.warn(`Failed to find class position: ${position}`);
 				break;
 		}
-		return true; // All checks failed, assume the position isn't valid, send to everyone
+		return false; // All checks failed, return false
 	}
+
 
 	const checkTarget = (obj, data) => {
 		if(!obj.targeted) return true; // If target isn't specified, assume it's for everyone
@@ -170,19 +167,34 @@ module.exports = (mod, extras) => {
 
 		const doAction = () => { // A function so we don't have to write this crap out twice
 			if(obj.type === "function"){ // If the type is a function, try running the function
-				// try {	obj.function();	} catch (e){ mod.error(e); }
+				try {	obj.function();	} catch (e){ mod.error(e); }
 				return;
 			}
-			// if(obj.type === "spawn"){
-			// 	try {	new spawn(obj, ent, mod, extras);	} catch (e){ mod.error(e); }
-			// 	return;
-			// }
+
+			if(obj.type === "spawn"){
+				if(!mod.settings.spawnObject || !extras.spawning) return;
+
+				// Make sure func and args is defined
+				if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
+				if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
+
+				// Check obj and ent to make sure
+				const spawnEvent = new spawn(obj, data.ent, mod);
+				try {
+					spawnEvent[obj.function](...obj.args);
+				} catch (e){
+					mod.error(e);
+				}
+				return;
+			}
+
 			if(obj.type === "text") return sendMessage(obj.message);
-			return mod.warn(`The key "${data.attack}" does not have a proper function, skipping it.`);
+			return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
 		};
 
 		if(delay){ mod.setTimeout(doAction, delay);	} else { doAction(); }
 	};
+
 
 	// Determine where to send messages
 	global.sendMessage = (msg) => {
@@ -198,7 +210,7 @@ module.exports = (mod, extras) => {
 			type: 31,
 			chat: false,
 			channel: 27,
-			message: msg
+			message: `</font><font color="#ffff00">${msg}`
 		});
 		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
@@ -210,5 +222,4 @@ module.exports = (mod, extras) => {
 			if(positionCheck(obj.position) && checkTarget(obj, data)) handleEvent(obj, data);
 		}
 	};
-
 };

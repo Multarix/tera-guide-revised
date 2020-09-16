@@ -12,7 +12,7 @@ exports.func = (mod, extras, evt) => {
 
 	const stage = `${evt.stage}`;
 	const attackKey = `s-${ent.huntingZoneId}-${ent.templateId}-${skillid}${stage ? `-${stage}` : ""}`;
-	return eventHandler({ event: attackKey, target: evt.target });
+	return eventHandler({ event: attackKey, target: evt.target, ent: ent });
 };
 
 exports.version = 9;

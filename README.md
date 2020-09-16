@@ -4,7 +4,6 @@ A more organized version of the tera-guide by [HSDN](https://github.com/HSDN).
 ## THIS MODULE IS UNFINISHED, USE AT OWN RISK
 And by this I mean it's literally not a good idea to use an unfinished module, and that you really probably should not attempt to install it.
 This module is currently missing the following features:
-- Spawning Objects
 - Abnormal Detection
 
 ### Why use this one and not HSDN's?

@@ -13,7 +13,7 @@ exports.func = (mod, extras, evt) => {
 	extras.mobHP[mobKey] = hp; // Otherwise set the hp percentage and send event
 
 	const hpKey = `h-${mobKey}-${hp}`;
-	return eventHandler({ event: hpKey, target: false });
+	return eventHandler({ event: hpKey, target: false, ent: ent });
 };
 
 exports.version = 3;

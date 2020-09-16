@@ -8,7 +8,7 @@ exports.func = (mod, extras, evt) => {
 	if(!res || !ent) return;
 
 	const qbKey = `qb-${ent.huntingZoneId}-${ent.templateId}-${res[1]}`;
-	eventHandler({ event: qbKey, target: false });
+	eventHandler({ event: qbKey, target: false, ent: ent });
 };
 
 exports.version = 1;

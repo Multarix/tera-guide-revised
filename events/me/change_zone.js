@@ -35,13 +35,9 @@ module.exports = (mod, extras, zone, quick) => {
 	extras.lastLocation = zone; // Set the last location to this current location
 	if(!extras.guides.includes(zone.toString())) return extras.active_guide = false; // if the zone is not a dungeon, return
 
-	let dungeon;
-	for(const d of mod.settings.dungeons){
-		if(d.id !== zone) continue;
-		extras.verbose = d.verbose;
-		extras.objects = d.spawnObject;
-		dungeon = d;
-	}
+	const dungeon = mod.settings.dungeons[zone.toString()];
+	extras.verbose = dungeon.verbose;
+	extras.spawning = dungeon.spawnObject;
 
 	// I feel like there is a better way to do this, but idk what it is.
 	if(sp_guides.includes(zone)){ // skill 1000-3000
@@ -56,7 +52,7 @@ module.exports = (mod, extras, zone, quick) => {
 	}
 
 	try { // Try loaidng the guide
-		extras.active_guide = require(`../../guides/${zone}.js`)(mod);
+		extras.active_guide = require(`../../guides/${zone}.js`);
 		delete require.cache[require.resolve(`../../guides/${zone}.js`)];
 	} catch (e){ mod.error(e); }
 	if(!extras.active_guide) return; // If the guide still doesn't exist, return
@@ -67,7 +63,7 @@ module.exports = (mod, extras, zone, quick) => {
 	const cr = '</font><font color="#ff0000">'; // red
 	const cw = '</font><font color="#ffffff">'; // white
 	const cp = '</font><font color="#ae60ff">'; // Purple
-	mod.command.message(`Entered ${cp}${dungeon.name}${cw}!\n` +
+	mod.command.message(`Entered ${cp}${dungeon.name}${cw} (${cp}${zone}${cw})!\n` +
 		`Text-to-Speech: ${mod.settings.tts ? cg : cr}${mod.settings.tts}\n${cw}` +
 		`Spawn Objects: ${dungeon.spawnObject ? cg : cr}${dungeon.spawnObject}\n${cw}` +
 		`Verbose: ${dungeon.verbose ? cg : cr}${dungeon.verbose}\n`
