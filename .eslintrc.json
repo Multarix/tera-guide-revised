@@ -40,6 +40,7 @@
 		"space-before-blocks": ["error", { "functions": "never", "keywords": "never", "classes": "always" }],
 		"space-before-function-paren": ["error", { "anonymous": "never","named": "never", "asyncArrow": "always" }],
 		"array-bracket-newline": ["error", "never"],
+		"arrow-spacing": "error",
 		"keyword-spacing": ["error", {
 			"before": true,
 			"after": true,
