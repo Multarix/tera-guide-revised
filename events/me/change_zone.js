@@ -52,7 +52,7 @@ module.exports = (mod, extras, zone, quick) => {
 	}
 
 	try { // Try loaidng the guide
-		extras.active_guide = require(`../../guides/${zone}.js`);
+		extras.active_guide = require(`../../guides/${zone}.js`)(mod, extras);
 		delete require.cache[require.resolve(`../../guides/${zone}.js`)];
 	} catch (e){ mod.error(e); }
 	if(!extras.active_guide) return; // If the guide still doesn't exist, return
