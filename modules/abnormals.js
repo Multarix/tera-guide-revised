@@ -1,5 +1,5 @@
 module.exports = (mod, extras, evt) => {
-	if(!mod.settings.enabled || !extras.active_guide || !extras.verbose || !evt.skill.npc) return;
+	if(!mod.settings.enabled || !extras.active_guide || !extras.verbose) return;
 
 	const { player, entity } = mod.require.library;
 
