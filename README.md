@@ -4,7 +4,6 @@ A more organized version of the tera-guide by [HSDN](https://github.com/HSDN).
 ## THIS MODULE IS UNFINISHED, USE AT OWN RISK
 And by this I mean it's literally not a good idea to use an unfinished module, and that you really probably should not attempt to install it.
 This module is currently missing the following features:
-- Abnormal Detection
 
 ### Why use this one and not HSDN's?
 This has a few changes from the original and in my opinion, much cleaner code.<br>
@@ -27,27 +26,30 @@ Toolbox(/8) | Command description
 **guide objects \<id\>** | Enables or disables the spawning of objects for a specific dungeon guide.<br>*The ID for the dungeons are listed below*
 
 ### Currently Supported Dungeons
-None. I did say it was unfinished. ¯\\\_(ツ)\_/¯<br>
-But here is a list of dungeons that should be supported when finished.
 
 ID | Dungeon name
 --- | ---
 3023 | Akalath Quarantine
+3102 | Draakon Arena
+3202 | Draakon Arena (Hard)
+3201 | Gossamer Vault (Hard)
+9053 | Kezzel's Gorge
+9735 | RK-9 Kennel
+9739 | Red Refuge
+
+### Upcoming Supported Dungeons
+
+ID | Dungeon name
+--- | ---
 9920 | Antaroth's Abyss (Hard)
 9044 | Bahaar's Sanctum
 3026 | Corrupted Skynest
 3126 | Corrupted Skynest (Hard)
-3102 | Draakon Arena
-3202 | Draakon Arena (Hard)
 3027 | Forbidden Arena [Hagufna]
 3103 | Forbidden Arena [Undying Warlord]
 3203 | Forbidden Arena [Nightmare Undying Warlord]
-3201 | Gossamer Vault (Hard)
 9982 | Grotto of Lost Souls (Hard)
-9053 | Kezzel's Gorge
-9735 | RK-9 Kennel
 3034 | RK-9 Kennel (Hard)
-9739 | Red Refuge
 3020 | Sea of Honor
 9781 | Velik's Sanctuary
 
