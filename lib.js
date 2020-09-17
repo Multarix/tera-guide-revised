@@ -210,7 +210,7 @@ class spawn {
 				locData = that.entity.loc.clone();
 			} else { return; }
 
-			const rotation = that.entity["loc"].w;
+			locData.w = that.entity.loc.w;
 
 			// Apply distance to the binding point
 			applyDistance(locData, offsetDistance, 360 - offsetAngle);
@@ -228,7 +228,7 @@ class spawn {
 						duration: duration, // How long till we despawn the item
 						distance: distance, // Distance
 						offset: angle,	// Angle
-						ent: { loc: locData, w: rotation } // Location
+						ent: { loc: locData } // Location
 					});
 					break;
 
@@ -243,7 +243,7 @@ class spawn {
 						duration: duration,
 						distance: distance,
 						offset: angle,
-						ent: { loc: locData, w: rotation }
+						ent: { loc: locData }
 					});
 					break;
 
@@ -260,7 +260,7 @@ class spawn {
 						offset: angle,
 						ownerName: label[0],
 						message: label[1],
-						ent: { loc: locData, w: rotation }
+						ent: { loc: locData }
 					});
 					break;
 			}
