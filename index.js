@@ -28,7 +28,7 @@ module.exports = function TeraGuide(mod){
 			const guideName = file.split(".")[0];
 			extras.guides.push(guideName);
 
-			// If the dungeon doesn't exist within the settings, we can add it, through we're missing it's name, we'll deal with that later.
+			// If the dungeon doesn't exist within the settings, we can add it, though we're missing it's name, we'll deal with that later.
 			if(!mod.settings.dungeons[guideName]) mod.settings.dungeons[guideName] = { name: undefined, verbose: true, spawnObject: true };
 			// We can however apply these 2 names
 			if(guideName === "3020") mod.settings.dungeons[guideName].name = "Sea of Honor";

@@ -54,7 +54,10 @@ module.exports = (mod, extras, zone, quick) => {
 	try { // Try loaidng the guide
 		extras.active_guide = require(`../../guides/${zone}.js`)(mod, extras);
 		delete require.cache[require.resolve(`../../guides/${zone}.js`)];
-	} catch (e){ mod.error(e); }
+	} catch (e){
+		mod.error(e);
+		mod.command.message(`${zone}.js could not be loaded, see the console for more details`);
+	}
 	if(!extras.active_guide) return; // If the guide still doesn't exist, return
 	extras.mobHP = {}; // Reset all mob HP
 

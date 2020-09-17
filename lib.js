@@ -196,21 +196,21 @@ class spawn {
 	 * @return  Void
 	 */
 	object(type, target, item, offsetAngle, offsetDistance, angle, distance, duration, label){
-		const self = this;
+		const that = this;
 
 		// Spawn callback function
 		const callback = function(type, target, item, offsetAngle, offsetDistance, angle, distance, duration, label){
 			// A binding point for a spawned object
 			let locData;
 			// Use "dest" instead of "loc" if it's specified and target is true
-			if(target && self.entity.dest !== undefined){
-				locData = self.entity.dest.clone();
+			if(target && that.entity.dest !== undefined){
+				locData = that.entity.dest.clone();
 			// Use "loc" if if it's specified and target is false
-			} else if(self.entity.loc !== undefined){
-				locData = self.entity.loc.clone();
+			} else if(that.entity.loc !== undefined){
+				locData = that.entity.loc.clone();
 			} else { return; }
 
-			locData.w = self.entity["loc"].w;
+			const rotation = that.entity["loc"].w;
 
 			// Apply distance to the binding point
 			applyDistance(locData, offsetDistance, 360 - offsetAngle);
@@ -228,7 +228,7 @@ class spawn {
 						duration: duration, // How long till we despawn the item
 						distance: distance, // Distance
 						offset: angle,	// Angle
-						ent: { loc: locData } // Location
+						ent: { loc: locData, w: rotation } // Location
 					});
 					break;
 
@@ -243,7 +243,7 @@ class spawn {
 						duration: duration,
 						distance: distance,
 						offset: angle,
-						ent: { loc: locData }
+						ent: { loc: locData, w: rotation }
 					});
 					break;
 
@@ -260,7 +260,7 @@ class spawn {
 						offset: angle,
 						ownerName: label[0],
 						message: label[1],
-						ent: { loc: locData }
+						ent: { loc: locData, w: rotation }
 					});
 					break;
 			}
