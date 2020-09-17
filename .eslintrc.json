@@ -51,6 +51,7 @@
 				"switch": { "after": false }
 			}
 		}],
+		"key-spacing": "error",
 		"yoda": "error"
 	},
 	"globals": {
