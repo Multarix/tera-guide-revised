@@ -14,8 +14,9 @@ module.exports = function TeraGuide(mod){
 		spawning: true, // If the dungeon has object spawning disabled
 		sp: false, // for sp guides
 		es: false, // for es guides
-		mobHP: {},
-		bonfire: false // Mob hps
+		mobHP: {}, // Mob hps
+		bonfire: false, // bonfire stuff
+		entity: false // For using spawning inside of functions for guides
 	};
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);

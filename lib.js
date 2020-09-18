@@ -18,12 +18,8 @@ const MARKER_ITEM = 88704; // Item id of "Velika Banquet Coin"
  * @return  Void
  */
 class spawn {
-	constructor(event, entity, mod){
-		this.event = event;
+	constructor(entity){
 		this.entity = entity;
-		this.mod = mod;
-		const { player } = mod.require.library;
-		this.player = player;
 	}
 
 	/**

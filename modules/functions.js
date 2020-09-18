@@ -180,7 +180,7 @@ module.exports = (mod, extras) => {
 				if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
 
 				// Check obj and ent to make sure
-				const spawnEvent = new spawn(obj, data.ent, mod);
+				const spawnEvent = new spawn(data.ent);
 				try {
 					spawnEvent[obj.function](...obj.args);
 				} catch (e){
@@ -219,6 +219,7 @@ module.exports = (mod, extras) => {
 	global.eventHandler = (data) => {
 		if(!extras.active_guide[data.event]) return;
 		const attackKeyData = extras.active_guide[data.event];
+		extras.entity = (data.ent) ? data.ent : false;
 		for(const obj of attackKeyData){
 			if(positionCheck(obj.position) && checkTarget(obj, data)) handleEvent(obj, data);
 		}
