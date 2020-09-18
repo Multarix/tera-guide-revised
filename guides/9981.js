@@ -1,12 +1,13 @@
-// Velik's Sanctuary (Hard)
+﻿// Velik's Sanctuary (Hard)
 //
 // made by michengs / HSDN
 // Updated to revised version
 
-module.exports = () => {
+module.exports = (mod, extras) => {
+
 	let thirdboss_fifty = false;
 
-	function thirdboss_message_event(skillid, handlers, event, ent, dispatch){
+	function thirdboss_message_event(skillid){
 		switch(skillid){
 		// Lakan has noticed you.
 			case 1043:
@@ -43,7 +44,6 @@ module.exports = () => {
 		thirdboss_fifty = true;
 	}
 
-
 	return {
 
 		// 1 BOSS
@@ -53,8 +53,7 @@ module.exports = () => {
 		"s-981-1000-2402": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
-		"s-981-1000-2304-0": [{ type: "text", message: "Flying" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
+		"s-981-1000-2304-0": [{ type: "text", message: "Flying" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
 		"s-981-1000-2303-0": [{ type: "text", message: "Spin" }],
 		"s-981-1000-2113-0": [{ type: "text", message: "Front + AoEs" }],
 		"s-981-1000-2308-0": [{ type: "text", message: "OUT" }],
@@ -65,46 +64,52 @@ module.exports = () => {
 		"s-981-1000-1402": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
-		"s-981-1000-1304-0": [{ type: "text", message: "Flying" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
+		"s-981-1000-1304-0": [{ type: "text", message: "Flying" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
 		"s-981-1000-1303-0": [{ type: "text", message: "Spin" }],
 		"s-981-1000-1113-0": [{ type: "text", message: "Front + AoEs" }],
 		"s-981-1000-1308-0": [{ type: "text", message: "OUT" }],
 		"s-981-1000-1309-0": [{ type: "text", message: "IN" }],
+		// "qb-981-1000-98102": [{ type: "text", message: "Run away" }],
+		// "qb-981-1000-98103": [{ type: "text", message: "点名炸石柱" }], // круг на одного
+		// "qb-981-1000-98106": [{ type: "text", message: "集体炸石柱" }], // круги на всех
 
 		// 2 BOSS
 		// Cage Mechanic
-
+		// "s-981-2000-1503-0": [{ type: "text", message: "坦快跑远" }],
 		"s-981-2000-1106-0": [{ type: "text", message: "Back" }],
 		"s-981-2000-1108-0": [{ type: "text", message: "Front" }],
 		"s-981-2000-1111-0": [{ type: "text", message: "360 attack" }],
 		"s-981-2000-1302-0": [{ type: "text", message: "Bait" }],
+		// "s-981-2000-1121-0": [{ type: "text", message: "Summon Mobs" }],
 		"s-981-2000-1501-0": [{ type: "text", message: "Identification" },
-			{ type: "text", message: "3", delay: 1000 },
-			{ type: "text", message: "2", delay: 2000 },
-			{ type: "text", message: "1", delay: 3000 }],
+			{ type: "text", delay: 1000, message: "3" },
+			{ type: "text", delay: 2000, message: "2" },
+			{ type: "text", delay: 3000, message: "1" }],
+		// "s-981-2000-1112-0": [{ type: "function", function: single_stage_callout, args: ["STAB + KNOCKUP"] }],
 		"s-981-2000-1130-0": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
 		"s-981-2000-1131-0": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 230, 100, 2000, true, null] }],
-
+		// "s-981-2000-2503-0": [{ type: "text", message: "坦快跑远" }],
 		"s-981-2000-2106-0": [{ type: "text", message: "Back" }],
 		"s-981-2000-2108-0": [{ type: "text", message: "Front" }],
 		"s-981-2000-2111-0": [{ type: "text", message: "360 attack" }],
-
+		// "s-981-2000-2121-0": [{ type: "text", message: "Summon Mobs" }],
 		"s-981-2000-2501-0": [{ type: "text", message: "Identification" },
-			{ type: "text", message: "3", delay: 1000 },
-			{ type: "text", message: "2", delay: 2000 },
-			{ type: "text", message: "1", delay: 3000 }],
+			{ type: "text", delay: 1000, message: "3" },
+			{ type: "text", delay: 2000, message: "2" },
+			{ type: "text", delay: 3000, message: "1" }],
 		"s-981-2000-2130-0": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
 		"s-981-2000-2131-0": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 230, 100, 2000, true, null] }],
-
+		// "s-981-2000-4000-0": [{ type: "text", message: "鉴定！！！！" }],
+		// "dm-0-0-9981022": [{ type: "text", message: "鉴定" }],
+		// "dm-0-0-9981023": [{ type: "text", message: "全场鉴定" }],
 		"dm-0-0-9981046": [{ type: "text", message: "First: (Debuffs) Closest" }], // Thank you... for this release...
 		"dm-0-0-9981047": [{ type: "text", message: "First: (Circles) Spread" }], // Beware the... red lightning...
 		"dm-0-0-9981048": [{ type: "text", message: "First: (Bombs) Gather + Cleanse" }], // Beware the mark... of Lakan...
@@ -135,9 +140,9 @@ module.exports = () => {
 		"s-981-3000-1138-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 250, 6000] }],
 		"s-981-3000-1144-0": [{ type: "text", message: "OUT" }],
 		"s-981-3000-1145-0": [{ type: "text", message: "IN" }],
-		"s-981-3000-1240-0": [{ type: "text", message: "Donuts" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 350, 6000] }],
+		"s-981-3000-1240-0": [{ type: "text", message: "Donuts" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 350, 6000] }],
 		"s-981-3000-1401-0": [{ type: "text", message: "Plague/Regress" }],
 		"s-981-3000-1402-0": [{ type: "text", message: "Sleep" }]
 	};
+
 };

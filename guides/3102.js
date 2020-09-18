@@ -3,8 +3,9 @@
 // made by Kuroine / HSDN
 // Updated to revised version
 
-module.exports = () => {
+module.exports = (mod, extras) => {
 	return {
+
 		// Ress bait / range check
 		"s-3102-1000-107-0": [{ type: "text", message: "Spectral Throw (Bait)" }],
 
@@ -19,10 +20,10 @@ module.exports = () => {
 			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 16, 420, 3000] }],
 		"s-3102-1000-111-0": [{ type: "text", message: "Leap (Stun)" }],
 		"s-3102-1000-115-0": [{ type: "text", message: "AOE Bombs (Gather)" },
-			{ type: "text", message: "Gather!", delay: 3000 }],
+			{ type: "text", delay: 3000, message: "Gather!" }],
 		"s-3102-1000-112-0": [{ type: "text", message: "Front | Back Kick" },
-			{ type: "spawn", function: "vector", args: [553, 90, 120, 160, 300, 3000] },
-			{ type: "spawn", function: "vector", args: [553, 270, 120, -160, 300, 3000] }],
+			{ type: "spawn", function: "vector", args: [553, 90, 160, 160, 300, 3000] },
+			{ type: "spawn", function: "vector", args: [553, 270, -160, -160, 300, 3000] }],
 		"s-3102-1000-110-0": [{ type: "text", message: "Donuts + Wave" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 650, 4000] }],
 		"s-3102-1000-109-0": [{ type: "text", message: "Knockdown + Spin" },
@@ -36,28 +37,28 @@ module.exports = () => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 550, 3000] },
 			{ type: "spawn", function: "semi", args: [-60, 70, 912, 0, 50, 8, 450, 4000] },
 			{ type: "spawn", function: "semi", args: [120, 250, 912, 0, 50, 8, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 70, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 120, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 250, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 300, 450, 4000] },
-			{ type: "text", message: "Dodge!", delay: 1900 }],
+			{ type: "spawn", function: "vector", args: [912, 0, 70, 70, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 120, 120, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 250, 250, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 300, 300, 450, 4000] },
+			{ type: "text", delay: 1900, message: "Dodge!" }],
 		"s-3102-1000-122-0": [{ type: "spawn", function: "marker", args: [false, 0, 200, 2000, true, null], delay: 500 }],
-		"s-3102-1000-123-0": [{ type: "spawn", function: "vector", args: [912, 0, 0, 295, 550, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 0, 85, 550, 0, 2000] },
-			{ type: "spawn", function: "semi", args: [85, 295, 912, 0, 0, 6, 550, 0, 2000] }],
+		"s-3102-1000-123-0": [{ type: "spawn", function: "vector", args: [912, 0, 295, 295, 550, 2000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 85, 85, 550, 2000] },
+			{ type: "spawn", function: "semi", args: [85, 295, 912, 0, 0, 6, 550, 2000] }],
 		// Left Foot
 		"s-3102-1000-124-0": [{ type: "text", message: "Pizza" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 550, 3000] },
 			{ type: "spawn", function: "semi", args: [-60, 70, 912, 0, 50, 8, 450, 4000] },
 			{ type: "spawn", function: "semi", args: [120, 250, 912, 0, 50, 8, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 70, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 120, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 250, 450, 4000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 50, 300, 450, 4000] },
-			{ type: "text", message: "Dodge!", delay: 1900 }],
+			{ type: "spawn", function: "vector", args: [912, 0, 70, 70, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 120, 120, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 250, 250, 450, 4000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 300, 300, 450, 4000] },
+			{ type: "text", delay: 1900, message: "Dodge!" }],
 		"s-3102-1000-125-0": [{ type: "spawn", function: "marker", args: [false, 0, 200, 3000, true, null], delay: 500 }],
-		"s-3102-1000-126-0": [{ type: "spawn", function: "vector", args: [912, 0, 0, 295, 550, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 0, 85, 550, 2000] },
+		"s-3102-1000-126-0": [{ type: "spawn", function: "vector", args: [912, 0, 295, 295, 550, 2000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 85, 85, 550, 2000] },
 			{ type: "spawn", function: "semi", args: [85, 295, 912, 0, 0, 6, 550, 2000] }]
 	};
 

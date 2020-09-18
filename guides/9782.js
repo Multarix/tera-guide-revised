@@ -1,18 +1,22 @@
-// Grotto of Lost Souls
+﻿// Grotto of Lost Souls
 //
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod) => {
+module.exports = (mod, extras) => {
 	return {
 
 		// 1 BOSS
-		"s-782-1000-106-0": [{ type: "text", message: "Heavy", position: "tank" }],
-		"s-782-1000-107-0": [{ type: "text", message: "Pushback", position: "dps" },
-			{ type: "text", message: "Pushback", position: "healer" }],
+		"s-782-1000-106-0": [{ type: "text", position: "tank", message: "Heavy" }],
+		"s-782-1000-107-0": [{ type: "text", position: "dps", message: "Pushback" },
+			{ type: "text", position: "healer", message: "Pushback" }],
+		"s-782-1000-108-0": [{ type: "text", position: "dps" },
+			{ type: "text", position: "healer" }],
 		"s-782-1000-109-0": [{ type: "text", message: "Rocks (Small)" }],
 		"s-782-1000-110-0": [{ type: "text", message: "Rocks (Large)" }],
 		"s-782-1000-301-0": [{ type: "text", message: "Flower Stuns" }],
+		"s-782-1000-307-0": [{ type: "text", position: "dps" },
+			{ type: "text", position: "healer" }],
 		"s-782-1000-309-0": [{ type: "text", message: "1 flower" }],
 		"s-782-1000-310-0": [{ type: "text", message: "2 flower" }],
 		"s-782-1000-116-0": [{ type: "text", message: "Big AoE attack!!" }],
@@ -24,8 +28,8 @@ module.exports = (mod) => {
 		"s-782-2000-114-0": [{ type: "text", message: "Get IN" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
 		"s-782-2000-116-0": [{ type: "text", message: "Front then Back" },
-			{ type: "spawn", function: "vector", args: [553, 0, 0, 270, 500, 5000] },
-			{ type: "spawn", function: "vector", args: [553, 180, 0, 90, 500, 5000] }],
+			{ type: "spawn", function: "vector", args: [553, 0, 270, 270, 500, 5000] },
+			{ type: "spawn", function: "vector", args: [553, 180, 90, 90, 500, 5000] }],
 		"s-782-2000-301-0": [{ type: "text", message: "Get Out + Dodge" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
 		"s-782-2000-302-0": [{ type: "text", message: "Get In + Dodge" },
@@ -71,19 +75,19 @@ module.exports = (mod) => {
 		"s-782-3000-215-0": [{ type: "text", message: "Tail!" }],
 		"s-782-3000-139-0": [{ type: "text", message: "Left safe" },
 			{ type: "spawn", function: "vector", args: [912, 90, 0, 0, 500, 5000] },
-			{ type: "spawn", function: "vector", args: [912, 270, 0, 180, 500, 5000] },
+			{ type: "spawn", function: "vector", args: [912, 270, 180, 180, 500, 5000] },
 			{ type: "spawn", function: "marker", args: [false, 270, 200, 8000, true, null] }],
 		"s-782-3000-150-0": [{ type: "text", message: "Left safe" },
 			{ type: "spawn", function: "vector", args: [912, 90, 0, 0, 500, 5000] },
-			{ type: "spawn", function: "vector", args: [912, 270, 0, 180, 500, 5000] },
+			{ type: "spawn", function: "vector", args: [912, 270, 180, 180, 500, 5000] },
 			{ type: "spawn", function: "marker", args: [false, 270, 200, 8000, true, null] }],
 		"s-782-3000-141-0": [{ type: "text", message: "Right safe" },
 			{ type: "spawn", function: "vector", args: [912, 90, 0, 0, 500, 5000] },
-			{ type: "spawn", function: "vector", args: [912, 270, 0, 180, 500, 5000] },
+			{ type: "spawn", function: "vector", args: [912, 270, 180, 180, 500, 5000] },
 			{ type: "spawn", function: "marker", args: [false, 90, 200, 8000, true, null] }],
 		"s-782-3000-152-0": [{ type: "text", message: "Right safe" },
 			{ type: "spawn", function: "vector", args: [912, 90, 0, 0, 500, 5000] },
-			{ type: "spawn", function: "vector", args: [912, 270, 0, 180, 500, 5000] },
+			{ type: "spawn", function: "vector", args: [912, 270, 180, 180, 500, 5000] },
 			{ type: "spawn", function: "marker", args: [false, 90, 200, 8000, true, null] }],
 		"s-782-3000-300-0": [{ type: "text", message: "Dodge! (Awakening 1)" }],
 		"s-782-3000-399-0": [{ type: "text", message: "Dodge! (Awakening 2)" }],
