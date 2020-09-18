@@ -5,35 +5,43 @@ const { promisify } = require("util");
 const readdir = promisify(fs.readdir);
 
 const replacer = async (content) => {
-	const loadRemover = /module\.exports = {(\r\n|\r|\n)\s.*(\r\n|\r|\n).*(\r\n|\r|\n).*/g;
+	const loadRemover = /module\.exports = {(\r\n|\r|\n)\s.*(\r\n|\r|\n).*(\r\n|\r|\n).*/;
 
 	let modified = content;
 
-	const convertToArray = /\.bind\(null, (.*?)\)/g;
-	let x = convertToArray.exec(modified);
-	while(x){
-		modified = modified.replace(x[0], `, args: [${x[1]}]`);
-		x = convertToArray.exec(modified);
+	const convertToArray = /\.bind\(null, (.*?)\)/;
+	let xa = convertToArray.exec(modified);
+	while(xa){
+		modified = modified.replace(xa[0], `, args: [${xa[1]}]`);
+		xa = convertToArray.exec(modified);
 	}
 
-	const handlerReplacement = /handlers\['text'\]\({(\r\n|\n|\r)\s*"sub_type": "message",(\r\n|\n|\r)\s*"message": "(.*?)",(\r\n|\n|\r)\s*"message_RU": "(.*?)"(\r\n|\n|\r)\s*}\)/g; // Yikes lmfao
-	let y = handlerReplacement.exec(modified);
-	while(y){
-		modified = modified.replace(y[0], `sendMessage("${y[3]}")`);
-		y = handlerReplacement.exec(modified);
+	const hRepl = /handlers\['text']\({(\n|\n\r|\r)\s+"sub_type": ".*?",(\n|\n\r|\r)\s+"message": "(.*?)",(\n|\n\r|\r)\s+"message_RU": ".*?"(\n|\n\r|\r)\s+}\)/; // Yikes lmfao
+	let ya = hRepl.exec(modified);
+	while(ya){
+		modified = modified.replace(ya[0], `sendMessage("${ya[3]}")`);
+		ya = hRepl.exec(modified);
 	}
 
-	const handleRepl = /handlers\["text"\]\({ "sub_type": "message", ("delay": delay, )?"message": (".*?"), "message_RU": (".*?") }\);/g;
-	let z = handleRepl.exec(modified);
-	while(z){
-		modified = modified.replace(z[0], `sendMessage("${z[3]}")`);
-		z = handleRepl.exec(modified);
+	const hRep2 = /handlers\['text']\({(\n|\n\r|\r)\s+"sub_type": ".*?",(\n|\n\r|\r)\s+"message_RU": ".*?",(\n|\n\r|\r)\s+"message": "(.*?)"(\n|\n\r|\r)\s+}\)/; // Yikes lmfao
+	let qa = hRep2.exec(modified);
+	while(qa){
+		modified = modified.replace(qa[0], `sendMessage("${qa[4]}")`);
+		qa = hRep2.exec(modified);
+	}
+
+	const handleRepl = /handlers\["text"\]\({ "sub_type": "message", ("delay": delay, )?"message": (".*?"), "message_RU": (".*?") }\);/;
+	let za = handleRepl.exec(modified);
+	while(za){
+		modified = modified.replace(za[0], `sendMessage("${za[3]}")`);
+		za = handleRepl.exec(modified);
 	}
 
 	modified = modified.replace(loadRemover, "module.exports = (mod, extras) => {\n\treturn {")
 		.replace(/const {.*?} = require\("\.\.\/lib"\);/g, "")
 		.replace("let player, entity, library, effect;", "")
 		.replace(/dispatch/g, "mod")
+		.replace(/, handlers, event, ent, mod/g, "")
 		.replace(/"type": "text"/g, `type: "text"`)
 		.replace(/"type": "spawn_func"/g, `type: "spawn"`)
 		.replace(/"type": "func"/g, `type: "function"`)
@@ -45,6 +53,18 @@ const replacer = async (content) => {
 		.replace(/"message":/g, `message:`)
 		.replace(/, "sub_type": ".*?"/g, "")
 		.replace(/, "message_RU": ".*?"/g, "");
+
+
+	const itemReplace = /"item", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	let item = itemReplace.exec(modified);
+	while(item){
+		if(parseInt(item[4]) > 150){
+			modified = modified.replace(item[0], `"item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}], delay: ${item[4]}`);
+		} else {
+			modified = modified.replace(item[0], `"item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}]`);
+		}
+		item = itemReplace.exec(modified);
+	}
 
 
 	const markerReplace = /"marker", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (\[?.*?\]?)\]/;
