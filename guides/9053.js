@@ -11,7 +11,7 @@ module.exports = () => {
 		"s-453-999-105-0": [{ type: "text", message: "Rock Smash", position: "tank" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 210, 10, 185, 3500] }],
 		"s-453-999-106-0": [{ type: "text", message: "Blast" },
-			{ type: "text", message: "Dodge!", "delay": 2000, targeted: true }],
+			{ type: "text", message: "Dodge!", "delay": 1500, targeted: true }],
 		"s-453-999-107-0": [{ type: "text", message: "Whip" }],
 		"s-453-999-116-0": [{ type: "text", message: "Shield" }],
 		"s-453-999-119-0": [{ type: "text", message: "Kaia's Shield", position: "priest" },
