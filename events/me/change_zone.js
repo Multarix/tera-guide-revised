@@ -21,7 +21,7 @@ const es_guides = [
 	9000, // ???
 	9759 // Forsaken Island (Hard)
 ];
-	/* eslint-enable */
+/* eslint-enable */
 
 module.exports = (mod, extras, zone, quick) => {
 	extras.bonfire = false;
@@ -33,6 +33,8 @@ module.exports = (mod, extras, zone, quick) => {
 	if(extras.guides.includes(extras.lastLocation.toString())) extras.active_guide = false;
 
 	extras.lastLocation = zone; // Set the last location to this current location
+	if(extras.entity) extras.entity = false; // Set entity to false
+
 	if(!extras.guides.includes(zone.toString())) return extras.active_guide = false; // if the zone is not a dungeon, return
 
 	const dungeon = mod.settings.dungeons[zone.toString()];

@@ -168,7 +168,10 @@ module.exports = (mod, extras) => {
 
 		const doAction = () => { // A function so we don't have to write this crap out twice
 			if(obj.type === "function"){ // If the type is a function, try running the function
-				try {	obj.function(...obj.args);	} catch (e){ mod.error(e); }
+				try {
+					extras.entity = data.ent;
+					obj.function(...obj.args);
+				} catch (e){ mod.error(e); }
 				return;
 			}
 
@@ -179,7 +182,6 @@ module.exports = (mod, extras) => {
 				if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
 				if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
 
-				// Check obj and ent to make sure
 				const spawnEvent = new spawn(data.ent);
 				try {
 					spawnEvent[obj.function](...obj.args);
@@ -219,7 +221,6 @@ module.exports = (mod, extras) => {
 	global.eventHandler = (data) => {
 		if(!extras.active_guide[data.event]) return;
 		const attackKeyData = extras.active_guide[data.event];
-		extras.entity = (data.ent) ? data.ent : false;
 		for(const obj of attackKeyData){
 			if(positionCheck(obj.position) && checkTarget(obj, data)) handleEvent(obj, data);
 		}
