@@ -8,7 +8,7 @@ module.exports = function TeraGuide(mod){
 	// Extra stuff that we need
 	const extras = {
 		guides: [], // The list of guides that we have
-		active_guide: false, // The current active guide, if it doesn't exist, it should be fallse
+		active_guide: false, // The current active guide, if it doesn't exist, it should be false
 		lastLocation: 0, // The last location we were at
 		verbose: false, // If the dungeon has been disabled
 		spawning: true, // If the dungeon has object spawning disabled
@@ -87,7 +87,7 @@ module.exports = function TeraGuide(mod){
 	const cp = '</font><font color="#ae60ff">'; // Purple
 
 	const cmd = mod.command;
-	cmd.add("mult", { // Add chat commands to change mod settings (it's only "mult" for testing purposes)
+	cmd.add("guide", { // Add chat commands to change mod settings
 		"$none": () => {
 			cmd.message(`Guide Settings:\n${cw}` +
 				`Guide enabled: ${mod.settings.enabled ? cg : cr}${mod.settings.enabled}${cw}\n` +
@@ -136,7 +136,7 @@ module.exports = function TeraGuide(mod){
 			if(!foundDungeon) return cmd.message(`That dungeon doesn't seem to exist, please try again!`);
 		},
 
-		"bonfire": (args) => { // Spawn a bonfire because WHY WOULDN'T YOU WANT THIS???
+		"campfire": (args) => { // Spawn a bonfire because WHY WOULDN'T YOU WANT THIS???
 			let type = 1;
 			switch(args){
 				case "normal":	type = 1; break;
@@ -187,6 +187,6 @@ module.exports = function TeraGuide(mod){
 	this.destructor = async () => { // When the mod gets unloaded, clear all the timers & remove the chat command
 		mod.clearAllTimeouts();
 		mod.clearAllIntervals();
-		cmd.remove("mult");
+		cmd.remove("guide");
 	};
 };
