@@ -10,22 +10,52 @@ module.exports = function TeraGuide(mod){
 		guides: [], // The list of guides that we have
 		active_guide: false, // The current active guide, if it doesn't exist, it should be false
 		lastLocation: 0, // The last location we were at
-		verbose: false, // If the dungeon has been disabled
+		verbose: null, // If the dungeon has been disabled
 		spawning: true, // If the dungeon has object spawning disabled
-		sp: false, // for sp guides
-		es: false, // for es guides
+		sp: null, // for sp guides
+		es: null, // for es guides
 		mobHP: {}, // Mob hps
 		bonfire: false, // bonfire stuff
-		entity: false // For using spawning inside of functions for guides
+		entity: false, // For using spawning inside of functions for guides
+		debug: {
+			abnormal: false,
+			skill: false,
+			hp: false,
+			message: false,
+			quest: false
+		}
+	};
+
+	const changeZoneObject = {
+		hooks: {}, // An object that contains all our current hooks
+		loaded: false, // If the hooks are currently loaded
+		load: function(){ // For loading hooks
+			if(this.loaded) return;
+			for(let h in this.hooks){
+				h = this.hooks[h];
+				mod.hook(h.name, h.vers, {}, h.func.bind(null, mod, extras));
+			}
+			this.loaded = true;
+		},
+		unload: function(){ // For unloading hooks
+			if(!this.loaded) return;
+			for(let h in this.hooks){
+				h = this.hooks[h];
+				mod.unhook(h.name, h.vers);
+			}
+			this.loaded = false;
+		}
 	};
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
 
+
+	const hookArray = [];
 	const init = async () => {
 		// Load the ids of the available guides
 		const guideFiles = await readdir(path.resolve(__dirname, "./guides/"));
 		for(const file of guideFiles){
-			if(file.split(".").slice(-1)[0] !== "js") continue;
+			if(!file.endsWith(".js")) continue;
 			const guideName = file.split(".")[0];
 			extras.guides.push(guideName);
 
@@ -39,7 +69,7 @@ module.exports = function TeraGuide(mod){
 		// Load "game" events
 		const gameFiles = await readdir(path.resolve(__dirname, "./events/game/"));
 		for(const file of gameFiles){
-			if(file.split(".").slice(-1)[0] !== "js") continue;
+			if(!file.endsWith(".js")) continue;
 			try {
 				const event = require(path.resolve(__dirname, `./events/game/${file}`));
 				const eventName = file.split(".")[0];
@@ -50,33 +80,41 @@ module.exports = function TeraGuide(mod){
 			}
 		}
 
+		// Load hooks
+		const hookFiles = await readdir(path.resolve(__dirname, "./events/hooks/"));
+		for(const file of hookFiles){
+			if(!file.endsWith(".js")) continue;
+			try {
+				const hookFile = require(path.resolve(__dirname, `./events/hooks/${file}`));
+
+				const hookName = file.split(".")[0];
+				const version = hookFile.version;
+				const hookFunc = hookFile.func;
+				changeZoneObject.hooks[hookName] = {
+					name: hookName,
+					vers: version,
+					func: hookFunc
+				};
+				delete require.cache[require.resolve(path.resolve(__dirname, `./events/hooks/${file}`))];
+			} catch (e){
+				mod.error(`Unable to load "hook" ${file}: ${e}`);
+			}
+		}
+
 		// Load "me" events
 		const meFiles = await readdir(path.resolve(__dirname, "./events/me/"));
 		for(const file of meFiles){
-			if(file.split(".").slice(-1)[0] !== "js") continue;
+			if(!file.endsWith(".js")) continue;
 			try {
 				const event = require(path.resolve(__dirname, `./events/me/${file}`));
 				const eventName = file.split(".")[0];
-				mod.game.me.on(eventName, event.bind(null, mod, extras));
+				mod.game.me.on(eventName, event.bind(null, mod, extras, changeZoneObject));
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/me/${file}`))];
 			} catch (e){
 				mod.error(`Unable to load "me" event ${file}: ${e}`);
 			}
 		}
 
-		// Load hooks
-		const hookFiles = await readdir(path.resolve(__dirname, "./events/hooks/"));
-		for(const file of hookFiles){
-			if(file.split(".").slice(-1)[0] !== "js") continue;
-			try {
-				const hookFile = require(path.resolve(__dirname, `./events/hooks/${file}`));
-				const hookName = file.split(".")[0];
-				mod.hook(hookName, hookFile.version, {}, hookFile.func.bind(null, mod, extras));
-				delete require.cache[require.resolve(path.resolve(__dirname, `./events/hooks/${file}`))];
-			} catch (e){
-				mod.error(`Unable to load "hook" ${file}: ${e}`);
-			}
-		}
 	};
 	init();
 
@@ -93,6 +131,18 @@ module.exports = function TeraGuide(mod){
 				`Guide enabled: ${mod.settings.enabled ? cg : cr}${mod.settings.enabled}${cw}\n` +
 				`TTS Enabled: ${mod.settings.tts ? cg : cr}${mod.settings.tts}${cw}\n` +
 				`Notice Chat: ${mod.settings.notice ? cg : cr}${mod.settings.notice}`);
+		},
+
+		"help": () => { // Enable and disable the module
+			cmd.message(`Guide Commands:\n${cw}` +
+				`Toggle - Enables and disables the guide\n` +
+				`Notice -\n` +
+				`TTS - Enables and disables Text-To-Speach\n` +
+				`Notice - Enables and disables sending messages to notice chat\n` +
+				`Verbose - Enables and disables a specific dungeon guide\n` +
+				`Objects - Enables and disables spawning objects in a dungeon\n` +
+				`Debug - Enables and disables debugging of skills, abnormals etc\n` +
+				`Test - Allows you to test event keys`);
 		},
 
 		"toggle": () => { // Enable and disable the module
@@ -134,6 +184,45 @@ module.exports = function TeraGuide(mod){
 				return cmd.message(`Spawning objects in ${cp}${dungeon.name}${cw} has been ${dungeon.spawnObject ? cg : cr}${dungeon.spawnObject ? "en" : "dis"}abled`);
 			}
 			if(!foundDungeon) return cmd.message(`That dungeon doesn't seem to exist, please try again!`);
+		},
+
+		"debug": (args) => { // Enable and disable whether or not the message is sent to party notices
+			const argsSplit = args.split(" ");
+			const subCommand = argsSplit[0];
+			if(!subCommand){
+				cmd.message(`Debugging Settings:\n` +
+					`</font><font color="#e05555">Abnormals: ${extras.debug.abnormal ? cg : cr}${extras.debug.abnormal ? "en" : "dis"}abled\n` +
+					`</font><font color="#e0cd55">Boss Skills: ${extras.debug.skill ? cg : cr}${extras.debug.skill ? "en" : "dis"}abled\n` +
+					`</font><font color="#9357de">Boss HP: ${extras.debug.hp ? cg : cr}${extras.debug.hp ? "en" : "dis"}abled\n` +
+					`</font><font color="#c74cb2">Dungeon Message: ${extras.debug.message ? cg : cr}${extras.debug.message ? "en" : "dis"}abled\n` +
+					`</font><font color="#4cc1c7">Quest Balloons: ${extras.debug.quest ? cg : cr}${extras.debug.quest ? "en" : "dis"}abled`);
+			}
+			switch(subCommand){
+				case "abnormal":
+				case "abnormals":
+					extras.debug.abnormal = !extras.debug.abnormal;
+					cmd.message(`Abnormal debugging has been ${extras.debug.abnormal ? cg : cr}${extras.debug.abnormal ? "en" : "dis"}abled`);
+					break;
+				case "skill":
+				case "skills":
+					extras.debug.skill = !extras.debug.skill;
+					cmd.message(`Mob skill debugging has been ${extras.debug.skill ? cg : cr}${extras.debug.skill ? "en" : "dis"}abled`);
+					break;
+				case "hp":
+					extras.debug.hp = !extras.debug.hp;
+					cmd.message(`Mob HP debugging has been ${extras.debug.hp ? cg : cr}${extras.debug.hp ? "en" : "dis"}abled`);
+					break;
+				case "dm":
+					extras.debug.message = !extras.debug.message;
+					cmd.message(`Dungeon message debugging has been ${extras.debug.message ? cg : cr}${extras.debug.message ? "en" : "dis"}abled`);
+					break;
+				case "qb":
+					extras.debug.quest = !extras.debug.quest;
+					cmd.message(`Quest balloon debugging has been ${extras.debug.quest ? cg : cr}${extras.debug.quest ? "en" : "dis"}abled`);
+					break;
+				default:
+					cmd.message(`${subCommand} is not a valid debugging type.`);
+			}
 		},
 
 		"campfire": (args) => { // Spawn a bonfire because WHY WOULDN'T YOU WANT THIS???
@@ -188,5 +277,7 @@ module.exports = function TeraGuide(mod){
 		mod.clearAllTimeouts();
 		mod.clearAllIntervals();
 		cmd.remove("guide");
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))];
+		changeZoneObject.unload();
 	};
 };

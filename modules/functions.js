@@ -9,7 +9,7 @@ module.exports = (mod, extras) => {
 		mod.send(type, version, obj);
 	};
 
-
+	// this is only a global cause of our campfire memes
 	global.spawnHandler = (evtData) => {
 		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
 			if(!mod.settings.spawnObject || !extras.spawning) return;
@@ -95,12 +95,6 @@ module.exports = (mod, extras) => {
 		voice = null;
 	} // Check if the voice lib is available
 
-	// Yes this is prototype pollution, yes it's not a good idea, yes I'm going to do it anyway.
-	String.prototype.toProperCase = function(){
-		return this.replace(/([^\W_]+[^\s-]*) */g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
-	};
-
-
 	// Check if the class matches the class position
 	function positionCheck(position){
 		const tanks = [1, 10]; // Tanks (Lancer + Brawler)
@@ -152,7 +146,6 @@ module.exports = (mod, extras) => {
 		return false; // All checks failed, return false
 	}
 
-
 	const checkTarget = (obj, data) => {
 		if(!obj.targeted) return true; // If target isn't specified, assume it's for everyone
 		if(data.target.toString() === mod.game.me.gameId.toString()) return true; // If the target is us, return true
@@ -198,14 +191,39 @@ module.exports = (mod, extras) => {
 		if(delay){ mod.setTimeout(doAction, delay);	} else { doAction(); }
 	};
 
+	const debugFunc = (key, color) => {
+		const type = key.split("-")[0];
+		switch(type){
+			case "am":
+			case "ae":
+			case "ab":
+				if(extras.debug.abnormal) return mod.command.message(`${cw}Abnormal event: '</font><font color="${color}">${key}${cw}'`);
+				break;
+			case "s":
+				if(extras.debug.skill) return mod.command.message(`${cw}Skill event: '</font><font color="${color}">${key}${cw}'`);
+				break;
+			case "h":
+				if(extras.debug.hp) return mod.command.message(`${cw}HP event: '</font><font color="${color}">${key}${cw}'`);
+				break;
+			case "dm":
+				if(extras.debug.message) return mod.command.message(`${cw}Dungeon-Message event: '</font><font color="${color}">${key}${cw}'`);
+				break;
+			case "qb":
+				if(extras.debug.quest) return mod.command.message(`${cw}Quest-Balloon Event: '</font><font color="${color}">${key}${cw}'`);
+				break;
+			default:
+				return;
+		}
+	};
 
-	// Determine where to send messages
+	// Globals are "bad" but honestly being able to call sendMessage and event handler everywhere is more useful than harmful
+	// A workaround if I wanted to bother, would be to add these to "extras".
 	global.sendMessage = (msg) => {
 		if(mod.settings.notice && mod.game.me.party.inParty()){ // If in a party, and the notice setting is on, send to party notice
 			mod.send('S_CHAT', 3, {
 				channel: 21,
 				message: msg,
-				name: "Multarix"
+				name: player.name
 			});
 		}
 		// Big message on screen
@@ -218,7 +236,9 @@ module.exports = (mod, extras) => {
 		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
 
+	const cw = '</font><font color="#ffffff">';
 	global.eventHandler = (data) => {
+		debugFunc(data.event, data.color);
 		if(!extras.active_guide[data.event]) return;
 		const attackKeyData = extras.active_guide[data.event];
 		for(const obj of attackKeyData){

@@ -23,7 +23,7 @@ const es_guides = [
 ];
 /* eslint-enable */
 
-module.exports = (mod, extras, zone, quick) => {
+module.exports = (mod, extras, zoneObject, zone, quick) => {
 	extras.bonfire = false;
 
 	if(extras.lastLocation === zone) return; // if the zone is the same as the last one, return
@@ -35,8 +35,12 @@ module.exports = (mod, extras, zone, quick) => {
 	extras.lastLocation = zone; // Set the last location to this current location
 	if(extras.entity) extras.entity = false; // Set entity to false
 
-	if(!extras.guides.includes(zone.toString())) return extras.active_guide = false; // if the zone is not a dungeon, return
-
+	if(!extras.guides.includes(zone.toString())){ // if the zone is not a dungeon, return
+		zoneObject.unload();
+		extras.active_guide = false;
+		return;
+	}
+	zoneObject.load();
 	const dungeon = mod.settings.dungeons[zone.toString()];
 	extras.verbose = dungeon.verbose;
 	extras.spawning = dungeon.spawnObject;
@@ -68,9 +72,9 @@ module.exports = (mod, extras, zone, quick) => {
 	const cr = '</font><font color="#ff0000">'; // red
 	const cw = '</font><font color="#ffffff">'; // white
 	const cp = '</font><font color="#ae60ff">'; // Purple
-	mod.command.message(`Entered ${cp}${dungeon.name}${cw} (${cp}${zone}${cw})!\n` +
+	mod.command.message(`${cw}Entered ${cp}${dungeon.name}${cw} (${cp}${zone}${cw})!\n` +
 		`Text-to-Speech: ${mod.settings.tts ? cg : cr}${mod.settings.tts}\n${cw}` +
-		`Spawn Objects: ${dungeon.spawnObject ? cg : cr}${dungeon.spawnObject}\n${cw}` +
+		`Object Spawning: ${dungeon.spawnObject ? cg : cr}${dungeon.spawnObject}\n${cw}` +
 		`Verbose: ${dungeon.verbose ? cg : cr}${dungeon.verbose}\n`
 
 	);

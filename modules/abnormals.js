@@ -8,23 +8,32 @@ module.exports = (mod, extras, evt) => {
 	const target = entity["mobs"][evt.target.toString()]; // If the boss/mob get"s a abnormality applied to it
 	const sauce = entity["mobs"][evt.source.toString()]; // If the boss/mob is the cause for the abnormality
 
+	if(!target && !sauce) return;
+
 	let abnType = "";
-	let entai = { huntingZoneId: 0, templateId: 0 };
+	let entai = {};
 
-	if(sauce && player.isMe(evt.target)){ // If the mob/boss applies an abnormality to me
-		abnType = "am";
-		entai = sauce;
-	}
+	abnormalType:{
+		if(sauce && player.isMe(evt.target)){ // If the mob/boss applies an abnormality to me
+			abnType = "am";
+			entai = sauce;
+			break abnormalType;
+		}
 
-	if(player.isMe(evt.target) && (evt.source || 0) == 0){ // If "nothing"/server applies an abnormality to me
-		abnType = "ae";
-	}
+		if(player.isMe(evt.target) && (evt.source || 0) == 0){ // If "nothing"/server applies an abnormality to me
+			abnType = "ae";
+			entai = { huntingZoneId: 0, templateId: 0 };
+			break abnormalType;
+		}
 
-	if(target){ // If it"s a mob/boss getting an abnormality applied to itself
-		abnType = "ab";
-		entai = target;
+		if(target){ // If it"s a mob/boss getting an abnormality applied to itself
+			abnType = "ab";
+			entai = target;
+			break abnormalType;
+		}
 	}
+	if(!abnType) return;
 
 	const abnormalKey = `${abnType}-${entai.huntingZoneId}-${entai.templateId}-${evt.id}`;
-	eventHandler({ event: abnormalKey, target: false, ent: entai });
+	eventHandler({ event: abnormalKey, target: false, ent: entai, color: "#e05555" });
 };
