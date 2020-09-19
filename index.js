@@ -49,7 +49,6 @@ module.exports = function TeraGuide(mod){
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
 
-
 	const hookArray = [];
 	const init = async () => {
 		// Load the ids of the available guides
@@ -59,12 +58,39 @@ module.exports = function TeraGuide(mod){
 			const guideName = file.split(".")[0];
 			extras.guides.push(guideName);
 
-			// If the dungeon doesn't exist within the settings, we can add it, though we're missing it's name, we'll deal with that later.
+			// If the dungeon doesn't exist within the settings, we can add it, though we're missing it's name, we'll deal with that in just a second.
 			if(!mod.settings.dungeons[guideName]) mod.settings.dungeons[guideName] = { name: undefined, verbose: true, spawnObject: true };
 			// We can however apply these 2 names
 			if(guideName === "3020") mod.settings.dungeons[guideName].name = "Sea of Honor";
 			if(guideName === "3030") mod.settings.dungeons[guideName].name = "Commander's Residence (Raid)";
 		}
+
+		// Grab a list of dungeon names, and apply them to settings
+		let allDungeons;
+		const dungeons = new Map();
+		try {
+			const resOne = await mod.queryData("/EventMatching/EventGroup/Event@type=?", ["Dungeon"], true, true, ["id"]);
+			allDungeons = resOne.map(e => {
+				const zoneId = e.children.find(x => x.name == "TargetList").children.find(x => x.name == "Target").attributes.id;
+				let dungeon = dungeons.get(zoneId);
+				if(!dungeon){
+					dungeon = { id: zoneId, name: "" };
+					dungeons.set(zoneId, dungeon);
+				}
+				return dungeon;
+			});
+
+			const resTwo = await mod.queryData("/StrSheet_Dungeon/String@id=?", [[... dungeons.keys()]], true);
+			for(const res of resTwo){
+				const id = res.attributes.id.toString();
+				const name = res.attributes.string.toString();
+				if(!mod.settings.dungeons[id]) continue;
+				mod.settings.dungeons[id].name = name;
+			}
+		} catch (e){
+			mod.warn(`Unable to get the list of dungeon names, some dungeons may be named "undefined"`);
+		}
+
 
 		// Load "game" events
 		const gameFiles = await readdir(path.resolve(__dirname, "./events/game/"));
