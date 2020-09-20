@@ -29,18 +29,15 @@ module.exports = (mod, extras, zoneObject, zone, quick) => {
 	if(extras.lastLocation === zone) return; // if the zone is the same as the last one, return
 	mod.clearAllTimeouts();
 	mod.clearAllIntervals();
+	zoneObject.unload();
 
 	if(extras.guides.includes(extras.lastLocation.toString())) extras.active_guide = false;
 
 	extras.lastLocation = zone; // Set the last location to this current location
 	if(extras.entity) extras.entity = false; // Set entity to false
 
-	if(!extras.guides.includes(zone.toString())){ // if the zone is not a dungeon, return
-		zoneObject.unload();
-		extras.active_guide = false;
-		return;
-	}
-	zoneObject.load();
+	if(!extras.guides.includes(zone.toString())) return extras.active_guide = false; // if the zone is not a dungeon, return
+
 	const dungeon = mod.settings.dungeons[zone.toString()];
 	extras.verbose = dungeon.verbose;
 	extras.spawning = dungeon.spawnObject;
@@ -65,7 +62,9 @@ module.exports = (mod, extras, zoneObject, zone, quick) => {
 		mod.command.message(`${zone}.js could not be loaded, see the console for more details`);
 	}
 	if(!extras.active_guide) return; // If the guide still doesn't exist, return
+
 	extras.mobHP = {}; // Reset all mob HP
+	zoneObject.load(); // Load all the hooks (hopefully)
 
 	// Honestly chat colors are unnessary but eh, fight me. I wanted this to look fancy.
 	const cg = '</font><font color="#00ff00">'; // Green

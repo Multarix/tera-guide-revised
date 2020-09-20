@@ -26,23 +26,24 @@ module.exports = function TeraGuide(mod){
 		}
 	};
 
-	const changeZoneObject = {
+	const zoneObject = {
 		hooks: {}, // An object that contains all our current hooks
+		hookArray: [],
 		loaded: false, // If the hooks are currently loaded
 		load: function(){ // For loading hooks
-			if(this.loaded) return;
+			if(this.loaded || this.hookArray.length) return;
 			for(let h in this.hooks){
 				h = this.hooks[h];
-				mod.hook(h.name, h.vers, {}, h.func.bind(null, mod, extras));
+				this.hookArray.push(mod.hook(h.name, h.vers, h.func.bind(null, mod, extras)));
 			}
 			this.loaded = true;
 		},
 		unload: function(){ // For unloading hooks
-			if(!this.loaded) return;
-			for(let h in this.hooks){
-				h = this.hooks[h];
-				mod.unhook(h.name, h.vers);
+			if(!this.loaded || !this.hookArray.length) return;
+			for(const h of this.hookArray){
+				mod.unhook(h);
 			}
+			this.hookArray = [];
 			this.loaded = false;
 		}
 	};
@@ -112,14 +113,11 @@ module.exports = function TeraGuide(mod){
 			if(!file.endsWith(".js")) continue;
 			try {
 				const hookFile = require(path.resolve(__dirname, `./events/hooks/${file}`));
-
 				const hookName = file.split(".")[0];
-				const version = hookFile.version;
-				const hookFunc = hookFile.func;
-				changeZoneObject.hooks[hookName] = {
+				zoneObject.hooks[hookName] = {
 					name: hookName,
-					vers: version,
-					func: hookFunc
+					vers: hookFile.version,
+					func: hookFile.func
 				};
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/hooks/${file}`))];
 			} catch (e){
@@ -134,13 +132,12 @@ module.exports = function TeraGuide(mod){
 			try {
 				const event = require(path.resolve(__dirname, `./events/me/${file}`));
 				const eventName = file.split(".")[0];
-				mod.game.me.on(eventName, event.bind(null, mod, extras, changeZoneObject));
+				mod.game.me.on(eventName, event.bind(null, mod, extras, zoneObject));
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/me/${file}`))];
 			} catch (e){
 				mod.error(`Unable to load "me" event ${file}: ${e}`);
 			}
 		}
-
 	};
 	init();
 
@@ -304,6 +301,6 @@ module.exports = function TeraGuide(mod){
 		mod.clearAllIntervals();
 		cmd.remove("guide");
 		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))];
-		changeZoneObject.unload();
+		zoneObject.unload();
 	};
 };
