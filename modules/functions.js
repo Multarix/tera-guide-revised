@@ -5,9 +5,17 @@ module.exports = (mod, extras) => {
 
 	let uint64 = 0xFFFFFFFA;
 
+	let voice = null; // Check if the voice lib is available
+	try { voice = require('../voice'); } catch (e){
+		mod.log(e);
+		voice = null;
+	}
+
+
 	const sendEvent = (type, version, obj) => {
 		mod.send(type, version, obj);
 	};
+
 
 	// this is only a global cause of our campfire memes
 	global.spawnHandler = (evtData) => {
@@ -89,11 +97,6 @@ module.exports = (mod, extras) => {
 		mod.setTimeout(sendEvent, evtData.duration, despawnType, despawnVersion, despawnEvent);
 	};
 
-	let voice = null;
-	try { voice = require('../voice'); } catch (e){
-		mod.log(e);
-		voice = null;
-	} // Check if the voice lib is available
 
 	// Check if the class matches the class position
 	function positionCheck(position){
@@ -113,8 +116,8 @@ module.exports = (mod, extras) => {
 		switch(position){
 			case "tank": // If we're a tank, return true
 				if(player.job === 0){ // If we're a warrior
-					if(effect.hasAbnormality(warrior.dps)) return false; // If we have the DPS abnormality return false
 					if(effect.hasAbnormality(warrior.tank)) return true; // If we have the Tank abnormality return true
+					if(effect.hasAbnormality(warrior.dps)) return false; // If we have the DPS abnormality return false
 					return false; // We have no stance, lets assume we're a dps
 				}
 				if(tanks.includes(player.job)) return true; // If we're a tank return true
@@ -133,7 +136,7 @@ module.exports = (mod, extras) => {
 			case "priest": // For Priest specific actions (eg Arise)
 				if(player.job === 6) return true;
 				break;
-			case "mystic": // For Mystic specific actions (idk what mystic can do that priest can't, I'm a priest main)
+			case "mystic": // For Mystic specific actions (idfk what mystic can do that priest can't, I'm a priest main)
 				if(player.job === 7) return true;
 				break;
 			case "lancer": // For Lancer specific actions (eg Blue Shield)
@@ -146,50 +149,53 @@ module.exports = (mod, extras) => {
 		return false; // All checks failed, return false
 	}
 
+
 	const checkTarget = (obj, data) => {
 		if(!obj.targeted) return true; // If target isn't specified, assume it's for everyone
 		if(data.target.toString() === mod.game.me.gameId.toString()) return true; // If the target is us, return true
 		return false; // Target isn't us
 	};
 
-	const handleEvent = (obj, data) => { // Determine the type, and run w/e action it requires
+
+	const doAction = (obj, data) => { // A function so we don't have to write this crap out twice
+		if(obj.type === "function"){ // If the type is a function, try running the function
+			try {
+				extras.entity = data.ent;
+				obj.function(...obj.args);
+			} catch (e){ mod.error(e); }
+			return;
+		}
+
+		if(obj.type === "spawn"){
+			if(!mod.settings.spawnObject || !extras.spawning) return;
+
+			// Make sure func and args is defined
+			if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
+			if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
+
+			const spawnEvent = new spawn(data.ent);
+			try {
+				spawnEvent[obj.function](...obj.args);
+			} catch (e){
+				mod.error(e);
+			}
+			return;
+		}
+
+		if(obj.type === "text") return sendMessage(obj.message);
+		return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
+	};
+
+
+	const runEvent = (obj, data) => { // Determine the type, and run w/e action it requires
 		let delay = false;
 		if(obj.delay){ // Check if a delay is required
 			delay = parseInt(obj.delay);
-			if(isNaN(delay)) delay = false;// ;
+			if(isNaN(delay)) delay = false;
 		}
-
-		const doAction = () => { // A function so we don't have to write this crap out twice
-			if(obj.type === "function"){ // If the type is a function, try running the function
-				try {
-					extras.entity = data.ent;
-					obj.function(...obj.args);
-				} catch (e){ mod.error(e); }
-				return;
-			}
-
-			if(obj.type === "spawn"){
-				if(!mod.settings.spawnObject || !extras.spawning) return;
-
-				// Make sure func and args is defined
-				if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
-				if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
-
-				const spawnEvent = new spawn(data.ent);
-				try {
-					spawnEvent[obj.function](...obj.args);
-				} catch (e){
-					mod.error(e);
-				}
-				return;
-			}
-
-			if(obj.type === "text") return sendMessage(obj.message);
-			return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
-		};
-
-		if(delay){ mod.setTimeout(doAction, delay);	} else { doAction(); }
+		if(delay){ mod.setTimeout(doAction, delay, obj, data);	} else { doAction(obj, data); }
 	};
+
 
 	const debugFunc = (key, color) => {
 		const type = key.split("-")[0];
@@ -216,6 +222,7 @@ module.exports = (mod, extras) => {
 		}
 	};
 
+
 	// Globals are "bad" but honestly being able to call sendMessage and event handler everywhere is more useful than harmful
 	// A workaround if I wanted to bother, would be to add these to "extras".
 	global.sendMessage = (msg) => {
@@ -236,13 +243,14 @@ module.exports = (mod, extras) => {
 		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
 
+
 	const cw = '</font><font color="#ffffff">';
 	global.eventHandler = (data) => {
 		debugFunc(data.event, data.color);
 		if(!extras.active_guide[data.event]) return;
 		const attackKeyData = extras.active_guide[data.event];
 		for(const obj of attackKeyData){
-			if(positionCheck(obj.position) && checkTarget(obj, data)) handleEvent(obj, data);
+			if(positionCheck(obj.position) && checkTarget(obj, data)) runEvent(obj, data);
 		}
 	};
 };
