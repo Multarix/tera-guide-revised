@@ -1,5 +1,6 @@
 # **Tera Guide**
-A more organized version of the tera-guide by [HSDN](https://github.com/HSDN)<br>
+A more organized/ cleaner version of the [tera-guide by HSDN](https://github.com/hsdn/tera-guide)<br>
+It has been mostly re-written and should be more efficient and the code should be much more readable<br>
 <br>
 This module requires the library module found <u>**[HERE](https://github.com/tera-toolbox-mods/library)**</u><br>
 Extract to "mods" folder in tera-toolbox<br>
@@ -130,21 +131,20 @@ ID | Dungeon name
 So given that I don't have any plans to add any multi-language translations into a single guide, feel free to make a fork of this guide and translate into your own language. Let me know and I'll add a link to your guide down here.
 
 ## **Q&A**
-**Q: Will this version make me lag like HSDN's version does?**<br>
+#### **Will this version make me lag like HSDN's version does?**<br>
 A: No idea, I don't get any lag with HSDN's guide.<br>
 Perhaps it's just that your computer is garbage and you should upgrade it?<br>
 Maybe it's just toolbox itself has potato code for handling events and hooks?<br>
 <br>
 As for logical reasons as to why you might have lag, unlike many other mods, events and hooks are triggered a large amount of times, I've done my best to stop processing invalid events as early as possible, so it should be somewhat lower than it could be.
-Furthermore, the hooks should unhook themselves upon loading into a non-dungeon area, preventing them from triggering at all.<br>
+Furthermore, the hooks should unhook themselves upon loading into a non-dungeon area, preventing them from triggering at all*.<br>
 <br>
 It's likely the real source of any lag comes from how Toolbox handles events and hooks to begin with.<br>
 I haven't bothered to look at toolboxes code, but then again the dev of toolbox doesn't bother to look at other peoples code and tell them how to fix it, rather just says it's shit code and they're too busy. You can always ask them to try and improve its performance, but they'll probably just tell you to remove this module ¯\\\_(ツ)\_/¯<br>
-<br>
-**Q: Can you add x feature, I think it would be good!**<br>
-A: Short answer: No.<br>
+
+<i>\*Given the complete lack of documentation available for toolbox module development, if it doesn't work, blame toolbox's lack of documentation</i>
+#### **Can you add x feature, I think it would be good!**<br>
+Short answer: No.<br>
 Long answer, still probably no, I have no reason to add things that probably won't see much use if at all. If you think it's super duper amazing and everyone is totally going to use it, [open a ticket](https://github.com/Multarix/tera-guide-custom/issues) and ask. If the answer is still no, there is nothing stopping you from making a fork and adding it yourself.<br>
-<br>
-**Q: I've looked at some of the code, it looks like you stole some of it from HSDN!**<br>
-A: First off, HSDN's guide uses an [MIT License](https://en.wikipedia.org/wiki/MIT_License), which means I'm free to use the code as I wish. Secondary, yes I have used some of HSDN's code, and of course given the nature of making a module that does roughly the same thing, it's fairly likely that there will be code similarities.<br>
-<br>
+#### **I've looked at some of the code, it looks like you stole some of it from HSDN!**<br>
+First off, HSDN's guide uses an [MIT License](https://en.wikipedia.org/wiki/MIT_License), which means I'm free to use the code as I wish. Secondary, yes I have used some of HSDN's code, and of course given the nature of making a module that does roughly the same thing, it's fairly likely that there will be code similarities.<br>
