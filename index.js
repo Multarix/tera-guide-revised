@@ -62,7 +62,7 @@ module.exports = function TeraGuide(mod){
 			if(!mod.settings.dungeons[guideName]) mod.settings.dungeons[guideName] = { name: undefined, verbose: true, spawnObject: true };
 			// We can however apply these 2 names
 			if(guideName === "3020") mod.settings.dungeons[guideName].name = "Sea of Honor";
-			if(guideName === "3030") mod.settings.dungeons[guideName].name = "Commander's Residence (Raid)";
+			if(guideName === "3030") mod.settings.dungeons[guideName].name = "Commander's Residence";
 		}
 
 		// Grab a list of dungeon names, and apply them to settings
