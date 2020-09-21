@@ -32,7 +32,7 @@ module.exports = (mod, extras) => {
 		const uniqueIdent = evtData.force_gameId || uint64--; // uint64 in js... what a pain
 		let loc = evtData.ent.loc.clone();
 
-		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that (as far as I can tell it's never set?)
+		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that
 		loc.w = (evtData.ent.loc.w || 0) + (evtData.offset || 0);
 		library.applyDistance(loc, evtData.distance || 0, evtData.degrees || 0); // I have no idea how library works still
 		let spawnEvent = {
