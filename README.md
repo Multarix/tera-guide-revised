@@ -6,6 +6,9 @@ This module requires the library module found <u>**[HERE](https://github.com/ter
 Extract to "mods" folder in tera-toolbox<br>
 <u>**MAKE SURE IT'S NAMED "library" NOT "library-master"**</u>
 
+## **This module is a work in progress**
+Things may be broken, things may not work correctly or they may work flawlessly... If you wish to help development, open a new issue with any errors/ bugs you encounter.
+
 ### **Why use this one and not the one by HSDN?**
 This has a few changes from the original and in my opinion, much cleaner code.<br>
 There are also several features that I found to be unneeded that I have removed such as:
