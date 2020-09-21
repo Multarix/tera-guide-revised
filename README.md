@@ -132,7 +132,7 @@ So given that I don't have any plans to add any multi-language translations into
 
 ## **Q&A**
 #### **Will this version make me lag like HSDN's version does?**<br>
-A: No idea, I don't get any lag with HSDN's guide.<br>
+No idea, I don't get any lag with HSDN's guide.<br>
 Perhaps it's just that your computer is garbage and you should upgrade it?<br>
 Maybe it's just toolbox itself has potato code for handling events and hooks?<br>
 <br>
