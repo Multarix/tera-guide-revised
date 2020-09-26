@@ -5,7 +5,7 @@
     "lib.js": "e66debc647968d1aeccaeef8db3c98aae963a19f16047909dc420fdc7aebd4ac",
     "LICENSE": "2a68b8e284fa44056d4ae7d7580f10aad1fea20953b2c3d52d4a7673e13a0389",
     "README.md": "3467c23bccb6dd851e82e05f1e07c4cc3f245e01be03c10cd05832b4218e2957",
-    "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb"
+    "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb",
     "events/game/leave_game.js": "58fb122eb47748069f80905faafcf3a7700d5396e772f9c3c70775bdfd4cfdbb",
     "events/hooks/S_ABNORMALITY_BEGIN.js": "55e4a3b4d274804bed2891397ccf68d3433a400b7d2c3b5ee61fe84092d708c1",
     "events/hooks/S_ABNORMALITY_REFRESH.js": "760ff705746fb83013fba6cf7c773b2f711b14a5f167f5780822d4d1dba2a417",
