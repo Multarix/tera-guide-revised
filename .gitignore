@@ -1,5 +1,6 @@
-.git
-node_modules
 config.json
 module.config.json
-modules/stuff.js
+SHAGen.exe
+SHAGen.exe.config
+Newtonsoft.Json.dll
+generated-manifest.json
