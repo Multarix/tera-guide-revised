@@ -1,3 +1,9 @@
+// This file is used to (mostly) convert the guides from HSDN Tera guide into version that is usable by my guide.
+// This file is uncommented as it's only intended for my usage
+//
+// DO NOT RELY ON THIS TO 100% CONVERT GUIDES
+// UNLESS THE GUIDE IS VERY SIMPLE, IT WILL REQUIRE ADDITIONAL HUMAN MODIFICATION
+
 const wait = require("util").promisify(setTimeout);
 
 const fs = require("fs");
