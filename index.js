@@ -209,7 +209,7 @@ module.exports = function TeraGuide(mod){
 			if(!foundDungeon) return cmd.message(`That dungeon doesn't seem to exist, please try again!`);
 		},
 
-		"debug": (args) => { // Enable and disable whether or not the message is sent to party notices
+		"debug": (args) => { // Enable and disable key debugging messages
 			const argsSplit = args.split(" ");
 			const subCommand = argsSplit[0];
 			if(!subCommand){
