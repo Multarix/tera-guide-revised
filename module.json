@@ -6,7 +6,7 @@
         "guiName": "Tera Guide",
         "settingsFile": "config.json",
         "settingsMigrator": "settings_migrator.js",
-        "settingsVersion": "1.1",
+        "settingsVersion": "1.0",
 				"reloadable": true
     },
     "author": "Multairx",
