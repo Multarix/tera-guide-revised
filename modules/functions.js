@@ -199,6 +199,7 @@ module.exports = (mod, extras) => {
 
 	const debugFunc = (key, color) => {
 		const type = key.split("-")[0];
+		const cw = '</font><font color="#ffffff">';
 		switch(type){
 			case "am":
 			case "ae":
@@ -243,8 +244,6 @@ module.exports = (mod, extras) => {
 		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
 
-
-	const cw = '</font><font color="#ffffff">';
 	global.eventHandler = (data) => {
 		debugFunc(data.event, data.color);
 		if(!extras.active_guide[data.event]) return;
