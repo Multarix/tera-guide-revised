@@ -50,7 +50,6 @@ module.exports = function TeraGuide(mod){
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
 
-	const hookArray = [];
 	const init = async () => {
 		// Load the ids of the available guides
 		const guideFiles = await readdir(path.resolve(__dirname, "./guides/"));
