@@ -103,7 +103,7 @@ module.exports = (mod, extras) => {
 		const tanks = [1, 10]; // Tanks (Lancer + Brawler)
 		const dps = [2, 3, 4, 5, 8, 9, 11, 12]; // DPS (not counting warrior)
 		const healers = [6, 7]; // Healers (Priest & Mystic)
-		const warrior = {	tank: 100201, dps: 100103	};
+		const warrior = { tank: 100201, dps: 100103 };
 
 		if(!position) return true; // if it's not defined we assume that it's for everyone
 
