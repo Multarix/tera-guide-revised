@@ -1,11 +1,11 @@
 {
   "files": {
-		"module.json": "5b9dd2bb52ffb45fcb312e4fb993e54271bbae5752a30c661694c36774c1713e",
-    "index.js": "076e37fdab4817a19c49f1a5b607780d1ee181a363b12321b6a5de3eefdb57a8",
+    "index.js": "68feca8156791cfc8eb7b9fab77901e46ad08ae16947860884fef0bfe64d6c10",
     "lib.js": "e66debc647968d1aeccaeef8db3c98aae963a19f16047909dc420fdc7aebd4ac",
     "LICENSE": "2a68b8e284fa44056d4ae7d7580f10aad1fea20953b2c3d52d4a7673e13a0389",
+    "module.json": "5b9dd2bb52ffb45fcb312e4fb993e54271bbae5752a30c661694c36774c1713e",
     "README.md": "3467c23bccb6dd851e82e05f1e07c4cc3f245e01be03c10cd05832b4218e2957",
-    "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb",
+    "settings_migrator.js": "41681a6d02ad27dbe03d4cd627f394ffe1b3164f8324c45db71a04dc70d617cd",
     "events/game/leave_game.js": "58fb122eb47748069f80905faafcf3a7700d5396e772f9c3c70775bdfd4cfdbb",
     "events/hooks/S_ABNORMALITY_BEGIN.js": "55e4a3b4d274804bed2891397ccf68d3433a400b7d2c3b5ee61fe84092d708c1",
     "events/hooks/S_ABNORMALITY_REFRESH.js": "760ff705746fb83013fba6cf7c773b2f711b14a5f167f5780822d4d1dba2a417",
@@ -14,8 +14,6 @@
     "events/hooks/S_DUNGEON_EVENT_MESSAGE.js": "94704c952028f82c9e122d130dfdeafe69cb1bc1689da56e3c411f965c9a9a10",
     "events/hooks/S_QUEST_BALLOON.js": "5a1db032c2bb96f28524b88c4f665ecd219cef1eb9447f90af99d66b9ff5c67b",
     "events/me/change_zone.js": "2f4078cae8304707b18d0939586044da128be4f4cf7e1625b6243418530b6238",
-		"modules/abnormals.js": "e3ccaf2d8c171ee710aebf7d8684ba33fd34c67fd1109d6fd3471c8cb3f38e23",
-		"modules/functions.js": "0b91d7cf8f0251d87743c214d1a0fba84419bd9d3255655941f1ffd520edae3b",
     "guides/3023.js": "215a3ff16f0c568342528b364dd37863e7e621efd3883aae74bde91e01d20d3a",
     "guides/3026.js": "a1585c548d917463e3a464904ad03e8c75de0c092f2f14c1fbf77abf85b0db0f",
     "guides/3027.js": "28b002e575008ad7a58f3cb6866688c8a87fab580a4ea15fc110c78d881c4805",
@@ -37,8 +35,11 @@
     "guides/9920.js": "1c03026c29ab3c64a6a1a9d213c340a8f25187a15dca9dc4b3b9dc99704d065a",
     "guides/9970.js": "e2b9f3227888c8958bc71daab2371522dc72465de8b8d1e110d1ebaa3f3fefe0",
     "guides/9981.js": "6eb110f9d792e6bb4aedb434821ce4b68b8b5e721599b5dc0bb93fae870d28c0",
-    "guides/9982.js": "cfa5884649a286ff78ed116aaaab83316624007a7a088163942b59e16a875098"
-  },
+    "guides/9982.js": "cfa5884649a286ff78ed116aaaab83316624007a7a088163942b59e16a875098",
+    "modules/abnormals.js": "e3ccaf2d8c171ee710aebf7d8684ba33fd34c67fd1109d6fd3471c8cb3f38e23",
+    "modules/functions.js": "9b4140807b9f41bf36fcd3c0b2eac583d0e8604fbf9bb92aa01a2a541f1a15e6",
+    "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb"
+	},
 	"defs": {
 		"S_ABNORMALITY_BEGIN": 4,
 		"S_ABNORMALITY_REFRESH": 2,
@@ -53,6 +54,6 @@
 		"S_SPAWN_DROPITEM": 8,
 		"S_DESPAWN_BUILD_OBJECT": 2,
 		"S_DESPAWN_COLLECTION": 2,
-		"S_DESPAWN_DROPITEM": 4,
+		"S_DESPAWN_DROPITEM": 4
 	}
 }
