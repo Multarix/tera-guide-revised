@@ -1,15 +1,15 @@
 {
   "files": {
-    "index.js": "68feca8156791cfc8eb7b9fab77901e46ad08ae16947860884fef0bfe64d6c10",
+    "index.js": "117b0f19d00ea21467cb8ef0ddf7e42a01dd71c0b99c181e9909bda233084112",
     "lib.js": "e66debc647968d1aeccaeef8db3c98aae963a19f16047909dc420fdc7aebd4ac",
     "LICENSE": "2a68b8e284fa44056d4ae7d7580f10aad1fea20953b2c3d52d4a7673e13a0389",
-    "module.json": "5b9dd2bb52ffb45fcb312e4fb993e54271bbae5752a30c661694c36774c1713e",
-    "README.md": "3467c23bccb6dd851e82e05f1e07c4cc3f245e01be03c10cd05832b4218e2957",
+    "module.json": "4b551ab941a87aa905e9c29dd92e5f1be7549f3c35432c33268bac93a432c0c8",
+    "README.md": "3d90e2f405a7223569aa55916b135cecfc362956d2e531fc089d3698a91f2fae",
     "settings_migrator.js": "41681a6d02ad27dbe03d4cd627f394ffe1b3164f8324c45db71a04dc70d617cd",
     "events/game/leave_game.js": "58fb122eb47748069f80905faafcf3a7700d5396e772f9c3c70775bdfd4cfdbb",
     "events/hooks/S_ABNORMALITY_BEGIN.js": "55e4a3b4d274804bed2891397ccf68d3433a400b7d2c3b5ee61fe84092d708c1",
     "events/hooks/S_ABNORMALITY_REFRESH.js": "760ff705746fb83013fba6cf7c773b2f711b14a5f167f5780822d4d1dba2a417",
-    "events/hooks/S_ACTION_STAGE.js": "1dc7e55a5b656a1dca3d06b474f65b2fb2b282a67f139b53ef3791e8115977b9",
+    "events/hooks/S_ACTION_STAGE.js": "4280eb8e64f32bfa68c2c5095cc52a16e70ae9fae1bbb3e3737f5d4cdc4653a6",
     "events/hooks/S_BOSS_GAGE_INFO.js": "ded7f33b4e85539618acc8976f55b31fed2560b2fcf33e925cf4e897bc315665",
     "events/hooks/S_DUNGEON_EVENT_MESSAGE.js": "94704c952028f82c9e122d130dfdeafe69cb1bc1689da56e3c411f965c9a9a10",
     "events/hooks/S_QUEST_BALLOON.js": "5a1db032c2bb96f28524b88c4f665ecd219cef1eb9447f90af99d66b9ff5c67b",
@@ -37,7 +37,7 @@
     "guides/9981.js": "6eb110f9d792e6bb4aedb434821ce4b68b8b5e721599b5dc0bb93fae870d28c0",
     "guides/9982.js": "cfa5884649a286ff78ed116aaaab83316624007a7a088163942b59e16a875098",
     "modules/abnormals.js": "e3ccaf2d8c171ee710aebf7d8684ba33fd34c67fd1109d6fd3471c8cb3f38e23",
-    "modules/functions.js": "9b4140807b9f41bf36fcd3c0b2eac583d0e8604fbf9bb92aa01a2a541f1a15e6",
+    "modules/functions.js": "a4c6822c6d499cfcef70f6815403f27e246706940ef8841b246d26e2be524a1b",
     "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb"
 	},
 	"defs": {
