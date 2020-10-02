@@ -17,7 +17,7 @@ module.exports = function TeraGuide(mod){
 		mobHP: {}, // Mob hps
 		bonfire: false, // bonfire stuff
 		entity: false, // For using spawning inside of functions for guides
-		debug: {
+		debug: { // Debug object for debugging stuff later
 			abnormal: false,
 			skill: false,
 			hp: false,
@@ -27,7 +27,7 @@ module.exports = function TeraGuide(mod){
 	};
 
 	const zoneObject = {
-		hooks: {}, // An object that contains all our current hooks
+		hooks: {}, // An object that contains all our hook information
 		hookArray: [],
 		loaded: false, // If the hooks are currently loaded
 		load: function(){ // For loading hooks
@@ -102,7 +102,7 @@ module.exports = function TeraGuide(mod){
 				mod.game.on(eventName, event.bind(null, mod, extras));
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/game/${file}`))];
 			} catch (e){
-				mod.error(`Unable to load "game" event ${file}: ${e}`);
+				mod.error(`Unable to load "game" event ${file}:\n${e}`);
 			}
 		}
 
@@ -120,7 +120,7 @@ module.exports = function TeraGuide(mod){
 				};
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/hooks/${file}`))];
 			} catch (e){
-				mod.error(`Unable to load "hook" ${file}: ${e}`);
+				mod.error(`Unable to load "hook" ${file}:\n${e}`);
 			}
 		}
 
@@ -134,7 +134,7 @@ module.exports = function TeraGuide(mod){
 				mod.game.me.on(eventName, event.bind(null, mod, extras, zoneObject));
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/me/${file}`))];
 			} catch (e){
-				mod.error(`Unable to load "me" event ${file}: ${e}`);
+				mod.error(`Unable to load "me" event ${file}:\n${e}`);
 			}
 		}
 	};
@@ -295,11 +295,11 @@ module.exports = function TeraGuide(mod){
 		}
 	});
 
-	this.destructor = async () => { // When the mod gets unloaded, clear all the timers & remove the chat command
-		mod.clearAllTimeouts();
+	this.destructor = async () => { // When the mod gets unloaded
+		mod.clearAllTimeouts(); // Clear all timers
 		mod.clearAllIntervals();
-		cmd.remove("guide");
-		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))];
-		zoneObject.unload();
+		cmd.remove("guide"); // Remove chat command
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))]; // Remove the function requirement
+		zoneObject.unload(); // Attempt unloading all hooks
 	};
 };

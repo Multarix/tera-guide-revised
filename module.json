@@ -16,5 +16,5 @@
     "dependencies": {
         "library": "https://raw.githubusercontent.com/tera-toolbox-mods/library/master/module.json"
     },
-    "version": "0.9a"
+    "version": "1.0"
 }

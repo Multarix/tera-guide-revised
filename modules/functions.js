@@ -7,7 +7,7 @@ module.exports = (mod, extras) => {
 
 	let voice = null; // Check if the voice lib is available
 	try { voice = require('../voice'); } catch (e){
-		mod.log(e);
+		mod.warn(e);
 		voice = null;
 	}
 
@@ -17,7 +17,7 @@ module.exports = (mod, extras) => {
 	};
 
 
-	// this is only a global cause of our campfire memes
+	// Globals are bad... But fight me. Workaround is to add to "extras"
 	global.spawnHandler = (evtData) => {
 		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
 			if(!mod.settings.spawnObject || !extras.spawning) return;

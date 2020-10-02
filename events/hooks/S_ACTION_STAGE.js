@@ -4,7 +4,9 @@ exports.func = (mod, extras, evnt) => {
 
 	let skillid = evnt.skill.id % 1000;
 	const eskillid = (evnt.skill.id > 3000) ? evnt.skill.id : evnt.skill.id % 1000;
-	skillid = (skillid === eskillid) ? skillid : eskillid; // This feels kinda cheaty
+
+	if(extras.sp) skillid = evnt.skill.id; // If the dungeon is an sp dungeon
+	if(extras.es) skillid = eskillid; // If the dungeon is an es dungeon
 
 	const { entity } = mod.require.library; // Honestly, I still have no idea what this does, it's not my code
 	const ent = entity["mobs"][evnt.gameId.toString()];
