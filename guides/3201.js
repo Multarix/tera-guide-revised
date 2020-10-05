@@ -20,22 +20,22 @@ exports.guide = (mod, extras) => {
 			mod.setTimeout(() => notice = true, 4000);
 		}
 		if(notice && skillid === 234 && boss === 1){ // 203 204技能没出/满足234 打手位置本体技能/满足吃分身buff
-		/* extras.sendMessage("Dps entity");*/
+		/* extras.sendMessage(mod, "Dps entity");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(notice && skillid === 234 && boss === 0){ // 203 204技能没出/满足234 打手位置本体技能/满足吃本体buff
-		/* extras.sendMessage("tank");*/
+		/* extras.sendMessage(mod, "tank");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 32010224){ // 吃分身buff
 			boss = 1;
 			mod.setTimeout(() => {
 				if(boss === 1){
-					extras.sendMessage("Debuff reload");
+					extras.sendMessage(mod, "Debuff reload");
 					boss = 3;
 				}
 			}, 80000);
@@ -44,51 +44,51 @@ exports.guide = (mod, extras) => {
 			boss = 0;
 			mod.setTimeout(() => {
 				if(boss === 0){
-					extras.sendMessage("Debuff reload");
+					extras.sendMessage(mod, "Debuff reload");
 					boss = 3;
 				}
 			}, 80000);
 		}
 		if(skillid === 203 && boss === 0){
-		/* extras.sendMessage("tank");*/
+		/* extras.sendMessage(mod, "tank");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 203 && boss === 1){
-		/* extras.sendMessage("Dps entity");*/
+		/* extras.sendMessage(mod, "Dps entity");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 204 && boss === 1){
-		/* extras.sendMessage("tank");*/
+		/* extras.sendMessage(mod, "tank");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 204 && boss === 0){
-		/* extras.sendMessage("Dps entity");*/
+		/* extras.sendMessage(mod, "Dps entity");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 203 && boss === 3){
-		/* extras.sendMessage("Dps entity");*/
+		/* extras.sendMessage(mod, "Dps entity");*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 204 && boss === 3){
-		/* extras.sendMessage("Tank entity");	*/
+		/* extras.sendMessage(mod, "Tank entity");	*/
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(notice && skillid === 234 && boss === 3){
-		/* extras.sendMessage("dps entity"); */
+		/* extras.sendMessage(mod, "dps entity"); */
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon！");
+				extras.sendMessage(mod, "Debuff coming soon！");
 			}, 55000);
 		}
 		if(skillid === 9203100 && secondboss){

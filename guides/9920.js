@@ -14,7 +14,7 @@ exports.guide = (mod, extras) => {
 		mod.clearTimeout(timer);
 		counter++;
 		if(counter >= 2){
-			extras.sendMessage("Back attack");
+			extras.sendMessage(mod, "Back attack");
 		}
 		timer = mod.setTimeout(() => counter = 0, 3000);
 	}
@@ -26,7 +26,7 @@ exports.guide = (mod, extras) => {
 		"blue": 240
 	};
 	function thirdboss_set_clockwise_event(clockwise){
-		const create = new spawn(extras);
+		const create = new spawn(mod, extras);
 		mod.setTimeout(() => {
 			const colour_rotation = clockwise ? ["red", "yellow", "blue"] : ["blue", "yellow", "red"];
 			for(let i = 0; i < 3; i++){

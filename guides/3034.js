@@ -21,12 +21,12 @@ exports.guide = (mod, extras) => {
 	};
 
 	function skilld_event(skillid){
-		const create = new spawn(extras);
+		const create = new spawn(mod, extras);
 
 		// 2 BOSS
 		if(orb_notice && skillid == 301){
 			orb_notice = false;
-			extras.sendMessage("Throwing Orb");
+			extras.sendMessage(mod, "Throwing Orb");
 			mod.setTimeout(() => orb_notice = true, 13000);
 		}
 
@@ -87,22 +87,22 @@ exports.guide = (mod, extras) => {
 		const delay = boss_seventy ? 2000 : 0;
 		let	duration = boss_seventy ? 800 : 900;
 		if([1160, 1190].includes(skillid)){
-			extras.sendMessage("Справа сейф");
+			extras.sendMessage(mod, "Справа сейф");
 		}
 		if([1170, 1180].includes(skillid)){
 			if(delay){
-				mod.setTimeout(extras.sendMessage, delay, "Left Safe");
+				mod.setTimeout(extras.sendMessage, delay, mod, "Left Safe");
 			} else {
-				extras.sendMessage("Left Safe");
+				extras.sendMessage(mod, "Left Safe");
 			}
 		}
 		if([1160, 1170, 1180, 1190].includes(skillid) && boss_seventy){ // <70%
 			if(mech_reverse){
-				extras.sendMessage("Triple-S | Out");
-				mod.setTimeout(extras.sendMessage, 4500, "Out");
+				extras.sendMessage(mod, "Triple-S | Out");
+				mod.setTimeout(extras.sendMessage, 4500, mod, "Out");
 			} else {
-				extras.sendMessage("Трипл-эска | К нему");
-				mod.setTimeout(extras.sendMessage, 4500, "In");
+				extras.sendMessage(mod, "Трипл-эска | К нему");
+				mod.setTimeout(extras.sendMessage, 4500, mod, "In");
 			}
 			create.circle(false, 445, 0, 0, 10, 300, 5000, 2000);
 			duration = 2000;
@@ -146,44 +146,29 @@ exports.guide = (mod, extras) => {
 	}
 
 	function print_mech(next, code){
-		let message = "",
-			message_RU = "",
-			sub_type = "message";
-
+		let message = "";
 		if(next){
 			message += "Next: ";
-			message_RU += "Далее: ";
-			sub_type = "notification";
 		}
 		if(mech_reverse){
 			message += mech_messages[msg_b].message + " + " + mech_messages[msg_a].message;
-			message_RU += mech_messages[msg_b].message_RU + " + " + mech_messages[msg_a].message_RU;
 		} else {
 			message += mech_messages[msg_a].message + " + " + mech_messages[msg_b].message;
-			message_RU += mech_messages[msg_a].message_RU + " + " + mech_messages[msg_b].message_RU;
 		}
 		if(code){
 			message += ", Code: " + (mech_reverse ? "0" : "1");
-			message_RU += ", Код: " + (mech_reverse ? "0" : "1");
 		}
-		extras.sendMessage({
-			"sub_type": sub_type,
-			"message_RU": message_RU,
-			message: message
-		});
+		extras.sendMessage(mod, message);
 	}
-
 	function thirdboss_start_event(){
 		boss_seventy = false;
 	}
-
 	function thirdboss_seventy_event(){
 		boss_seventy = true;
 	}
 
 
 	return {
-
 		// 1 BOSS
 		"qb-3034-1000-3034101": [{ type: "text", message: "Pizza" }],
 		"qb-3034-1000-3034102": [{ type: "text", message: "AOE! Jump" }],

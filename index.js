@@ -17,9 +17,10 @@ module.exports = function TeraGuide(mod){
 		mobHP: {}, // Mob hps
 		bonfire: false, // bonfire stuff
 		entity: false, // For using spawning inside of functions for guides
-		spawnHandler: undefined,
-		sendMessage: undefined,
-		eventHandler: undefined,
+		uint64: 0xFFFFFFFA,
+		spawnHandler: require(path.resolve(__dirname, "./modules/spawnHandler.js")),
+		sendMessage: require(path.resolve(__dirname, "./modules/sendMessage.js")),
+		eventHandler: require(path.resolve(__dirname, "./modules/eventHandler.js")),
 		debug: { // Debug object for debugging stuff later
 			abnormal: false,
 			skill: false,
@@ -49,9 +50,6 @@ module.exports = function TeraGuide(mod){
 			}
 		}
 	};
-
-	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
-	if(!extras.spawnHandler || !extras.sendMessage || !extras.eventHandlers) return mod.error("Critical Error loading functions, module will be unusable till fixed");
 
 	const init = async () => {
 		// Load the ids of the available guides
@@ -274,7 +272,7 @@ module.exports = function TeraGuide(mod){
 				despawnBonfire();
 			} else {
 				if(extras.bonfire) despawnBonfire();
-				extras.spawnHandler({
+				extras.spawnHandler(mod, extras, {
 					spawnType: "S_SPAWN_BONFIRE",
 					spawnVersion: 2,
 					despawnType: "S_DESPAWN_BONFIRE",
@@ -293,7 +291,7 @@ module.exports = function TeraGuide(mod){
 
 		"test": (args) => { // Test a key with the player as the target entity
 			cmd.message(`Running event with key "${args}"`);
-			extras.eventHandler({ event: args, target: false, ent: player });
+			extras.eventHandler(mod, extras, { event: args, target: false, ent: player });
 		}
 	});
 

@@ -18,7 +18,8 @@ const MARKER_ITEM = 88704; // Item id of "Velika Banquet Coin"
  * @return  Void
  */
 class spawn {
-	constructor(extras){
+	constructor(mod, extras){
+		this.mod = mod;
 		this.extras = extras;
 		this.entity = extras.entity;
 	}
@@ -216,7 +217,7 @@ class spawn {
 			switch(type){
 				// S_SPAWN_COLLECTION
 				case "collection":
-					that.extras.spawnHandler({
+					that.extras.spawnHandler(that.mod, that.extras, {
 						spawnType: "S_SPAWN_COLLECTION",
 						spawnVersion: 4,
 						despawnType: "S_DESPAWN_COLLECTION",
@@ -231,7 +232,7 @@ class spawn {
 
 				// S_SPAWN_DROPITEM
 				case "item":
-					that.extras.spawnHandler({
+					that.extras.spawnHandler(that.mod, that.extras, {
 						spawnType: "S_SPAWN_DROPITEM",
 						spawnVersion: 8,
 						despawnType: "S_DESPAWN_DROPITEM",
@@ -246,7 +247,7 @@ class spawn {
 
 				// S_SPAWN_BUILD_OBJECT
 				case "build_object":
-					that.extras.spawnHandler({
+					that.extras.spawnHandler(that.mod, that.extras, {
 						spawnType: "S_SPAWN_BUILD_OBJECT",
 						spawnVersion: 2,
 						despawnType: "S_DESPAWN_BUILD_OBJECT",

@@ -11,25 +11,25 @@ exports.guide = (mod, extras) => {
 		// Lakan has noticed you.
 			case 1043:
 				if(!thirdboss_fifty){
-					extras.sendMessage("Debuffs > Circles > Bombs");
+					extras.sendMessage(mod, "Debuffs > Circles > Bombs");
 				} else {
-					extras.sendMessage("Debuffs > Bombs > Circles");
+					extras.sendMessage(mod, "Debuffs > Bombs > Circles");
 				}
 				break;
 				// Lakan is trying to take you on one at a time.
 			case 1044:
 				if(!thirdboss_fifty){
-					extras.sendMessage("Circles > Bombs > Debuffs");
+					extras.sendMessage(mod, "Circles > Bombs > Debuffs");
 				} else {
-					extras.sendMessage("Circles > Debuffs > Bombs");
+					extras.sendMessage(mod, "Circles > Debuffs > Bombs");
 				}
 				break;
 				// Lakan intends to kill all of you at once.
 			case 1045:
 				if(!thirdboss_fifty){
-					extras.sendMessage("Bombs > Debuffs > Circles");
+					extras.sendMessage(mod, "Bombs > Debuffs > Circles");
 				} else {
-					extras.sendMessage("Bombs > Circles > Debuffs");
+					extras.sendMessage(mod, "Bombs > Circles > Debuffs");
 				}
 				break;
 		}

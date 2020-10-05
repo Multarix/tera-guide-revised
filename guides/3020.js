@@ -14,7 +14,7 @@ exports.guide = (mod, extras) => {
 	let party_makers = [];
 
 	function skilld_event(skillid){
-		const create = new spawn(extras);
+		const create = new spawn(mod, extras);
 		// (зеленый) "Ближе!"
 		if(skillid == 121){
 			green = true;
@@ -38,7 +38,7 @@ exports.guide = (mod, extras) => {
 		// Проваливай! - Упади в бездну
 		// к нему (бублик вокруг босса) -> от него (круг перед боссом) -> к нему (бублик перед боссом)
 			if(purple && !boss_thirty){
-				extras.sendMessage("In > Out > In");
+				extras.sendMessage(mod, "In > Out > In");
 				// бублик перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 150, 8, 280, 3000]); // 3
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 150, 4, 570, 3000]); // 3
@@ -48,8 +48,8 @@ exports.guide = (mod, extras) => {
 				// Проваливай! - Упади в бездну
 				// к нему (бублик вокруг босса) -> от него (круг перед боссом) -> [волны] -> к нему (бублик перед боссом)
 			} else if(purple && boss_thirty){
-				extras.sendMessage("In > Out");
-				mod.setTimeout(extras.sendMessage, 5000, "In");
+				extras.sendMessage(mod, "In > Out");
+				mod.setTimeout(extras.sendMessage, 5000, mod, "In");
 				// бублик перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 150, 8, 280, 5000]); // 3
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 150, 4, 570, 5000]); // 3
@@ -61,7 +61,7 @@ exports.guide = (mod, extras) => {
 		// Ближе! - Ощути силу взрыва
 		// от него (круг перед боссом) -> к нему (бублик вокруг босса) -> от него (большой круг перед боссом)
 			if(green && !boss_thirty){
-				extras.sendMessage("Out > In > Out");
+				extras.sendMessage(mod, "Out > In > Out");
 				// большой круг перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 200, 8, 450, 3000]); // 3
 				mod.setTimeout(() => green = false, 2000);
@@ -69,7 +69,7 @@ exports.guide = (mod, extras) => {
 				// Проваливай - Ощути силу взрыва
 				// к нему (бублик вокруг босса) -> от него (круг перед боссом) -> от него (большой круг перед боссом)
 			} else if(purple && !boss_thirty){
-				extras.sendMessage("In > Out > Out");
+				extras.sendMessage(mod, "In > Out > Out");
 				// большой круг перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 200, 8, 450, 3000]); // 3
 				mod.setTimeout(() => purple = false, 2000);
@@ -78,8 +78,8 @@ exports.guide = (mod, extras) => {
 				// Ближе! - Ощути силу взрыва
 				// от него (круг перед боссом) -> к нему (бублик вокруг босса) -> [волны] -> от него (большой круг перед боссом)
 			} else if(green && boss_thirty){
-				extras.sendMessage("Out > In");
-				setTimeout(extras.sendMessage, 5000, "Out");
+				extras.sendMessage(mod, "Out > In");
+				setTimeout(extras.sendMessage, 5000, mod, "Out");
 				// большой круг перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 200, 8, 450, 5000]); // 3
 				mod.setTimeout(() => purple = false, 2000);
@@ -88,8 +88,8 @@ exports.guide = (mod, extras) => {
 				// Проваливай! - Ощути силу взрыва
 				// к нему (бублик вокруг босса) -> от него (круг перед боссом) -> [волны] -> от него (большой круг перед боссом)
 			} else if(purple && boss_thirty){
-				extras.sendMessage("In > Out");
-				mod.setTimeout(extras.sendMessage, 5000, "Out");
+				extras.sendMessage(mod, "In > Out");
+				mod.setTimeout(extras.sendMessage, 5000, mod, "Out");
 				// большой круг перед боссом
 				mod.setTimeout(create.circle, 5000, ...[true, 912, 0, 200, 8, 450, 5000]); // 3
 				mod.setTimeout(() => purple = false, 2000);
@@ -98,9 +98,9 @@ exports.guide = (mod, extras) => {
 		// Прыжок
 		if(skillid == 127){
 			if(boss_thirty){
-				extras.sendMessage("Jump | Get Out");
+				extras.sendMessage(mod, "Jump | Get Out");
 			} else {
-				extras.sendMessage("Jump | Get In");
+				extras.sendMessage(mod, "Jump | Get In");
 				mod.setTimeout(create.circle, 250, ...[true, 553, 0, 0, 15, 200, 1000]);
 				mod.setTimeout(create.circle, 1000, ...[true, 553, 0, 0, 10, 300, 4000]);
 			}
@@ -140,7 +140,7 @@ exports.guide = (mod, extras) => {
 							mod.clearTimeout(debuff_call_event);
 						}
 						debuff_call_event = mod.setTimeout(() => {
-							extras.sendMessage(debuffs_targe[event.id]);
+							extras.sendMessage(mod, debuffs_targe[event.id]);
 							debuff_call_event = null;
 						}, 1500);
 					}

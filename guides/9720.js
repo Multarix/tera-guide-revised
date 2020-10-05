@@ -12,7 +12,7 @@ exports.guide = (mod, extras) => {
 		mod.clearTimeout(timer);
 		counter++;
 		if(counter >= 2){
-			extras.sendMessage("Back attack");
+			extras.sendMessage(mod, "Back attack");
 		}
 		timer = mod.setTimeout(() => {
 			counter = 0;

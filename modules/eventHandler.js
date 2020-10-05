@@ -1,102 +1,7 @@
-module.exports = (mod, extras) => {
-	const { player, library, effect } = mod.require.library; // Require the library module
-	const lib = require("../lib");
-	const { spawn } = lib;
+module.exports = (mod, extras, data) => {
+	const { player, effect } = mod.require.library; // Require the library module
+	const { spawn } = require("../lib");
 
-	let uint64 = 0xFFFFFFFA;
-
-	let voice = null; // Check if the voice lib is available
-	try { voice = require('../voice'); } catch (e){
-		mod.warn(e);
-		voice = null;
-	}
-
-	const sendEvent = (type, version, obj) => {
-		mod.send(type, version, obj);
-	};
-
-	// Globals are bad... But fight me. Workaround is to add to "extras"
-	extras.spawnHandler = (evtData) => {
-		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
-			if(!mod.settings.spawnObject || !extras.spawning) return;
-			if(!evtData.id) return mod.error("No itemID was listed"); // Make sure id is defined
-		}
-		const spawnType = evtData.spawnType || "S_SPAWN_COLLECTION"; // Set spawnType to be collection as default for backward compatibility
-		const spawnVersion = evtData.spawnVersion || 4;
-		const despawnType = evtData.despawnType || "S_DESPAWN_COLLECTION";
-		const despawnVersion = evtData.despawnVersion || 2;
-
-		// The unique spawned id this item will be using.
-		const uniqueIdent = evtData.force_gameId || uint64--; // uint64 in js... what a pain
-		let loc = evtData.ent.loc.clone();
-
-		if(evtData.pos) loc = evtData.pos; // if pos is set, we use that
-		loc.w = (evtData.ent.loc.w || 0) + (evtData.offset || 0);
-		library.applyDistance(loc, evtData.distance || 0, evtData.degrees || 0); // I have no idea how library works still
-		let spawnEvent = {
-			gameId: uniqueIdent,
-			loc: loc,
-			w: loc.w
-		};
-		let despawnEvent = {
-			gameId: uniqueIdent,
-			unk: 0, // used in S_DESPAWN_BUILD_OBJECT
-			collected: false // used in S_DESPAWN_COLLECTION
-		};
-		// Create the sending event
-		switch(spawnType){
-			case "S_SPAWN_COLLECTION":
-				Object.assign(spawnEvent, {
-					id: evtData.id,
-					amount: 1,
-					extractor: false,
-					extractorDisabled: false,
-					extractorDisabledTime: 0
-				});
-				break;
-			case "S_SPAWN_DROPITEM":
-				Object.assign(spawnEvent, {
-					item: evtData.id,
-					amount: 1,
-					expiry: 0,
-					explode: false,
-					masterwork: false,
-					enchant: 0,
-					debug: false,
-					owners: []
-				});
-				break;
-			case "S_SPAWN_BUILD_OBJECT":
-				Object.assign(spawnEvent, {
-					itemId: evtData.id,
-					unk: 0,
-					ownerName: evtData.ownerName || "SafeZone",
-					message: evtData.message || "SafeZone"
-				});
-				break;
-			// Because BONFIRES SON
-			case "S_SPAWN_BONFIRE":
-				spawnEvent = {
-					gameId: evtData.bonfireID,
-					id: evtData.bonfireType,
-					loc: loc,
-					status: 0
-				};
-				despawnEvent = {
-					gameId: evtData.bonfireID
-				};
-				break;
-			default:
-				// spawnType broke apparently
-				return mod.error(`Invalid spawnType for spawn handler: ${evtData.spawnType}`);
-		}
-
-		sendEvent(spawnType, spawnVersion, spawnEvent);
-		mod.setTimeout(sendEvent, evtData.duration, despawnType, despawnVersion, despawnEvent);
-	};
-
-
-	// Check if the class matches the class position
 	function positionCheck(position){
 		const tanks = [1, 10]; // Tanks (Lancer + Brawler)
 		const dps = [2, 3, 4, 5, 8, 9, 11, 12]; // DPS (not counting warrior)
@@ -156,9 +61,10 @@ module.exports = (mod, extras) => {
 
 
 	const doAction = (obj, data) => { // A function so we don't have to write this crap out twice
+		if(obj.type === "text") return extras.sendMessage(mod, obj.message);
 		if(obj.type === "function"){ // If the type is a function, try running the function
+			extras.entity = data.ent;
 			try {
-				extras.entity = data.ent;
 				obj.function(...obj.args);
 			} catch (e){ mod.error(e); }
 			return;
@@ -166,12 +72,13 @@ module.exports = (mod, extras) => {
 
 		if(obj.type === "spawn"){
 			if(!mod.settings.spawnObject || !extras.spawning) return;
+			extras.entity = data.ent;
 
 			// Make sure func and args is defined
 			if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
 			if(!obj.args) return mod.error(`Spawning objects requires arguments! (${data.evemt})`);
 
-			const spawnEvent = new spawn(data.ent);
+			const spawnEvent = new spawn(mod, extras);
 			try {
 				spawnEvent[obj.function](...obj.args);
 			} catch (e){
@@ -179,8 +86,6 @@ module.exports = (mod, extras) => {
 			}
 			return;
 		}
-
-		if(obj.type === "text") return extras.sendMessage(obj.message);
 		return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
 	};
 
@@ -192,6 +97,7 @@ module.exports = (mod, extras) => {
 		}
 		if(delay){ mod.setTimeout(doAction, delay, obj, data);	} else { doAction(obj, data); }
 	};
+
 
 	const debugFunc = (key, color) => {
 		const type = key.split("-")[0];
@@ -219,33 +125,10 @@ module.exports = (mod, extras) => {
 		}
 	};
 
-
-	// Globals are "bad" but honestly being able to call sendMessage and event handler everywhere is more useful than harmful
-	// A workaround if I wanted to bother, would be to add these to "extras".
-	extras.sendMessage = (msg) => {
-		if(mod.settings.notice && mod.game.me.party.inParty()){ // If in a party, and the notice setting is on, send to party notice
-			mod.send('S_CHAT', 3, {
-				channel: 21,
-				message: msg,
-				name: player.name
-			});
-		}
-		// Big message on screen
-		mod.send('S_DUNGEON_EVENT_MESSAGE', 2, {
-			type: 31,
-			chat: false,
-			channel: 27,
-			message: `</font><font color="#ffff00">${msg}`
-		});
-		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
-	};
-
-	extras.eventHandler = (data) => {
-		debugFunc(data.event, data.color);
-		if(!extras.active_guide[data.event]) return;
-		const attackKeyData = extras.active_guide[data.event];
-		for(const obj of attackKeyData){
-			if(positionCheck(obj.position) && checkTarget(obj, data)) runEvent(obj, data);
-		}
-	};
+	debugFunc(data.event, data.color);
+	if(!extras.active_guide[data.event]) return;
+	const attackKeyData = extras.active_guide[data.event];
+	for(const obj of attackKeyData){
+		if(positionCheck(obj.position) && checkTarget(obj, data)) runEvent(obj, data);
+	}
 };

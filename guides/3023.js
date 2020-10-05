@@ -22,16 +22,16 @@ exports.guide = (mod, extras) => {
 			switch(skillid){
 				case 3119: // red inside
 					if(debuff === 1){
-						extras.sendMessage("OUT (blue)");
+						extras.sendMessage(mod, "OUT (blue)");
 					} else if(debuff === 2){
-						extras.sendMessage("IN (red)");
+						extras.sendMessage(mod, "IN (red)");
 					}
 					break;
 				case 3220: // blue inside
 					if(debuff === 1){
-						extras.sendMessage("IN (blue)");
+						extras.sendMessage(mod, "IN (blue)");
 					} else if(debuff === 2){
-						extras.sendMessage("OUT (red)");
+						extras.sendMessage(mod, "OUT (red)");
 					}
 					break;
 			}
@@ -41,7 +41,7 @@ exports.guide = (mod, extras) => {
 			mod.clearTimeout(timer1);
 			mod.clearTimeout(timer2);
 			timer1 = mod.setTimeout(() => {
-			/* extras.sendMessage("!");*/
+			/* extras.sendMessage(mod, "!");*/
 				debuff = 0;
 			}, 70000);
 		}
@@ -50,7 +50,7 @@ exports.guide = (mod, extras) => {
 			mod.clearTimeout(timer2);
 			mod.clearTimeout(timer1);
 			timer2 = mod.setTimeout(() => {
-			/* extras.sendMessage("!");*/
+			/* extras.sendMessage(mod, "!");*/
 				debuff = 0;
 			}, 70000);
 		}
@@ -60,7 +60,7 @@ exports.guide = (mod, extras) => {
 			if(counter >= 4){
 			/* mod.clearTimeout(timer4);
 			timer4 = mod.setTimeout(()=> {
-			extras.sendMessage("4x slash");
+			extras.sendMessage(mod, "4x slash");
 			}, 70000);*/
 			}
 			timer3 = mod.setTimeout(() => {

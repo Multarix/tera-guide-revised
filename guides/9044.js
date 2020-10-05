@@ -24,15 +24,15 @@ exports.guide = (mod, extras) => {
 	}
 
 	function skilld_event(skillid){
-		const create = new spawn(extras);
+		const create = new spawn(mod, extras);
 
 		if(skillid == 90442000) shining = true;
 		if(skillid == 90442001) shining = false;
-		if(skillid == 90442304)extras.sendMessage("Stun");
+		if(skillid == 90442304) extras.sendMessage(mod, "Stun");
 		if(skillid == 90444001 && skill == 104){
 			mod.setTimeout(() => {
 				if(shining){
-					extras.sendMessage("Back");
+					extras.sendMessage(mod, "Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -42,7 +42,7 @@ exports.guide = (mod, extras) => {
 		if(skillid == 90442000 && skill == 134){
 			mod.setTimeout(() => {
 				if(shining){
-					extras.sendMessage("Back");
+					extras.sendMessage(mod, "Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -52,7 +52,7 @@ exports.guide = (mod, extras) => {
 		if(skillid == 90444001 && skill == 118){
 			mod.setTimeout(() => {
 				if(shining){
-					extras.sendMessage("Back");
+					extras.sendMessage(mod, "Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -61,12 +61,12 @@ exports.guide = (mod, extras) => {
 		}
 		if(notice && skillid == 305){
 			notice = false;
-			extras.sendMessage("Laser");
-			extras.sendMessage("Laser");
+			extras.sendMessage(mod, "Laser");
+			extras.sendMessage(mod, "Laser");
 			mod.setTimeout(() => notice = true, 4000);
 		}
 		if(notices && skillid == 137){
-			mod["text"]({ "sub_type": "message", "message": "Back" });
+			extras.sendMessage(mod, "Back");
 		}
 		//
 		if([1121, 2121].includes(skillid)){
@@ -79,7 +79,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 		// Right
 		if([1140, 2140].includes(skillid)){
@@ -92,7 +92,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 		// 2nd fast 123 142
 		// Left
@@ -106,7 +106,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 		// Right
 		if([1142, 2142].includes(skillid)){
@@ -119,7 +119,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 		// 3rd fast 122 141
 		// Left
@@ -133,7 +133,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 		// Right
 		if([1141, 2141].includes(skillid)){
@@ -146,7 +146,7 @@ exports.guide = (mod, extras) => {
 			create.vector(553, 270, 50, 180, 500, 6000);
 			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, mod, "Waves soon...");
 		}
 	}
 
@@ -157,15 +157,15 @@ exports.guide = (mod, extras) => {
 
 	function print_th(){
 		if(print){
-			extras.sendMessage("Laser (loading)");
+			extras.sendMessage(mod, "Laser (loading)");
 		}
 		print = false;
 	}
 
 	function print_end(){
 		if(printend){
-			extras.sendMessage("Laser (loading)");
-			mod.setTimeout(extras.sendMessage, 30000, "Laser (loading)");
+			extras.sendMessage(mod, "Laser (loading)");
+			mod.setTimeout(extras.sendMessage, 30000, mod, "Laser (loading)");
 		}
 		printend = false;
 	}

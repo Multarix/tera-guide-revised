@@ -16,9 +16,9 @@ exports.guide = (mod, extras) => {
 		}
 		if(skillid == 116){ // Haymaker
 			if(in_bait){
-				extras.sendMessage("Haymaker");
+				extras.sendMessage(mod, "Haymaker");
 			} else { // 116 -> 146
-				extras.sendMessage("Haymaker | Back Kick");
+				extras.sendMessage(mod, "Haymaker | Back Kick");
 			}
 		}
 		if([31031007, 32031007].includes(skillid)){ // "Ha" attacks
@@ -27,7 +27,7 @@ exports.guide = (mod, extras) => {
 				print_target = false;
 				mod.setTimeout(() => print_target = true, 5000);
 				timer1 = mod.setTimeout(() => {
-					extras.sendMessage("Target attacks soon...");
+					extras.sendMessage(mod, "Target attacks soon...");
 				}, 65000);
 			}
 		}
