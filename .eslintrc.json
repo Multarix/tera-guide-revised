@@ -54,9 +54,5 @@
 		"key-spacing": "error",
 		"yoda": "error"
 	},
-	"globals": {
-		"eventHandler": false,
-		"sendMessage": false,
-		"spawnHandler": false
-	}
+	"globals": {}
 }
