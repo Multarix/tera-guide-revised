@@ -3,7 +3,7 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 
 	let power = true;
 	let Level = 0;
@@ -38,16 +38,16 @@ module.exports = (mod, extras) => {
 			Level++;
 			powerMsg = "{" + Level + "}";
 			if(Level == 4){
-				sendMessage("Fully charged!");
+				extras.sendMessage("Fully charged!");
 			} else if(Level == 2 && steptwo){
-				sendMessage("Fully charged!!");
+				extras.sendMessage("Fully charged!!");
 			}
 			if(powerMsg !== null && skillid !== 399){
 				if(!steptwo && Level !== 4){
-					sendMessage(powerMsg);
+					extras.sendMessage(powerMsg);
 				}
 				if(steptwo && Level !== 2){
-					sendMessage(powerMsg);
+					extras.sendMessage(powerMsg);
 				}
 			}
 		}
@@ -56,9 +56,7 @@ module.exports = (mod, extras) => {
 		}
 	}
 
-
 	return {
-
 		// 1 BOSS
 		"s-982-1000-106-0": [{ type: "text", position: "tank", message: "Heavy" }],
 		"s-982-1000-107-0": [{ type: "text", position: "dps", message: "Pushback" },
@@ -72,7 +70,6 @@ module.exports = (mod, extras) => {
 		"s-982-1000-310-0": [{ type: "text", message: "2 Flower" }],
 		"s-982-1000-116-0": [{ type: "text", message: "Big AoE Attack!" }],
 		"s-982-1000-312-0": [{ type: "text", message: "Golden Flower!" }],
-
 		// 2 BOSS
 		"s-982-2000-105-0": [{ type: "text", message: "Spin" }],
 		"s-982-2000-113-0": [{ type: "text", message: "Stun Inc" }],
@@ -85,7 +82,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
 		"s-982-2000-302-0": [{ type: "text", message: "Get In + Dodge" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
-
 		// 3 БОСС
 		"h-982-3000-99": [{ type: "function", function: start_boss }],
 		"h-982-3000-30": [{ type: "text", message: "30%" }],
@@ -166,5 +162,9 @@ module.exports = (mod, extras) => {
 		"s-982-3000-360-0": [{ type: "text", message: "Explosion!" },
 			{ type: "function", function: skilld_event, args: [360] }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: false
 };

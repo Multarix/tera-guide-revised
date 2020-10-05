@@ -3,49 +3,45 @@
 // made by michengs / HSDN
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 
 	let thirdboss_fifty = false;
-
 	function thirdboss_message_event(skillid){
 		switch(skillid){
 		// Lakan has noticed you.
 			case 1043:
 				if(!thirdboss_fifty){
-					sendMessage("Debuffs > Circles > Bombs");
+					extras.sendMessage("Debuffs > Circles > Bombs");
 				} else {
-					sendMessage("Debuffs > Bombs > Circles");
+					extras.sendMessage("Debuffs > Bombs > Circles");
 				}
 				break;
 				// Lakan is trying to take you on one at a time.
 			case 1044:
 				if(!thirdboss_fifty){
-					sendMessage("Circles > Bombs > Debuffs");
+					extras.sendMessage("Circles > Bombs > Debuffs");
 				} else {
-					sendMessage("Circles > Debuffs > Bombs");
+					extras.sendMessage("Circles > Debuffs > Bombs");
 				}
 				break;
 				// Lakan intends to kill all of you at once.
 			case 1045:
 				if(!thirdboss_fifty){
-					sendMessage("Bombs > Debuffs > Circles");
+					extras.sendMessage("Bombs > Debuffs > Circles");
 				} else {
-					sendMessage("Bombs > Circles > Debuffs");
+					extras.sendMessage("Bombs > Circles > Debuffs");
 				}
 				break;
 		}
 	}
-
 	function thirdboss_start_event(){
 		thirdboss_fifty = false;
 	}
-
 	function thirdboss_fifty_event(){
 		thirdboss_fifty = true;
 	}
 
 	return {
-
 		// 1 BOSS
 		"s-781-1000-2401": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
@@ -114,7 +110,6 @@ module.exports = (mod, extras) => {
 		"dm-0-0-9781046": [{ type: "text", message: "First: (Debuffs) Closest" }], // Thank you... for this release...
 		"dm-0-0-9781047": [{ type: "text", message: "First: (Circles) Spread" }], // Beware the... red lightning...
 		"dm-0-0-9781048": [{ type: "text", message: "First: (Bombs) Gather + Cleanse" }], // Beware the mark... of Lakan...
-
 		// 3 BOSS
 		"h-781-3000-99": [{ type: "function", function: thirdboss_start_event }],
 		"h-781-3000-50": [{ type: "function", function: thirdboss_fifty_event }],
@@ -145,5 +140,9 @@ module.exports = (mod, extras) => {
 		"s-781-3000-1401-0": [{ type: "text", message: "Plague/Regress" }],
 		"s-781-3000-1402-0": [{ type: "text", message: "Sleep" }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: true
 };

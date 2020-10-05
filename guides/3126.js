@@ -1,7 +1,7 @@
-// Corrupted Skynest
+// Corrupted Skynest (Hard)
 //
 // made by michengs / HSDN / ZC
-// Updated to revised version
+// Should be functional, needs testing
 
 exports.guide = (mod, extras) => {
 	const { player } = mod.require.library;
@@ -22,7 +22,9 @@ exports.guide = (mod, extras) => {
 
 	const mech_messages = {
 		0: { message: "IN" },
-		1: { message: "OUT" }
+		1: { message: "OUT" },
+		2: { message: "Left" },
+		3: { message: "Right" }
 	};
 	const qbacting_messages = {
 		0: { message: "different" },
@@ -53,14 +55,14 @@ exports.guide = (mod, extras) => {
 		create.marker(false, 315 + boss_offset, distance, 4000, true, [caption, "SAFE"]);
 	}
 
-	function debuff_added(id){
-		debuff_removed();
+	function debuff_added(id, handlers, mod){
+		debuff_removed(mod);
 		debuff = id; // debuff event id
 		timer1 = mod.setTimeout(() => {
 			if(debuff != null){
 				extras.sendMessage("Debuff 20 seconds");
 			}
-		}, 70000);
+		}, 50000);
 		timer2 = mod.setTimeout(() => {
 			if(debuff != null){
 				mod.setTimeout(() => {
@@ -68,33 +70,33 @@ exports.guide = (mod, extras) => {
 				}, 2000);
 				extras.sendMessage("Debuff 50 seconds");
 			}
-		}, 40000);
+		}, 70000);
 		timer3 = mod.setTimeout(() => {
 			if(debuff != null){
 				extras.sendMessage("Warning! Debuff 15 seconds");
 			}
-		}, 75000);
+		}, 55000);
 		timer4 = mod.setTimeout(() => {
 			if(debuff != null){
 				extras.sendMessage("Warning! Debuff 10 seconds");
 			}
-		}, 80000);
+		}, 60000);
 		timer5 = mod.setTimeout(() => {
 			if(debuff != null){
 				extras.sendMessage("Warning! Debuff 5 seconds");
 			}
-		}, 85000);
+		}, 65000);
 		//
 		if(blue){
 			extras.sendMessage(`${mech_messages[(qbacting + debuff + 1) % 2].message}`);
-			spawn_marker((qbacting + debuff + 1) % 2);
+			spawn_marker((qbacting + debuff + 1) % 2, handlers, mod);
 		} else if(red){
 			extras.sendMessage(`${mech_messages[(qbacting + debuff) % 2].message}`);
 			spawn_marker((qbacting + debuff) % 2);
 		}
 	}
 
-	function debuff_removed(){
+	function debuff_removed(mod){
 		debuff = null;
 		mod.clearTimeout(timer1);
 		mod.clearTimeout(timer2);
@@ -149,23 +151,23 @@ exports.guide = (mod, extras) => {
 		// In-Out identification
 		if([212, 213, 214, 215].includes(skillid)){
 			boss_ent = extras.entity;
-			create.circle(false, 445, 0, 0, 8, 440, 8000);
-			create.circle(false, 445, 0, 0, 4, 840, 8000);
+			create.circle(false, 445, 0, 0, 8, 440, 11000);
+			create.circle(false, 445, 0, 0, 4, 840, 11000);
 		}
-		if([212, 214].includes(skillid)){ // Fire claw (141, 142)
+		if([212, 214].includes(skillid)){ // Fire claw (141,  142)
 			boss_offset = 10;
-			create.vector(553, 0, 0, 190, 840, 8000);
-			create.vector(553, 0, 0, 10, 840, 8000);
+			create.vector(553, 0, 0, 190, 840, 11000);
+			create.vector(553, 0, 0, 10, 840, 11000);
 		}
-		if([213, 215].includes(skillid)){ // Ice claw (143, 144)
+		if([213, 215].includes(skillid)){ // Ice claw (143,  144)
 			boss_offset = -10;
-			create.vector(553, 0, 0, 170, 840, 8000);
-			create.vector(553, 0, 0, 350, 840, 8000);
+			create.vector(553, 0, 0, 170, 840, 11000);
+			create.vector(553, 0, 0, 350, 840, 11000);
 		}
 		if([213, 214].includes(skillid)){ // Ice inside
 			mod.setTimeout(() => {
 				if(debuff != null){
-					extras.sendMessage(`Ice inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff + 1) % 2].message}`);
+					extras.sendMessage(`Ice inside (${qbacting_messages[qbacting].message}) | ${mech_messages[debuff % 2 + 2].message} | ${mech_messages[(qbacting + debuff + 1) % 2].message}`);
 					spawn_marker((qbacting + debuff + 1) % 2);
 				} else {
 					extras.sendMessage(`Ice inside (${qbacting_messages[qbacting].message})`);
@@ -173,12 +175,16 @@ exports.guide = (mod, extras) => {
 			}, 500);
 			blue = true;
 			red = false;
-			mod.setTimeout(() => blue = false, 6500); // 6700
+			mod.setTimeout(() => {
+				blue = false;
+				red = true;
+			}, 6600);
+			mod.setTimeout(() => red = false, 9400);
 		}
 		if([212, 215].includes(skillid)){ // Fire inside
 			mod.setTimeout(() => {
 				if(debuff != null){
-					extras.sendMessage(`Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
+					extras.sendMessage(`Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[debuff % 2 + 2].message} | ${mech_messages[(qbacting + debuff) % 2].message}`);
 					spawn_marker((qbacting + debuff) % 2);
 				} else {
 					extras.sendMessage(`Fire inside (${qbacting_messages[qbacting].message})`);
@@ -186,7 +192,11 @@ exports.guide = (mod, extras) => {
 			}, 500);
 			blue = false;
 			red = true;
-			mod.setTimeout(() => red = false, 6500);
+			mod.setTimeout(() => {
+				blue = true;
+				red = false;
+			}, 6600);
+			mod.setTimeout(() => blue = false, 9400);
 		}
 		if(skillid === 99020020){ // Death release debuff
 			mod.clearTimeout(timer1);
@@ -223,8 +233,10 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "semi", args: [140, 260, 912, 0, 0, 10, 500, 2000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 135, 135, 500, 2000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 260, 260, 500, 2000] }],
+		"114-0": [{ type: "text", message: "Front Fire" }],
 		"118-0": [{ type: "text", message: "Jump" }],
 		"118-1": [{ type: "text", message: "Dodge" }],
+
 		// AOE лед (большой)
 		"104-0": [{ type: "text", message: "Ice Storm DOTs" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 5000] }],
@@ -239,11 +251,11 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 500, 10, 270, 4500] },
 			{ type: "spawn", function: "circle", args: [false, 553, 180, 500, 10, 270, 4750] }],
 		// AOE лед (малый)
-		"154-0": [{ type: "text", message: "Ice Storm" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 6000] }],
+		"154-0": [{ type: "text", message: "Ice Storm" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 6000] }],
 		// AOE огонь (малый)
 		"155-0": [{ type: "text", message: "Fire (Knockdown)" },
 			{ type: "text", delay: 1200, message: "Dodge" }],
+
 		"206-0": [{ type: "text", message: "Jump Back" }],
 		"206-2": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 350, 3000] }],
 		"137-0": [{ type: "text", message: "Knockdown" }],
@@ -252,26 +264,34 @@ exports.guide = (mod, extras) => {
 			{ type: "text", delay: 4000, message: "Lower the temp" }],
 		"140-0": [{ type: "text", message: "40 degrees (Ice to all)" },
 			{ type: "text", delay: 4000, message: "Raise the temp" }],
-		"s-3026-1000-1212-0": [{ type: "function", function: skilld_event, args: [212] }],
-		"s-3026-1000-1215-0": [{ type: "function", function: skilld_event, args: [215] }],
-		"s-3026-1000-1213-0": [{ type: "function", function: skilld_event, args: [213] }],
-		"s-3026-1000-1214-0": [{ type: "function", function: skilld_event, args: [214] }],
-		"qb-3026-1000-3026005": [{ type: "function", function: skilld_event, args: [3026005] }], // ужас, одинаковые цвета
-		"qb-3026-1000-3026004": [{ type: "function", function: skilld_event, args: [3026004] }], // ярость, разные цвета
-		"qb-3026-1000-3126005": [{ type: "function", function: skilld_event, args: [3126005] }], // ужас, одинаковые цвета
-		"qb-3026-1000-3126004": [{ type: "function", function: skilld_event, args: [3126004] }], // ярость, разные цвета
+
+		"s-3126-1000-1212-0": [{ type: "function", function: skilld_event, args: [212] }],
+		"s-3126-1000-1215-0": [{ type: "function", function: skilld_event, args: [215] }],
+		"s-3126-1000-1213-0": [{ type: "function", function: skilld_event, args: [213] }],
+		"s-3126-1000-1214-0": [{ type: "function", function: skilld_event, args: [214] }],
+		"qb-3126-1000-3026005": [{ type: "function", function: skilld_event, args: [3026005] }], // ужас, одинаковые цвета
+		"qb-3126-1000-3026004": [{ type: "function", function: skilld_event, args: [3026004] }], // ярость, разные цвета
+		"qb-3126-1000-3126005": [{ type: "function", function: skilld_event, args: [3126005] }], // ужас, одинаковые цвета
+		"qb-3126-1000-3126004": [{ type: "function", function: skilld_event, args: [3126004] }], // ярость, разные цвета
 		"ae-0-0-99020020": [{ type: "function", function: skilld_event, args: [99020020] }],
-		"am-3026-1000-30260001": [{ type: "function", function: skilld_event, args: [30260001] }], // красный
-		"am-3026-1000-30260002": [{ type: "function", function: skilld_event, args: [30260002] }], // синий
-		"am-3026-1000-31260001": [{ type: "function", function: skilld_event, args: [31260001] }], // красный
-		"am-3026-1000-31260002": [{ type: "function", function: skilld_event, args: [31260002] }] // синий
+		"am-3126-1000-30260001": [{ type: "function", function: skilld_event, args: [30260001] }], // красный
+		"am-3126-1000-30260002": [{ type: "function", function: skilld_event, args: [30260002] }], // синий
+		"am-3126-1000-31260001": [{ type: "function", function: skilld_event, args: [31260001] }], // красный
+		"am-3126-1000-31260002": [{ type: "function", function: skilld_event, args: [31260002] }], // синий
+
+		"s-3126-1000-1107-0": [{ type: "text", message: "[Debuff] Farthest" }],
+		"s-3126-1000-2107-0": [{ type: "text", message: "[Debuff] Closest" }],
+		"am-3126-1000-31260251": [{ type: "text", message: "[Debuff] Layer 1" }],
+		"am-3126-1000-31260067": [{ type: "text", message: "[Debuff] Layer 2" }],
+		"am-3126-1000-31260068": [{ type: "text", message: "[Debuff] Layer 3" },
+			{ type: "text", delay: 145000, message: '[Debuff] 2.5 minutes passed' }]
 	};
 
 	const skillGroup = {};
 	for(const [key, value] of Object.entries(skills)){
 		if(key.length === 5){
-			skillGroup[`s-3026-1000-1${key}`] = value;
-			skillGroup[`s-3026-1000-2${key}`] = value;
+			skillGroup[`s-3126-1000-1${key}`] = value;
+			skillGroup[`s-3126-1000-2${key}`] = value;
 		} else {
 			skillGroup[key] = value;
 		}

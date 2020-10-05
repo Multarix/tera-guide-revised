@@ -3,7 +3,7 @@
 // made by multarix
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
 		// 1 BOSS
 		"s-739-1000-105-0": [{ type: "text", message: "Turn + Breath" }],
@@ -15,7 +15,6 @@ module.exports = (mod, extras) => {
 		"s-739-1000-306-0": [{ type: "text", message: "Out > In" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 7500] }],
 		"s-739-1000-306-1": [{ type: "text", message: "In" }],
-
 		// 2 BOSS
 		"s-739-2000-105-0": [{ type: "text", message: "360" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 2500] },
@@ -28,7 +27,6 @@ module.exports = (mod, extras) => {
 		"s-739-2000-120-0": [{ type: "text", message: "Back" }],
 		"s-739-2000-303-0": [{ type: "text", message: "Whip" },
 			{ type: "text", message: "Dodge!", delay: 1000, targeted: true }],
-
 		// 3 BOSS
 		"h-739-3001-30": [{ type: "text", message: "Reveal soon..." }],
 		"s-739-3000-201-0": [{ type: "text", delay: 3600, message: "Dodge!" }],
@@ -42,4 +40,9 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 630, 4000] }],
 		"s-739-3000-178-0": [{ type: "text", message: "Scratching (bleed)" }]
 	};
+};
+
+exports.type = {
+	es: false,
+	sp: false
 };

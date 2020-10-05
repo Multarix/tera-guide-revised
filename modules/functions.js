@@ -11,14 +11,12 @@ module.exports = (mod, extras) => {
 		voice = null;
 	}
 
-
 	const sendEvent = (type, version, obj) => {
 		mod.send(type, version, obj);
 	};
 
-
 	// Globals are bad... But fight me. Workaround is to add to "extras"
-	global.spawnHandler = (evtData) => {
+	extras.spawnHandler = (evtData) => {
 		if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
 			if(!mod.settings.spawnObject || !extras.spawning) return;
 			if(!evtData.id) return mod.error("No itemID was listed"); // Make sure id is defined
@@ -182,10 +180,9 @@ module.exports = (mod, extras) => {
 			return;
 		}
 
-		if(obj.type === "text") return sendMessage(obj.message);
+		if(obj.type === "text") return extras.sendMessage(obj.message);
 		return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
 	};
-
 
 	const runEvent = (obj, data) => { // Determine the type, and run w/e action it requires
 		let delay = false;
@@ -195,7 +192,6 @@ module.exports = (mod, extras) => {
 		}
 		if(delay){ mod.setTimeout(doAction, delay, obj, data);	} else { doAction(obj, data); }
 	};
-
 
 	const debugFunc = (key, color) => {
 		const type = key.split("-")[0];
@@ -226,7 +222,7 @@ module.exports = (mod, extras) => {
 
 	// Globals are "bad" but honestly being able to call sendMessage and event handler everywhere is more useful than harmful
 	// A workaround if I wanted to bother, would be to add these to "extras".
-	global.sendMessage = (msg) => {
+	extras.sendMessage = (msg) => {
 		if(mod.settings.notice && mod.game.me.party.inParty()){ // If in a party, and the notice setting is on, send to party notice
 			mod.send('S_CHAT', 3, {
 				channel: 21,
@@ -244,7 +240,7 @@ module.exports = (mod, extras) => {
 		if(mod.settings.tts && voice) voice.speak(msg, mod.settings.rate);
 	};
 
-	global.eventHandler = (data) => {
+	extras.eventHandler = (data) => {
 		debugFunc(data.event, data.color);
 		if(!extras.active_guide[data.event]) return;
 		const attackKeyData = extras.active_guide[data.event];

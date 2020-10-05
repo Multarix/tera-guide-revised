@@ -3,16 +3,16 @@
 // made by Yuyuko / HSDN
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 
 	let counter = 0;
 	let timer;
 
-	function thirdboss_backattack_event(handlers, event, ent, mod){
+	function thirdboss_backattack_event(){
 		mod.clearTimeout(timer);
 		counter++;
 		if(counter >= 2){
-			sendMessage("Back attack");
+			extras.sendMessage("Back attack");
 		}
 		timer = mod.setTimeout(() => {
 			counter = 0;
@@ -20,13 +20,11 @@ module.exports = (mod, extras) => {
 	}
 
 	return {
-
 		// 1 BOSS
 		"s-720-1000-117-0": [{ type: "text", message: "Stay In > Get Out" }],
 		"s-720-1000-116-0": [{ type: "text", message: "Get Out > Stay In" }],
 		"s-720-1000-109-0": [{ type: "text", message: "Back Attack" }],
 		"s-720-1000-300-0": [{ type: "text", delay: 600, message: "Dodge!" }],
-
 		// 2 BOSS
 		"s-720-2000-106-0": [{ type: "text", message: "Spin Attack" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 320, 3500] }],
@@ -38,7 +36,6 @@ module.exports = (mod, extras) => {
 		"s-720-2000-119-0": [{ type: "text", message: "Red: Out Safe" }],
 		"s-720-2000-220-0": [{ type: "text", message: "Blue: In Safe" }],
 		"s-720-2000-116-0": [{ type: "text", message: "Circles" }],
-
 		// 3 BOSS
 		"s-720-3000-315-0": [{ type: "text", message: "Pushback" }],
 		"s-720-3000-107-0": [{ type: "text", message: "Random Jump" }],
@@ -61,9 +58,12 @@ module.exports = (mod, extras) => {
 		"s-720-3000-115-0": [{ type: "text", message: "Spinning Attack" }],
 		"s-720-3000-104-0": [{ type: "function", function: thirdboss_backattack_event }],
 		// "s-720-3000-202-0": [{ type: "text", message: "spin or front, back slam" }],
-
 		"s-720-3000-400-0": [{ type: "text", message: "Clones: Beam" }],
 		"s-720-3000-401-0": [{ type: "text", message: "Clones: Spin" }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: false
 };

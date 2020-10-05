@@ -3,9 +3,8 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
-
 		// 1 BOSS
 		"s-782-1000-106-0": [{ type: "text", position: "tank", message: "Heavy" }],
 		"s-782-1000-107-0": [{ type: "text", position: "dps", message: "Pushback" },
@@ -21,7 +20,6 @@ module.exports = (mod, extras) => {
 		"s-782-1000-310-0": [{ type: "text", message: "2 flower" }],
 		"s-782-1000-116-0": [{ type: "text", message: "Big AoE attack!!" }],
 		"s-782-1000-312-0": [{ type: "text", message: "Golden Flower!!" }],
-
 		// 2 BOSS
 		"s-782-2000-105-0": [{ type: "text", message: "Spin" }],
 		"s-782-2000-113-0": [{ type: "text", message: "Stun Inc" }],
@@ -34,7 +32,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
 		"s-782-2000-302-0": [{ type: "text", message: "Get In + Dodge" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 260, 3000] }],
-
 		// 3 BOSS
 		"s-782-3000-118-0": [{ type: "text", message: "Front Triple" }],
 		"s-782-3000-143-0": [{ type: "text", message: "Left rear" }],
@@ -93,5 +90,9 @@ module.exports = (mod, extras) => {
 		"s-782-3000-399-0": [{ type: "text", message: "Dodge! (Awakening 2)" }],
 		"s-782-3000-360-0": [{ type: "text", message: "Explosion!" }]
 	};
+};
 
+exports.type = {
+	es: true,
+	sp: false
 };

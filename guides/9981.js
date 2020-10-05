@@ -3,7 +3,7 @@
 // made by michengs / HSDN
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 
 	let thirdboss_fifty = false;
 
@@ -12,25 +12,25 @@ module.exports = (mod, extras) => {
 		// Lakan has noticed you.
 			case 1043:
 				if(!thirdboss_fifty){
-					sendMessage("Debuffs > Circles > Bombs");
+					extras.sendMessage("Debuffs > Circles > Bombs");
 				} else {
-					sendMessage("Debuffs > Bombs > Circles");
+					extras.sendMessage("Debuffs > Bombs > Circles");
 				}
 				break;
 				// Lakan is trying to take you on one at a time.
 			case 1044:
 				if(!thirdboss_fifty){
-					sendMessage("Circles > Bombs > Debuffs");
+					extras.sendMessage("Circles > Bombs > Debuffs");
 				} else {
-					sendMessage("Circles > Debuffs > Bombs");
+					extras.sendMessage("Circles > Debuffs > Bombs");
 				}
 				break;
 				// Lakan intends to kill all of you at once.
 			case 1045:
 				if(!thirdboss_fifty){
-					sendMessage("Bombs > Debuffs > Circles");
+					extras.sendMessage("Bombs > Debuffs > Circles");
 				} else {
-					sendMessage("Bombs > Circles > Debuffs");
+					extras.sendMessage("Bombs > Circles > Debuffs");
 				}
 				break;
 		}
@@ -45,7 +45,6 @@ module.exports = (mod, extras) => {
 	}
 
 	return {
-
 		// 1 BOSS
 		"s-981-1000-2401": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
@@ -53,7 +52,8 @@ module.exports = (mod, extras) => {
 		"s-981-1000-2402": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
-		"s-981-1000-2304-0": [{ type: "text", message: "Flying" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
+		"s-981-1000-2304-0": [{ type: "text", message: "Flying" },
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
 		"s-981-1000-2303-0": [{ type: "text", message: "Spin" }],
 		"s-981-1000-2113-0": [{ type: "text", message: "Front + AoEs" }],
 		"s-981-1000-2308-0": [{ type: "text", message: "OUT" }],
@@ -64,7 +64,8 @@ module.exports = (mod, extras) => {
 		"s-981-1000-1402": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
-		"s-981-1000-1304-0": [{ type: "text", message: "Flying" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
+		"s-981-1000-1304-0": [{ type: "text", message: "Flying" },
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 6000] }],
 		"s-981-1000-1303-0": [{ type: "text", message: "Spin" }],
 		"s-981-1000-1113-0": [{ type: "text", message: "Front + AoEs" }],
 		"s-981-1000-1308-0": [{ type: "text", message: "OUT" }],
@@ -72,7 +73,6 @@ module.exports = (mod, extras) => {
 		// "qb-981-1000-98102": [{ type: "text", message: "Run away" }],
 		// "qb-981-1000-98103": [{ type: "text", message: "点名炸石柱" }], // круг на одного
 		// "qb-981-1000-98106": [{ type: "text", message: "集体炸石柱" }], // круги на всех
-
 		// 2 BOSS
 		// Cage Mechanic
 		// "s-981-2000-1503-0": [{ type: "text", message: "坦快跑远" }],
@@ -113,7 +113,6 @@ module.exports = (mod, extras) => {
 		"dm-0-0-9981046": [{ type: "text", message: "First: (Debuffs) Closest" }], // Thank you... for this release...
 		"dm-0-0-9981047": [{ type: "text", message: "First: (Circles) Spread" }], // Beware the... red lightning...
 		"dm-0-0-9981048": [{ type: "text", message: "First: (Bombs) Gather + Cleanse" }], // Beware the mark... of Lakan...
-
 		// 3 BOSS
 		"h-981-3000-99": [{ type: "function", function: thirdboss_start_event }],
 		"h-981-3000-50": [{ type: "function", function: thirdboss_fifty_event }],
@@ -140,9 +139,14 @@ module.exports = (mod, extras) => {
 		"s-981-3000-1138-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 250, 6000] }],
 		"s-981-3000-1144-0": [{ type: "text", message: "OUT" }],
 		"s-981-3000-1145-0": [{ type: "text", message: "IN" }],
-		"s-981-3000-1240-0": [{ type: "text", message: "Donuts" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 350, 6000] }],
+		"s-981-3000-1240-0": [{ type: "text", message: "Donuts" },
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 350, 6000] }],
 		"s-981-3000-1401-0": [{ type: "text", message: "Plague/Regress" }],
 		"s-981-3000-1402-0": [{ type: "text", message: "Sleep" }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: true
 };

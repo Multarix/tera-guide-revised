@@ -3,7 +3,7 @@
 // Made by Multarix
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
 		"s-453-999-103-0": [{ type: "text", message: "Smash (Left)" }],
 		"s-453-999-104-0": [{ type: "text", message: "Smash (Right)" }],
@@ -20,4 +20,9 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 390, 6700] }, // Middle circle
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 590, 7700] }] // Outer circle
 	};
+};
+
+exports.type = {
+	es: false,
+	sp: false
 };

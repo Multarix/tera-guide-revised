@@ -3,9 +3,8 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
-
-	const { spawn } = module.parent.exports.lib;
+exports.guide = (mod, extras) => {
+	const { spawn } = require("../lib.js");
 
 	let shining = false;
 	let skill = 0;
@@ -25,15 +24,15 @@ module.exports = (mod, extras) => {
 	}
 
 	function skilld_event(skillid){
-		const spawn = new spawn(extras.entity);
+		const create = new spawn(extras);
 
 		if(skillid == 90442000) shining = true;
 		if(skillid == 90442001) shining = false;
-		if(skillid == 90442304) sendMessage("Stun");
+		if(skillid == 90442304)extras.sendMessage("Stun");
 		if(skillid == 90444001 && skill == 104){
 			mod.setTimeout(() => {
 				if(shining){
-					sendMessage("Back");
+					extras.sendMessage("Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -43,7 +42,7 @@ module.exports = (mod, extras) => {
 		if(skillid == 90442000 && skill == 134){
 			mod.setTimeout(() => {
 				if(shining){
-					sendMessage("Back");
+					extras.sendMessage("Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -53,7 +52,7 @@ module.exports = (mod, extras) => {
 		if(skillid == 90444001 && skill == 118){
 			mod.setTimeout(() => {
 				if(shining){
-					sendMessage("Back");
+					extras.sendMessage("Back");
 					skill = 0;
 					notices = false;
 					mod.setTimeout(() => notices = true, 1000);
@@ -62,8 +61,8 @@ module.exports = (mod, extras) => {
 		}
 		if(notice && skillid == 305){
 			notice = false;
-			sendMessage("Laser");
-			sendMessage("Laser");
+			extras.sendMessage("Laser");
+			extras.sendMessage("Laser");
 			mod.setTimeout(() => notice = true, 4000);
 		}
 		if(notices && skillid == 137){
@@ -71,83 +70,83 @@ module.exports = (mod, extras) => {
 		}
 		//
 		if([1121, 2121].includes(skillid)){
-			spawn.marker(false, 37, 125, 2533, false, ["safe", "safe"]);
-			spawn.marker(false, 143, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 37, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 143, 125, 2533, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 		// Right
 		if([1140, 2140].includes(skillid)){
-			spawn.marker(false, 323, 125, 2533, false, ["safe", "safe"]);
-			spawn.marker(false, 217, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 323, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 217, 125, 2533, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 		// 2nd fast 123 142
 		// Left
 		if([1123, 2123].includes(skillid)){
-			spawn.marker(false, 37, 125, 0, 2500, false, ["safe", "safe"]);
-			spawn.marker(false, 143, 125, 0, 2500, false, ["safe", "safe"]);
+			create.marker(false, 37, 125, 0, 2500, false, ["safe", "safe"]);
+			create.marker(false, 143, 125, 0, 2500, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 		// Right
 		if([1142, 2142].includes(skillid)){
-			spawn.marker(false, 323, 125, 2500, false, ["safe", "safe"]);
-			spawn.marker(false, 217, 125, 2500, false, ["safe", "safe"]);
+			create.marker(false, 323, 125, 2500, false, ["safe", "safe"]);
+			create.marker(false, 217, 125, 2500, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 		// 3rd fast 122 141
 		// Left
 		if([1122, 2122].includes(skillid)){
-			spawn.marker(false, 37, 125, 2533, false, ["safe", "safe"]);
-			spawn.marker(false, 143, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 37, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 143, 125, 2533, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 		// Right
 		if([1141, 2141].includes(skillid)){
-			spawn.marker(false, 323, 125, 2533, false, ["safe", "safe"]);
-			spawn.marker(false, 217, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 323, 125, 2533, false, ["safe", "safe"]);
+			create.marker(false, 217, 125, 2533, false, ["safe", "safe"]);
 
-			spawn.vector(553, 90, 50, 0, 500, 6000);
-			spawn.vector(553, 270, 50, 0, 500, 6000);
-			spawn.vector(553, 90, 50, 180, 500, 6000);
-			spawn.vector(553, 270, 50, 180, 500, 6000);
-			spawn.circle(false, 445, 0, 0, 6, 400, 6000);
+			create.vector(553, 90, 50, 0, 500, 6000);
+			create.vector(553, 270, 50, 0, 500, 6000);
+			create.vector(553, 90, 50, 180, 500, 6000);
+			create.vector(553, 270, 50, 180, 500, 6000);
+			create.circle(false, 445, 0, 0, 6, 400, 6000);
 
-			mod.setTimeout(sendMessage, 60000, "Waves soon...");
+			mod.setTimeout(extras.sendMessage, 60000, "Waves soon...");
 		}
 	}
 
@@ -156,26 +155,17 @@ module.exports = (mod, extras) => {
 		printend = true;
 	}
 
-	function print_th(handlers){
+	function print_th(){
 		if(print){
-			sendMessage("Laser (loading)");
+			extras.sendMessage("Laser (loading)");
 		}
 		print = false;
 	}
 
-	function print_end(handlers){
+	function print_end(){
 		if(printend){
-			handlers['text']({
-				"sub_type": "message",
-				"message": "Laser (loading)",
-				"message_RU": "Лазер (зарядка)"
-			});
-			handlers['text']({
-				"sub_type": "message",
-				delay: 30000,
-				"message": "Laser (loading)",
-				"message_RU": "Лазер (зарядка)"
-			});
+			extras.sendMessage("Laser (loading)");
+			mod.setTimeout(extras.sendMessage, 30000, "Laser (loading)");
 		}
 		printend = false;
 	}
@@ -196,7 +186,8 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 290, 6000] }],
 		"s-444-1000-2117-0": [{ type: "text", message: "Jump (Bait)" }],
 		"s-444-1000-2118-0": [{ type: "text", message: "Jump (Tank)" }],
-		"s-444-1000-2121-0": [{ type: "text", message: "Waves (Left)" }, { type: "function", function: skilld_event, args: [2121] }],
+		"s-444-1000-2121-0": [{ type: "text", message: "Waves (Left)" },
+			{ type: "function", function: skilld_event, args: [2121] }],
 		//
 		"s-444-1000-2131-0": [{ type: "text", message: "Front | Left Scratch" },
 			{ type: "spawn", function: "circle", args: [false, 445, 358, 340, 8, 660, 4000] },
@@ -248,14 +239,11 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 360, 2000] }],
 		"s-444-1000-1140-0": [{ type: "text", message: "Waves (Right)" },
 			{ type: "function", function: skilld_event, args: [1140] }],
-
-
 		// PHASE 2
 		"h-444-2000-100": [{ type: "spawn", function: "marker", args: [false, 0, -700, 3600000, false, ["Throne", "Throne Direction"]] }, // 1 hour is probably overkill
 			{ type: "spawn", function: "point", args: [513, 0, 800, 3600000] }], // 1 hour is probably overkill
 		"h-444-2000-99": [{ type: "function", function: start_boss }],
 		"h-444-2000-0": [{ type: "function", function: print_end }],
-
 		// ---------------------------------------- Not enraged ----------------------------------------
 		"s-444-2000-1101-0": [{ type: "text", message: "4 Hit Combo" },
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 195, 500, 4000] },
@@ -330,7 +318,6 @@ module.exports = (mod, extras) => {
 		"s-444-2000-1312-0": [{ type: "text", message: "Wrath!" },
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 0, 500, 6000] },
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 180, 500, 6000] }],
-
 		// ---------------------------------------- Enraged ----------------------------------------
 		"s-444-2000-2101-0": [{ type: "text", message: "4 Hit combo" },
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 195, 500, 4000] },
@@ -397,7 +384,6 @@ module.exports = (mod, extras) => {
 			{ type: "function", function: skilld_event, args: [2141] }],
 		"s-444-2000-2142-0": [{ type: "text", message: "Waves (Right) 2nd fast" },
 			{ type: "function", function: skilld_event, args: [2142] }],
-
 		"ab-444-2000-90442000": [{ type: "function", function: skilld_event, args: [90442000] }],
 		"ab-444-2000-90442001": [{ type: "function", function: skilld_event, args: [90442001] }],
 		"ab-444-2000-90442304": [{ type: "function", function: skilld_event, args: [90442304] }],
@@ -406,4 +392,9 @@ module.exports = (mod, extras) => {
 		"s-444-2500-1305-0": [{ type: "function", function: skilld_event, args: [305] },
 			{ type: "spawn", function: "vector", args: [912, 0, 0, 0, 3000, 4000] }]
 	};
+};
+
+exports.type = {
+	es: false,
+	sp: true
 };

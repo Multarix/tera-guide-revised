@@ -7,7 +7,7 @@ exports.func = (mod, extras, evt) => {
 	if(!result[1]) return;
 
 	msgKey = `dm-0-0-${result[1]}`;
-	return eventHandler({ event: msgKey, target: false, ent: { huntingZoneId: 0, templateId: 0 }, color: "#c74cb2" });
+	return extras.eventHandler({ event: msgKey, target: false, ent: { huntingZoneId: 0, templateId: 0 }, color: "#c74cb2" });
 };
 
 exports.version = 2;

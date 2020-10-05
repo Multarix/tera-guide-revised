@@ -3,7 +3,7 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 
 	let debuff = 0;
 	let counter = 0;
@@ -22,16 +22,16 @@ module.exports = (mod, extras) => {
 			switch(skillid){
 				case 3119: // red inside
 					if(debuff === 1){
-						sendMessage("OUT (blue)");
+						extras.sendMessage("OUT (blue)");
 					} else if(debuff === 2){
-						sendMessage("IN (red)");
+						extras.sendMessage("IN (red)");
 					}
 					break;
 				case 3220: // blue inside
 					if(debuff === 1){
-						sendMessage("IN (blue)");
+						extras.sendMessage("IN (blue)");
 					} else if(debuff === 2){
-						sendMessage("OUT (red)");
+						extras.sendMessage("OUT (red)");
 					}
 					break;
 			}
@@ -41,7 +41,7 @@ module.exports = (mod, extras) => {
 			mod.clearTimeout(timer1);
 			mod.clearTimeout(timer2);
 			timer1 = mod.setTimeout(() => {
-			/* sendMessage("!");*/
+			/* extras.sendMessage("!");*/
 				debuff = 0;
 			}, 70000);
 		}
@@ -50,7 +50,7 @@ module.exports = (mod, extras) => {
 			mod.clearTimeout(timer2);
 			mod.clearTimeout(timer1);
 			timer2 = mod.setTimeout(() => {
-			/* sendMessage("!");*/
+			/* extras.sendMessage("!");*/
 				debuff = 0;
 			}, 70000);
 		}
@@ -60,7 +60,7 @@ module.exports = (mod, extras) => {
 			if(counter >= 4){
 			/* mod.clearTimeout(timer4);
 			timer4 = mod.setTimeout(()=> {
-				sendMessage("4x slash");
+			extras.sendMessage("4x slash");
 			}, 70000);*/
 			}
 			timer3 = mod.setTimeout(() => {
@@ -73,9 +73,7 @@ module.exports = (mod, extras) => {
 		debuff = 0;
 	}
 
-
 	return {
-
 		// 1 BOSS
 		"h-3023-1000-99": [{ type: "function", function: firstboss_start_event }],
 		"h-3023-1000-80": [{ type: "text", message: "80%" }],
@@ -138,7 +136,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 270, 4000] },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 575, 4000] }],
 		// "s-3023-1000-3223-0": [{ type: "text" }],
-
 		// 2 BOSS
 		"s-3023-2000-164-0": [{ type: "text", message: "Counter Attack (bleed)" }],
 		"s-3023-2000-166-0": [{ type: "text", message: "Turn-back" }],
@@ -159,5 +156,9 @@ module.exports = (mod, extras) => {
 		"s-3023-2000-207-0": [{ type: "text", message: "Phantom x5 (bleed)" }],
 		"s-3023-2000-212-0": [{ type: "text", message: "Flash (bleed)" }]
 	};
+};
 
+exports.type = {
+	es: true,
+	sp: false
 };

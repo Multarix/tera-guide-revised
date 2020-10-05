@@ -35,5 +35,5 @@ module.exports = (mod, extras, evt) => {
 	if(!abnType) return;
 
 	const abnormalKey = `${abnType}-${entai.huntingZoneId}-${entai.templateId}-${evt.id}`;
-	eventHandler({ event: abnormalKey, target: false, ent: entai, color: "#e05555" });
+	extras.eventHandler({ event: abnormalKey, target: false, ent: entai, color: "#e05555" });
 };

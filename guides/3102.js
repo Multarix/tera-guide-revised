@@ -3,12 +3,10 @@
 // made by Kuroine / HSDN
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
-
 		// Ress bait / range check
 		"s-3102-1000-107-0": [{ type: "text", message: "Spectral Throw (Bait)" }],
-
 		// Basic attacks
 		"s-3102-1000-103-0": [{ type: "text", message: "2 Hits | Bleed" }],
 		"s-3102-1000-113-0": [{ type: "text", message: "4 Hits Combo" }],
@@ -31,7 +29,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [true, 553, 0, 150, 10, 420, 2000], delay: 1000 }],
 		"s-3102-1000-304-0": [{ type: "text", message: "Shield!" }],
 		"ab-3102-1000-31021006": [{ type: "text", message: "Plague/Regress" }],
-
 		// Right Foot
 		"s-3102-1000-121-0": [{ type: "text", message: "Pizza" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 550, 3000] },
@@ -61,5 +58,9 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "vector", args: [912, 0, 85, 85, 550, 2000] },
 			{ type: "spawn", function: "semi", args: [85, 295, 912, 0, 0, 6, 550, 2000] }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: false
 };

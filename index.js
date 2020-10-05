@@ -17,38 +17,41 @@ module.exports = function TeraGuide(mod){
 		mobHP: {}, // Mob hps
 		bonfire: false, // bonfire stuff
 		entity: false, // For using spawning inside of functions for guides
+		spawnHandler: undefined,
+		sendMessage: undefined,
+		eventHandler: undefined,
 		debug: { // Debug object for debugging stuff later
 			abnormal: false,
 			skill: false,
 			hp: false,
 			message: false,
 			quest: false
-		}
-	};
-
-	const zoneObject = {
-		hooks: {}, // An object that contains all our hook information
-		hookArray: [],
-		loaded: false, // If the hooks are currently loaded
-		load: function(){ // For loading hooks
-			if(this.loaded || this.hookArray.length) return;
-			for(let h in this.hooks){
-				h = this.hooks[h];
-				this.hookArray.push(mod.hook(h.name, h.vers, h.func.bind(null, mod, extras)));
-			}
-			this.loaded = true;
 		},
-		unload: function(){ // For unloading hooks
-			if(!this.loaded || !this.hookArray.length) return;
-			for(const h of this.hookArray){
-				mod.unhook(h);
+		hookData: {
+			hooks: {}, // An object that contains all our hook information
+			hookArray: [],
+			loaded: false, // If the hooks are currently loaded
+			load: function(){ // For loading hooks
+				if(this.loaded || this.hookArray.length) return;
+				for(let h in this.hooks){
+					h = this.hooks[h];
+					this.hookArray.push(mod.hook(h.name, h.vers, h.func.bind(null, mod, extras)));
+				}
+				this.loaded = true;
+			},
+			unload: function(){ // For unloading hooks
+				if(!this.loaded || !this.hookArray.length) return;
+				for(const h of this.hookArray){
+					mod.unhook(h);
+				}
+				this.hookArray = [];
+				this.loaded = false;
 			}
-			this.hookArray = [];
-			this.loaded = false;
 		}
 	};
 
 	require(path.resolve(__dirname, "./modules/functions.js"))(mod, extras);
+	if(!extras.spawnHandler || !extras.sendMessage || !extras.eventHandlers) return mod.error("Critical Error loading functions, module will be unusable till fixed");
 
 	const init = async () => {
 		// Load the ids of the available guides
@@ -91,7 +94,6 @@ module.exports = function TeraGuide(mod){
 			mod.warn(`Unable to get the list of dungeon names, some dungeons may be named "undefined"`);
 		}
 
-
 		// Load "game" events
 		const gameFiles = await readdir(path.resolve(__dirname, "./events/game/"));
 		for(const file of gameFiles){
@@ -113,7 +115,7 @@ module.exports = function TeraGuide(mod){
 			try {
 				const hookFile = require(path.resolve(__dirname, `./events/hooks/${file}`));
 				const hookName = file.split(".")[0];
-				zoneObject.hooks[hookName] = {
+				extras.hookData.hooks[hookName] = {
 					name: hookName,
 					vers: hookFile.version,
 					func: hookFile.func
@@ -131,7 +133,7 @@ module.exports = function TeraGuide(mod){
 			try {
 				const event = require(path.resolve(__dirname, `./events/me/${file}`));
 				const eventName = file.split(".")[0];
-				mod.game.me.on(eventName, event.bind(null, mod, extras, zoneObject));
+				mod.game.me.on(eventName, event.bind(null, mod, extras));
 				delete require.cache[require.resolve(path.resolve(__dirname, `./events/me/${file}`))];
 			} catch (e){
 				mod.error(`Unable to load "me" event ${file}:\n${e}`);
@@ -272,7 +274,7 @@ module.exports = function TeraGuide(mod){
 				despawnBonfire();
 			} else {
 				if(extras.bonfire) despawnBonfire();
-				spawnHandler({
+				extras.spawnHandler({
 					spawnType: "S_SPAWN_BONFIRE",
 					spawnVersion: 2,
 					despawnType: "S_DESPAWN_BONFIRE",
@@ -291,7 +293,7 @@ module.exports = function TeraGuide(mod){
 
 		"test": (args) => { // Test a key with the player as the target entity
 			cmd.message(`Running event with key "${args}"`);
-			eventHandler({ event: args, target: false, ent: player });
+			extras.eventHandler({ event: args, target: false, ent: player });
 		}
 	});
 
@@ -300,6 +302,6 @@ module.exports = function TeraGuide(mod){
 		mod.clearAllIntervals();
 		cmd.remove("guide"); // Remove chat command
 		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))]; // Remove the function requirement
-		zoneObject.unload(); // Attempt unloading all hooks
+		extras.hookData.unload(); // Attempt unloading all hooks
 	};
 };

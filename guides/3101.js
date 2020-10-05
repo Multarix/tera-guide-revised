@@ -3,7 +3,7 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
 		// 1 BOSS
 		// "s-3101-1000-121-0": [{ type: "text", position:"tank", message: "Right",  }],
@@ -44,7 +44,6 @@ module.exports = (mod, extras) => {
 		// "s-3101-2000-226-0": [{ type: "text",  }],
 		"s-3101-2000-228-0": [{ type: "text", message: "Team Up" }],
 		"s-3101-2000-230-0": [{ type: "text", message: "AOE" }],
-
 		"s-3101-2000-231-0": [{ type: "text", message: "Out Safe" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] }],
 		"s-3101-2000-232-0": [{ type: "text", message: "In Safe" },
@@ -53,4 +52,9 @@ module.exports = (mod, extras) => {
 		"s-3101-2000-234-0": [{ type: "text", message: "Debuffs" }],
 		"s-3101-2000-235-0": [{ type: "text", message: "Debuffs" }]
 	};
+};
+
+exports.type = {
+	es: false,
+	sp: false
 };

@@ -3,9 +3,8 @@
 // made by michengs
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
-
 		// 1 BOSS
 		"s-735-1000-111-0": [{ type: "text", message: "Back + Front" }],
 		"s-735-1000-112-0": [{ type: "text", message: "Back" }],
@@ -14,7 +13,6 @@ module.exports = (mod, extras) => {
 		"s-735-1000-306-0": [{ type: "text", message: "Bombs" }],
 		"s-735-1000-307-0": [{ type: "text", message: "Pull" }],
 		"s-735-1000-309-0": [{ type: "text", message: "Four Missile" }],
-
 		// 2 BOSS
 		"s-735-2000-102-0": [{ type: "text", message: "Pizza Cutter" },
 			{ type: "spawn", function: "circle", args: [true, 553, 0, 300, 12, 228, 3000] }],
@@ -38,7 +36,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "vector", args: [912, 0, 90, 90, 500, 4000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 180, 180, 500, 4000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 270, 270, 500, 4000] }],
-
 		// 3 BOSS
 		"s-735-3000-116-0": [{ type: "text", message: "Right Safe" },
 			{ type: "spawn", function: "point", args: [553, 120, 250, 3000] },
@@ -97,5 +94,9 @@ module.exports = (mod, extras) => {
 		"s-735-3000-321-0": [{ type: "text", message: "Shield!" }],
 		"s-735-3000-324-0": [{ type: "text", message: "Dodge" }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: false
 };

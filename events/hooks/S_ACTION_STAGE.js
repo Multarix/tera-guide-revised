@@ -17,7 +17,7 @@ exports.func = (mod, extras, evnt) => {
 
 	const stage = `${evnt.stage}`;
 	const attackKey = `s-${ent.huntingZoneId}-${ent.templateId}-${skillid}${stage ? `-${stage}` : ""}`;
-	return eventHandler({ event: attackKey, target: evnt.target, ent: entData, color: "#e0cd55" });
+	return extras.eventHandler({ event: attackKey, target: evnt.target, ent: entData, color: "#e0cd55" });
 };
 
 exports.version = 9;

@@ -3,9 +3,8 @@
 // made by Kuroine / HSDN
 // Updated to revised version
 
-module.exports = (mod, extras) => {
+exports.guide = (mod, extras) => {
 	return {
-
 		// Ress bait / range check
 		"s-3202-1000-107-0": [{ type: "text", message: "Spectral Throw (Bait)" }],
 
@@ -31,7 +30,6 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [true, 553, 0, 150, 10, 420, 2000], delay: 1000 }],
 		"s-3202-1000-304-0": [{ type: "text", message: "Shield!" }],
 		"ab-3202-1000-32021006": [{ type: "text", message: "Plague/Regress" }],
-
 		// Pizza + Donuts (outward waves)
 		"s-3202-1000-121-0": [{ type: "text", message: "Pizza (Right foot) | Out-waves: Stay Out > Get In" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 550, 3000] },
@@ -71,5 +69,9 @@ module.exports = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 390, 3000] },
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 6, 620, 3000] }]
 	};
+};
 
+exports.type = {
+	es: false,
+	sp: false
 };
