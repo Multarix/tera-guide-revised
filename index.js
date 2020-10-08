@@ -299,7 +299,9 @@ module.exports = function TeraGuide(mod){
 		mod.clearAllTimeouts(); // Clear all timers
 		mod.clearAllIntervals();
 		cmd.remove("guide"); // Remove chat command
-		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/functions.js"))]; // Remove the function requirement
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/spawnHandler.js"))]; // Remove the spawnHandler requirement
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/sendMessage.js"))]; // Remove the sendMessage requirement
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/eventHandler.js"))]; // Remove the eventHandler requirement
 		extras.hookData.unload(); // Attempt unloading all hooks
 	};
 };
