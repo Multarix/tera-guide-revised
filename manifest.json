@@ -6,11 +6,6 @@
     "module.json": "4b551ab941a87aa905e9c29dd92e5f1be7549f3c35432c33268bac93a432c0c8",
     "README.md": "3d90e2f405a7223569aa55916b135cecfc362956d2e531fc089d3698a91f2fae",
     "settings_migrator.js": "41681a6d02ad27dbe03d4cd627f394ffe1b3164f8324c45db71a04dc70d617cd",
-		"voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb",
-		"modules/abnormals.js": "83577e1aeb619acac03011e0374bbb481ed97d1166f76e8bcb0fb91867015fa3",
-		"modules/eventHandler.js": "3584b499786136b2b33c99b71618880f739f6b6c21080a038a6aa1eee9f07b57",
-		"modules/sendMessage.js": "b769f582e4ad027dbb9a4b8570260360714eea9b2edf0e25e1afeb920868297e",
-		"modules/spawnHandler.js": "adb385c9dd9a716bdcac31d3a76285fced698190c99e9fa4c67e4d9ecb25c443",
     "events/game/leave_game.js": "58fb122eb47748069f80905faafcf3a7700d5396e772f9c3c70775bdfd4cfdbb",
     "events/hooks/S_ABNORMALITY_BEGIN.js": "55e4a3b4d274804bed2891397ccf68d3433a400b7d2c3b5ee61fe84092d708c1",
     "events/hooks/S_ABNORMALITY_REFRESH.js": "760ff705746fb83013fba6cf7c773b2f711b14a5f167f5780822d4d1dba2a417",
@@ -42,7 +37,12 @@
     "guides/9920.js": "1fa1882b4fa91c31b15b79708c00392a1188eb6564c4e3d3a549cb1ad141457a",
     "guides/9970.js": "ac178b143f053e73a472d147628195c9a0307c3c8da528ba98c097707f121eaa",
     "guides/9981.js": "d4614479af8db84eebc06c0732ed8d87cd171af20121de8ffec05c71ba8b2891",
-    "guides/9982.js": "c9affc4e8cca3ee2a5aeb7412c5966edb99c5e8f855fd5e32fcc2a2c21aac078"
+    "guides/9982.js": "c9affc4e8cca3ee2a5aeb7412c5966edb99c5e8f855fd5e32fcc2a2c21aac078",
+    "modules/abnormals.js": "9cbe2db5b8c0dd1405a874deff51d205d0377f1bb6ba5daa880005a52aed2dd7",
+    "modules/eventHandler.js": "1beb2df0ea013bc2bf77dd9077cc6b6197f7ed9218e7af9802be8a7be45994ef",
+    "modules/sendMessage.js": "b769f582e4ad027dbb9a4b8570260360714eea9b2edf0e25e1afeb920868297e",
+    "modules/spawnHandler.js": "e5801508a76b04ec077ad16b368f1b6257a66d59c0c8c4e0bd52dc4104549771",
+    "voice/index.js": "43c748c14d9675fdfe81900f3fff6bdbb50419942b996af4a520295a818e84bb"
 	},
 	"defs": {
 		"S_ABNORMALITY_BEGIN": 4,

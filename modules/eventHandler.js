@@ -65,7 +65,7 @@ module.exports = (mod, extras, data) => {
 		if(obj.type === "function"){ // If the type is a function, try running the function
 			extras.entity = data.ent;
 			try {
-				obj.function(...obj.args);
+				(obj.args) ? obj.function(...obj.args) : obj.function();
 			} catch (e){ mod.error(e); }
 			return;
 		}

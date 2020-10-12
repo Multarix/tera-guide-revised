@@ -18,7 +18,6 @@ module.exports = (mod, extras, evtData) => {
 	// The unique spawned id this item will be using.
 
 	const uniqueIdent = evtData.force_gameId || extras.uint64--; // uint64 in js... what a pain
-	mod.log(uniqueIdent);
 	let loc = evtData.ent.loc.clone();
 
 	if(evtData.pos) loc = evtData.pos; // if pos is set, we use that
