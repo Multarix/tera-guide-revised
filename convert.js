@@ -11,146 +11,139 @@ const { promisify } = require("util");
 const readdir = promisify(fs.readdir);
 
 const replacer = async (content) => {
-	const loadRemover = /module\.exports = {(\r\n|\r|\n)\s.*(\r\n|\r|\n).*(\r\n|\r|\n).*/;
-
 	let modified = content;
 
-	const convertToArray = /\.bind\(null, (.*?)\)/;
-	let xa = convertToArray.exec(modified);
-	while(xa){
-		modified = modified.replace(xa[0], `, args: [${xa[1]}]`);
-		xa = convertToArray.exec(modified);
+	const handlerOne = /handlers\.text\({(\n\r|\n|\r)?(\s*)?sub_type: (.*?),(\n\r|\n|\r)?(\s*)?message: (.*?),(\n\r|\n|\r)?(\s*)?message_RU: (.*?)(\n\r|\n|\r)?(\s*)?}\)/;
+	let hOne = handlerOne.exec(modified);
+	while(hOne){
+		modified = modified.replace(hOne[0], `extras.sendMessage(${hOne[6]})`);
+		hOne = handlerOne.exec(modified);
+	}
+	const handlerTwo = /handlers\.text\({(\n\r|\n|\r)?(\s*)?sub_type: (.*?),(\n\r|\n|\r)?(\s*)?message_RU: (.*?),(\n\r|\n|\r)?(\s*)?message: (.*?)(\n\r|\n|\r)?(\s*)?}\)/;
+	let hTwo = handlerTwo.exec(modified);
+	while(hTwo){
+		modified = modified.replace(hTwo[0], `extras.sendMessage(${hTwo[9]})`);
+		hTwo = handlerTwo.exec(modified);
 	}
 
-	const hRepl = /handlers\['text']\({(\n|\n\r|\r)\s+"sub_type": ".*?",(\n|\n\r|\r)\s+"message": "(.*?)",(\n|\n\r|\r)\s+"message_RU": ".*?"(\n|\n\r|\r)\s+}\)/; // Yikes lmfao
-	let ya = hRepl.exec(modified);
-	while(ya){
-		modified = modified.replace(ya[0], `sendMessage("${ya[3]}")`);
-		ya = hRepl.exec(modified);
-	}
 
-	const hRep2 = /handlers\['text']\({(\n|\n\r|\r)\s+"sub_type": ".*?",(\n|\n\r|\r)\s+"message_RU": ".*?",(\n|\n\r|\r)\s+"message": "(.*?)"(\n|\n\r|\r)\s+}\)/; // Yikes lmfao
-	let qa = hRep2.exec(modified);
-	while(qa){
-		modified = modified.replace(qa[0], `sendMessage("${qa[4]}")`);
-		qa = hRep2.exec(modified);
+	const esGuide = /guide.type = ES;/;
+	let esGuideCheck = esGuide.exec(modified);
+	while(esGuideCheck){
+		modified = modified.replace(esGuideCheck[0], "");
+		esGuideCheck = esGuide.exec(modified);
+		modified += "\n\nexports.type = { es: true, sp: false };";
 	}
-
-	const handleRepl = /handlers\["text"\]\({ "sub_type": "message", ("delay": delay, )?"message": (".*?"), "message_RU": (".*?") }\);/;
-	let za = handleRepl.exec(modified);
-	while(za){
-		modified = modified.replace(za[0], `sendMessage("${za[3]}")`);
-		za = handleRepl.exec(modified);
+	const spGuide = /guide.type = SP;/;
+	let spGuideCheck = spGuide.exec(modified);
+	while(spGuideCheck){
+		modified = modified.replace(spGuideCheck[0], "");
+		spGuideCheck = spGuide.exec(modified);
+		modified += "\n\nexports.type = { es: false, sp: true };";
 	}
+	const typeMatcher = /(exports\.type = { es: true, sp: false };|exports\.type = { es: false, sp: true };)/;
+	const spesCheck = typeMatcher.exec(modified);
+	if(!spesCheck) modified += "\n\nexports.type = { es: false, sp: false };";
 
-	modified = modified.replace(loadRemover, "module.exports = (mod, extras) => {\n\treturn {")
-		.replace(/const {.*?} = require\("\.\.\/lib"\);/g, "")
-		.replace("let player, entity, library, effect;", "")
+
+	modified = modified.replace(/module.exports = \(dispatch, handlers, guide, lang\) => {/g, "exports.guide = (mod, extras) => {")
+		.replace(/type: "func"/g, `type: "function"`)
+		.replace(/func:/g, `function:`)
+		.replace(/, sub_type: ".*?"/g, "")
+		.replace(/, message_RU: ".*?"/g, "")
+		.replace(/class_position:/g, "position:")
 		.replace(/dispatch/g, "mod")
-		.replace(/, handlers, event, ent, mod/g, "")
-		.replace(/"type": "text"/g, `type: "text"`)
-		.replace(/"type": "spawn_func"/g, `type: "spawn"`)
-		.replace(/"type": "func"/g, `type: "function"`)
-		.replace(/"delay":/g, "delay:")
-		.replace(/"func":/g, "function:")
-		.replace(/"class_position":/g, "position:")
 		.replace(/position: "heal"/g, `position: "healer"`)
-		.replace(/function: "semicircle"/g, `function: "semi"`)
-		.replace(/"message":/g, `message:`)
-		.replace(/, "sub_type": ".*?"/g, "")
-		.replace(/, "message_RU": ".*?"/g, "");
+		.replace(/function: "marker"/g, `"function": "marker"`)
+		.replace(/handlers\.event\(/g, `extras.eventHandler(`);
 
 
-	const itemReplace = /"item", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	const itemReplace = /function: "item", args: \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
 	let item = itemReplace.exec(modified);
 	while(item){
-		if(parseInt(item[4]) > 150){
-			modified = modified.replace(item[0], `"item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}], delay: ${item[4]}`);
+		if(parseInt(item[4]) > 0){
+			modified = modified.replace(item[0], `function: "item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}], delay: ${item[4]}`);
 		} else {
-			modified = modified.replace(item[0], `"item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}]`);
+			modified = modified.replace(item[0], `function: "item", args: [${item[1]}, ${item[2]}, ${item[3]}, ${item[5]}]`);
 		}
 		item = itemReplace.exec(modified);
 	}
 
-
-	const markerReplace = /"marker", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (\[?.*?\]?)\]/;
+	const markerReplace = /"function": "marker", args: \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (\[?.*?\]?)\]/;
 	let marker = markerReplace.exec(modified);
 	while(marker){
-		if(parseInt(marker[4]) > 150){
-			modified = modified.replace(marker[0], `"marker", args: [${marker[1]}, ${marker[2]}, ${marker[3]}, ${marker[5]}, ${marker[6]}, ${marker[7]}], delay: ${marker[4]}`);
+		if(parseInt(marker[4]) > 0){
+			modified = modified.replace(marker[0], `function: "marker", args: [${marker[1]}, ${marker[2]}, ${marker[3]}, ${marker[5]}, ${marker[6]}, ${marker[7]}], delay: ${marker[4]}`);
 		} else {
-			modified = modified.replace(marker[0], `"marker", args: [${marker[1]}, ${marker[2]}, ${marker[3]}, ${marker[5]}, ${marker[6]}, ${marker[7]}]`);
+			modified = modified.replace(marker[0], `function: "marker", args: [${marker[1]}, ${marker[2]}, ${marker[3]}, ${marker[5]}, ${marker[6]}, ${marker[7]}]`);
 		}
 		marker = markerReplace.exec(modified);
 	}
 
 
-	const pointReplace = /"point", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	const pointReplace = /function: "point", args: \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
 	let point = pointReplace.exec(modified);
 	while(point){
-		if(parseInt(point[4]) > 150){
-			modified = modified.replace(point[0], `"point", args: [${point[1]}, ${point[2]}, ${point[4]}, ${point[5]}], delay: ${point[4]}`);
+		if(parseInt(point[4]) > 0){
+			modified = modified.replace(point[0], `function: "point", args: [${point[1]}, ${point[2]}, ${point[3]}, ${point[5]}], delay: ${point[4]}`);
 		} else {
-			modified = modified.replace(point[0], `"point", args: [${point[1]}, ${point[2]}, ${point[3]}, ${point[5]}]`);
+			modified = modified.replace(point[0], `function: "point", args: [${point[1]}, ${point[2]}, ${point[3]}, ${point[5]}]`);
 		}
 		point = pointReplace.exec(modified);
 	}
 
-
-	const vectorReplace = /"vector", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	const vectorReplace = /function: "vector", args: \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
 	let vector = vectorReplace.exec(modified);
 	while(vector){
-		if(parseInt(vector[6]) > 150){
-			modified = modified.replace(vector[0], `"vector", args: [${vector[1]}, ${vector[2]}, ${vector[4]}, ${vector[4]}, ${vector[5]}, ${vector[7]}], delay: ${vector[6]}`);
+		if(parseInt(vector[6]) > 0){
+			modified = modified.replace(vector[0], `function: "vector", args: [${vector[1]}, ${vector[2]}, ${vector[3]}, ${vector[4]}, ${vector[5]}, ${vector[7]}], delay: ${vector[6]}`);
 		} else {
-			modified = modified.replace(vector[0], `"vector", args: [${vector[1]}, ${vector[2]}, ${vector[4]}, ${vector[4]}, ${vector[5]}, ${vector[7]}]`);
+			modified = modified.replace(vector[0], `function: "vector", args: [${vector[1]}, ${vector[2]}, ${vector[3]}, ${vector[4]}, ${vector[5]}, ${vector[7]}]`);
 		}
 		vector = vectorReplace.exec(modified);
 	}
 
-
-	const circleReplace = /"circle", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	const circleReplace = /function: "circle", args: \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
 	let circle = circleReplace.exec(modified);
 	while(circle){
-		if(parseInt(circle[7]) > 150){
-			modified = modified.replace(circle[0], `"circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}], delay: ${circle[7]}`);
+		if(parseInt(circle[7]) > 0){
+			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}], delay: ${circle[7]}`);
 		} else {
-			modified = modified.replace(circle[0], `"circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}]`);
+			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}]`);
 		}
 
 		circle = circleReplace.exec(modified);
 	}
 
-
-	const semiReplace = /"semi", "args": \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
+	const semiReplace = /function: "semicircle", args: \[(.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?), (.*?)\]/;
 	let semi = semiReplace.exec(modified);
 	while(semi){
-		if(parseInt(semi[8]) > 150){
-			modified = modified.replace(semi[0], `"semi", args: [${semi[1]}, ${semi[2]}, ${semi[3]}, ${semi[4]}, ${semi[5]}, ${semi[6]}, ${semi[7]}, ${semi[9]}], delay: ${semi[8]}`);
+		if(parseInt(semi[8]) > 0){
+			modified = modified.replace(semi[0], `function: "semi", args: [${semi[1]}, ${semi[2]}, ${semi[3]}, ${semi[4]}, ${semi[5]}, ${semi[6]}, ${semi[7]}, ${semi[9]}], delay: ${semi[8]}`);
 		} else {
-			modified = modified.replace(semi[0], `"semi", args: [${semi[1]}, ${semi[2]}, ${semi[3]}, ${semi[4]}, ${semi[5]}, ${semi[6]}, ${semi[7]}, ${semi[9]}]`);
+			modified = modified.replace(semi[0], `function: "semi", args: [${semi[1]}, ${semi[2]}, ${semi[3]}, ${semi[4]}, ${semi[5]}, ${semi[6]}, ${semi[7]}, ${semi[9]}]`);
 		}
 		semi = semiReplace.exec(modified);
 	}
 
-	modified += "\n};";
 	return modified;
 };
 
 const convertStuff = async (f, content) => {
 	const newData = await replacer(content);
-	await fs.writeFileSync(`./guides/${f}`, newData);
+	await fs.writeFileSync(`./converted_guides/${f}`, newData);
 	console.log(`Converted file ${f}`);
 };
 
 const init = async () => {
 	console.log("Starting Conversion...");
-	const guides = await readdir("./guides");
-	console.log(`${guides.length} files detected in ./guides/`);
+	const guides = await readdir("./");
+	console.log(`${guides.length} files detected`);
 
 	const guideModied = guides.forEach(async (f) => {
 		if(!f.endsWith(".js")) return;
-		const content = fs.readFileSync(`./guides/${f}`, { encoding: 'utf8' });
+		if(f === "convert.js") return;
+		const content = fs.readFileSync(`./${f}`, { encoding: 'utf8' });
 		try {
 			await convertStuff(f, content);
 		} catch (e){ console.error(`Failed to read/ write file: ${f}\n${e}`); }
