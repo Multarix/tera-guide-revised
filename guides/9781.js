@@ -1,52 +1,57 @@
-﻿// Velik's Sanctuary
+// Velik's Sanctuary
 //
 // made by michengs / HSDN
-// Updated to revised version
 
 exports.guide = (mod, extras) => {
 
+
 	let thirdboss_fifty = false;
+
 	function thirdboss_message_event(skillid){
 		switch(skillid){
-		// Lakan has noticed you.
+			// Lakan has noticed you.
 			case 1043:
 				if(!thirdboss_fifty){
-					extras.sendMessage(mod, "Debuffs > Circles > Bombs");
+					extras.sendMessage("Debuffs > Circles > Bombs");
 				} else {
-					extras.sendMessage(mod, "Debuffs > Bombs > Circles");
+					extras.sendMessage("Debuffs > Bombs > Circles");
 				}
 				break;
-				// Lakan is trying to take you on one at a time.
+			// Lakan is trying to take you on one at a time.
 			case 1044:
 				if(!thirdboss_fifty){
-					extras.sendMessage(mod, "Circles > Bombs > Debuffs");
+					extras.sendMessage("Circles > Bombs > Debuffs");
 				} else {
-					extras.sendMessage(mod, "Circles > Debuffs > Bombs");
+					extras.sendMessage("Circles > Debuffs > Bombs");
 				}
 				break;
-				// Lakan intends to kill all of you at once.
+			// Lakan intends to kill all of you at once.
 			case 1045:
 				if(!thirdboss_fifty){
-					extras.sendMessage(mod, "Bombs > Debuffs > Circles");
+					extras.sendMessage("Bombs > Debuffs > Circles");
 				} else {
-					extras.sendMessage(mod, "Bombs > Circles > Debuffs");
+					extras.sendMessage("Bombs > Circles > Debuffs");
 				}
 				break;
 		}
 	}
+
 	function thirdboss_start_event(){
 		thirdboss_fifty = false;
 	}
+
 	function thirdboss_fifty_event(){
 		thirdboss_fifty = true;
 	}
 
 	return {
 		// 1 BOSS
-		"s-781-1000-2401": [{ type: "text", message: "Right" },
+		"nd-781-1000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
+		"s-781-1000-2401-0": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 230, 100, 2000, true, null] }],
-		"s-781-1000-2402": [{ type: "text", message: "Left" },
+		"s-781-1000-2402-0": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
 		"s-781-1000-2304-0": [{ type: "text", message: "Flying" },
@@ -55,10 +60,10 @@ exports.guide = (mod, extras) => {
 		"s-781-1000-2113-0": [{ type: "text", message: "Front + AoEs" }],
 		"s-781-1000-2308-0": [{ type: "text", message: "OUT" }],
 		"s-781-1000-2309-0": [{ type: "text", message: "IN" }],
-		"s-781-1000-1401": [{ type: "text", message: "Right" },
+		"s-781-1000-1401-0": [{ type: "text", message: "Right" },
 			{ type: "spawn", function: "marker", args: [false, 300, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 230, 100, 2000, true, null] }],
-		"s-781-1000-1402": [{ type: "text", message: "Left" },
+		"s-781-1000-1402-0": [{ type: "text", message: "Left" },
 			{ type: "spawn", function: "marker", args: [false, 60, 100, 2000, true, null] },
 			{ type: "spawn", function: "marker", args: [false, 130, 100, 2000, true, null] }],
 		"s-781-1000-1304-0": [{ type: "text", message: "Flying" },
@@ -72,6 +77,8 @@ exports.guide = (mod, extras) => {
 		// "qb-781-1000-78106": [{ type: "text", message: "集体炸石柱" }], // круги на всех
 
 		// 2 BOSS
+		"nd-781-2000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
 		// Cage Mechanic
 		// "s-781-2000-1503-0": [{ type: "text", message: "坦快跑远" }], // наткнул
 		"s-781-2000-1106-0": [{ type: "text", message: "Back" }],
@@ -110,7 +117,10 @@ exports.guide = (mod, extras) => {
 		"dm-0-0-9781046": [{ type: "text", message: "First: (Debuffs) Closest" }], // Thank you... for this release...
 		"dm-0-0-9781047": [{ type: "text", message: "First: (Circles) Spread" }], // Beware the... red lightning...
 		"dm-0-0-9781048": [{ type: "text", message: "First: (Bombs) Gather + Cleanse" }], // Beware the mark... of Lakan...
+
 		// 3 BOSS
+		"nd-781-3000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
 		"h-781-3000-99": [{ type: "function", function: thirdboss_start_event }],
 		"h-781-3000-50": [{ type: "function", function: thirdboss_fifty_event }],
 		"dm-0-0-9781043": [{ type: "function", function: thirdboss_message_event, args: [1043] }], // Lakan has noticed you.
@@ -142,7 +152,4 @@ exports.guide = (mod, extras) => {
 	};
 };
 
-exports.type = {
-	es: false,
-	sp: true
-};
+exports.type = { es: false, sp: true };

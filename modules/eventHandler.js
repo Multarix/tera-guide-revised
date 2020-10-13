@@ -63,7 +63,7 @@ module.exports = (mod, extras, data) => {
 	const doAction = (obj, data) => { // A function so we don't have to write this crap out twice
 		if(obj.type === "text") return extras.sendMessage(mod, obj.message);
 		if(obj.type === "function"){ // If the type is a function, try running the function
-			extras.entity = data.ent;
+			extras.entity = data.ent || extras.entity;
 			try {
 				(obj.args) ? obj.function(...obj.args) : obj.function();
 			} catch (e){ mod.error(e); }
@@ -72,7 +72,7 @@ module.exports = (mod, extras, data) => {
 
 		if(obj.type === "spawn"){
 			if(!mod.settings.spawnObject || !extras.spawning) return;
-			extras.entity = data.ent;
+			extras.entity = data.ent || extras.entity;
 
 			// Make sure func and args is defined
 			if(!obj.function) return mod.error(`Spawning objects needs a type of spawning function! (${data.event})`);
@@ -88,6 +88,7 @@ module.exports = (mod, extras, data) => {
 		}
 		return mod.warn(`The key "${data.event}" does not have a proper function, skipping it.`);
 	};
+
 
 	const runEvent = (obj, data) => { // Determine the type, and run w/e action it requires
 		let delay = false;
@@ -125,9 +126,14 @@ module.exports = (mod, extras, data) => {
 		}
 	};
 
-	debugFunc(data.event, data.color);
-	if(!extras.active_guide[data.event]) return;
-	const attackKeyData = extras.active_guide[data.event];
+
+	let attackKeyData = data;
+	if(data.event){
+		debugFunc(data.event, data.color);
+		if(!extras.active_guide[data.event]) return;
+		attackKeyData = extras.active_guide[data.event];
+	}
+
 	for(const obj of attackKeyData){
 		if(positionCheck(obj.position) && checkTarget(obj, data)) runEvent(obj, data);
 	}

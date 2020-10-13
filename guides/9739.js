@@ -1,11 +1,12 @@
 // Red Refuge
 //
 // made by multarix
-// Updated to revised version
 
 exports.guide = (mod, extras) => {
 	return {
 		// 1 BOSS
+		"nd-739-1000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
 		"s-739-1000-105-0": [{ type: "text", message: "Turn + Breath" }],
 		"s-739-1000-308-0": [{ type: "text", message: "In > Out" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 7500] }],
@@ -15,7 +16,10 @@ exports.guide = (mod, extras) => {
 		"s-739-1000-306-0": [{ type: "text", message: "Out > In" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 7500] }],
 		"s-739-1000-306-1": [{ type: "text", message: "In" }],
+
 		// 2 BOSS
+		"nd-739-2000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
 		"s-739-2000-105-0": [{ type: "text", message: "360" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 2500] },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 510, 2500] }],
@@ -26,7 +30,8 @@ exports.guide = (mod, extras) => {
 		"s-739-2000-119-0": [{ type: "text", message: "Front" }],
 		"s-739-2000-120-0": [{ type: "text", message: "Back" }],
 		"s-739-2000-303-0": [{ type: "text", message: "Whip" },
-			{ type: "text", message: "Dodge!", delay: 1000, targeted: true }],
+			{ type: "text", message: "Dodge!", delay: 1200, targeted: true }],
+
 		// 3 BOSS
 		"h-739-3001-30": [{ type: "text", message: "Reveal soon..." }],
 		"s-739-3000-201-0": [{ type: "text", delay: 3600, message: "Dodge!" }],
@@ -42,7 +47,4 @@ exports.guide = (mod, extras) => {
 	};
 };
 
-exports.type = {
-	es: false,
-	sp: false
-};
+exports.type = { es: false, sp: false };

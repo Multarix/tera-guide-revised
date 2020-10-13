@@ -1,19 +1,18 @@
 // Corrupted Skynest
 //
 // made by michengs / HSDN / ZC
-// Updated to revised version
 
 exports.guide = (mod, extras) => {
 	const { player } = mod.require.library;
-	const { MARKER_ITEM, spawn } = require("../lib.js");
+	const { MARKER_ITEM } = module.parent.exports.spawn;
 
 	let debuff = null;
-	let timer1;
-	let timer2;
-	let timer3;
-	let timer4;
-	let timer5;
-	let boss_ent = extras.entity;
+	let timer1 = null;
+	let timer2 = null;
+	let timer3 = null;
+	let timer4 = null;
+	let timer5 = null;
+	let boss_ent = null;
 	let boss_offset = 0;
 	let qbacting = null;
 	let blue = false;
@@ -40,56 +39,58 @@ exports.guide = (mod, extras) => {
 
 	function spawn_marker(out){
 		if(!boss_ent) return;
-		const create = new spawn(mod, extras);
+
 		let distance = 220;
 		let caption = "IN";
+
 		if(out){
 			distance = 620;
 			caption = "OUT";
 		}
-		create.marker(false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]);
-		create.marker(false, 135 + boss_offset, distance, 4000, true, [caption, "SAFE"]);
-		create.marker(false, 225 + boss_offset, distance, 4000, true, [caption, "SAFE"]);
-		create.marker(false, 315 + boss_offset, distance, 4000, true, [caption, "SAFE"]);
+
+		extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
+			{ type: "spawn", function: "marker", args: [false, 135 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
+			{ type: "spawn", function: "marker", args: [false, 225 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
+			{ type: "spawn", function: "marker", args: [false, 315 + boss_offset, distance, 4000, true, [caption, "SAFE"]] }]);
 	}
 
 	function debuff_added(id){
 		debuff_removed();
 		debuff = id; // debuff event id
+
 		timer1 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage(mod, "Debuff 20 seconds");
+				extras.sendMessage("Debuff 20 seconds");
 			}
 		}, 70000);
 		timer2 = mod.setTimeout(() => {
 			if(debuff != null){
 				mod.setTimeout(() => {
-					extras.sendMessage(mod, `${debuff_messages[debuff % 2].message}`);
+					extras.sendMessage((`${debuff_messages[debuff % 2].message}`));
 				}, 2000);
-				extras.sendMessage(mod, "Debuff 50 seconds");
+				extras.sendMessage("Debuff 50 seconds");
 			}
 		}, 40000);
 		timer3 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage(mod, "Warning! Debuff 15 seconds");
+				extras.sendMessage("Warning! Debuff 15 seconds");
 			}
 		}, 75000);
 		timer4 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage(mod, "Warning! Debuff 10 seconds");
+				extras.sendMessage("Warning! Debuff 10 seconds");
 			}
 		}, 80000);
 		timer5 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage(mod, "Warning! Debuff 5 seconds");
+				extras.sendMessage("Warning! Debuff 5 seconds");
 			}
 		}, 85000);
-		//
 		if(blue){
-			extras.sendMessage(mod, `${mech_messages[(qbacting + debuff + 1) % 2].message}`);
+			extras.sendMessage((`${mech_messages[(qbacting + debuff + 1) % 2].message}`));
 			spawn_marker((qbacting + debuff + 1) % 2);
 		} else if(red){
-			extras.sendMessage(mod, `${mech_messages[(qbacting + debuff) % 2].message}`);
+			extras.sendMessage((`${mech_messages[(qbacting + debuff) % 2].message}`));
 			spawn_marker((qbacting + debuff) % 2);
 		}
 	}
@@ -103,10 +104,9 @@ exports.guide = (mod, extras) => {
 		mod.clearTimeout(timer5);
 	}
 
-	function skilld_event(skillid){
-		const create = new spawn(mod, extras);
+	function skilld_event(skillid, ent){
 		const abnormality_change = (added, event) => {
-		// Fire/Ice debuff
+			// Fire/Ice debuff
 			if(player.isMe(event.target.toString()) && [30260001, 30260002, 31260001, 31260002].includes(event.id)){
 				if(added){
 					debuff_added(event.id);
@@ -114,6 +114,7 @@ exports.guide = (mod, extras) => {
 					debuff_removed();
 				}
 			}
+
 			// Argon Priest Essence buff
 			if(player.isMe(event.target.toString()) && [30261701, 31261701].includes(event.id)){
 				if(added && boss_ent){
@@ -138,43 +139,50 @@ exports.guide = (mod, extras) => {
 				}
 			}
 		};
+
 		// In-Out quest balloons (qbacting => ярость 0, ужас 1)
 		if([3026004, 3126004, 3026005, 3126005].includes(skillid)){
 			qbacting = skillid % 2;
 		}
+
 		// Fire/Ice debuff (debuff % 2 => синий 0, красный 1)
 		if([30260001, 31260001, 30260002, 31260002].includes(skillid) && !debuff_tracker_started){
 			debuff_added(skillid);
 		}
+
 		// In-Out identification
 		if([212, 213, 214, 215].includes(skillid)){
-			boss_ent = extras.entity;
-			create.circle(false, 445, 0, 0, 8, 440, 8000);
-			create.circle(false, 445, 0, 0, 4, 840, 8000);
+			boss_ent = ent;
+			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 440, 8000], delay: 200 },
+				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 4, 840, 8000], delay: 200 }]);
 		}
+
 		if([212, 214].includes(skillid)){ // Fire claw (141, 142)
 			boss_offset = 10;
-			create.vector(553, 0, 0, 190, 840, 8000);
-			create.vector(553, 0, 0, 10, 840, 8000);
+			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 190, 840, 8000], delay: 200 },
+				{ type: "spawn", function: "vector", args: [553, 0, 0, 10, 840, 8000], delay: 200 }]);
 		}
+
 		if([213, 215].includes(skillid)){ // Ice claw (143, 144)
 			boss_offset = -10;
-			create.vector(553, 0, 0, 170, 840, 8000);
-			create.vector(553, 0, 0, 350, 840, 8000);
+			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 170, 840, 8000], delay: 200 },
+				{ type: "spawn", function: "vector", args: [553, 0, 0, 350, 840, 8000], delay: 200 }]);
 		}
+
 		if([213, 214].includes(skillid)){ // Ice inside
 			mod.setTimeout(() => {
 				if(debuff != null){
-					extras.sendMessage(mod, `Ice inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff + 1) % 2].message}`);
+					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
 					spawn_marker((qbacting + debuff + 1) % 2);
 				} else {
-					extras.sendMessage(mod, `Ice inside (${qbacting_messages[qbacting].message})`);
+					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message})`);
 				}
 			}, 500);
 			blue = true;
 			red = false;
 			mod.setTimeout(() => blue = false, 6500); // 6700
 		}
+
 		if([212, 215].includes(skillid)){ // Fire inside
 			mod.setTimeout(() => {
 				if(debuff != null){
@@ -184,14 +192,18 @@ exports.guide = (mod, extras) => {
 					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message})`);
 				}
 			}, 500);
+
 			blue = false;
 			red = true;
+
 			mod.setTimeout(() => red = false, 6500);
 		}
+
 		if(skillid === 99020020){ // Death release debuff
 			mod.clearTimeout(timer1);
 			mod.clearTimeout(timer2);
 		}
+
 		if(!debuff_tracker_started){
 			extras.hookData.hookArray.push(mod.hook("S_ABNORMALITY_BEGIN", 4, abnormality_change(true)));
 			extras.hookData.hookArray.push(mod.hook("S_ABNORMALITY_END", 1, abnormality_change(false)));
@@ -216,15 +228,16 @@ exports.guide = (mod, extras) => {
 		"103-0": [{ type: "text", message: "Tail (Flying)" },
 			{ type: "text", message: "Arise!", delay: 1500, position: "priest" },
 			{ type: "spawn", function: "semi", args: [140, 260, 912, 0, 0, 10, 500, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 135, 135, 500, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 260, 260, 500, 2000] }],
+			{ type: "spawn", function: "vector", args: [912, 0, 0, 135, 500, 2000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 0, 260, 500, 2000] }],
 		"153-0": [{ type: "text", message: "Tail (Flying)" },
 			{ type: "text", message: "Arise!", delay: 1500, position: "priest" },
 			{ type: "spawn", function: "semi", args: [140, 260, 912, 0, 0, 10, 500, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 135, 135, 500, 2000] },
-			{ type: "spawn", function: "vector", args: [912, 0, 260, 260, 500, 2000] }],
+			{ type: "spawn", function: "vector", args: [912, 0, 0, 135, 500, 2000] },
+			{ type: "spawn", function: "vector", args: [912, 0, 0, 260, 500, 2000] }],
 		"118-0": [{ type: "text", message: "Jump" }],
 		"118-1": [{ type: "text", message: "Dodge" }],
+
 		// AOE лед (большой)
 		"104-0": [{ type: "text", message: "Ice Storm DOTs" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 5000] }],
@@ -244,6 +257,7 @@ exports.guide = (mod, extras) => {
 		// AOE огонь (малый)
 		"155-0": [{ type: "text", message: "Fire (Knockdown)" },
 			{ type: "text", delay: 1200, message: "Dodge" }],
+
 		"206-0": [{ type: "text", message: "Jump Back" }],
 		"206-2": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 350, 3000] }],
 		"137-0": [{ type: "text", message: "Knockdown" }],
@@ -252,6 +266,9 @@ exports.guide = (mod, extras) => {
 			{ type: "text", delay: 4000, message: "Lower the temp" }],
 		"140-0": [{ type: "text", message: "40 degrees (Ice to all)" },
 			{ type: "text", delay: 4000, message: "Raise the temp" }],
+
+		"nd-3026-1000": [{ type: "stop_timers" },
+			{ type: "despawn_all" }],
 		"s-3026-1000-1212-0": [{ type: "function", function: skilld_event, args: [212] }],
 		"s-3026-1000-1215-0": [{ type: "function", function: skilld_event, args: [215] }],
 		"s-3026-1000-1213-0": [{ type: "function", function: skilld_event, args: [213] }],
@@ -267,19 +284,18 @@ exports.guide = (mod, extras) => {
 		"am-3026-1000-31260002": [{ type: "function", function: skilld_event, args: [31260002] }] // синий
 	};
 
-	const skillGroup = {};
+	const object = {};
+
 	for(const [key, value] of Object.entries(skills)){
 		if(key.length === 5){
-			skillGroup[`s-3026-1000-1${key}`] = value;
-			skillGroup[`s-3026-1000-2${key}`] = value;
+			object[`s-3026-1000-1${key}`] = value;
+			object[`s-3026-1000-2${key}`] = value;
 		} else {
-			skillGroup[key] = value;
+			object[key] = value;
 		}
 	}
-	return skillGroup;
+
+	return object;
 };
 
-exports.type = {
-	es: false,
-	sp: true
-};
+exports.type = { es: false, sp: true };
