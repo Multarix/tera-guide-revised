@@ -109,6 +109,7 @@ ID | Dungeon name
 9920 | Antaroth's Abyss (Hard)
 9044 | Bahaar's Sanctum
 3026 | Corrupted Skynest (May have issues)
+3126 | Corrupted Skynest (Hard) (May have issues)
 3102 | Draakon Arena
 3202 | Draakon Arena (Hard)
 3027 | Forbidden Arena [Hagufna]
@@ -118,6 +119,7 @@ ID | Dungeon name
 9982 | Grotto of Lost Souls (Hard)
 9053 | Kezzel's Gorge
 9735 | RK-9 Kennel
+3034 | RK-9 Kennel (Hard)
 9739 | Red Refuge
 9781 | Velik's Sanctuary
 
@@ -125,9 +127,7 @@ ID | Dungeon name
 
 ID | Dungeon name
 --- | ---
-3126 | Corrupted Skynest (Hard)
-3034 | RK-9 Kennel (Hard)
-3020 | Sea of Honor
+3020 | Sea of Honor (Does anyone even do SoH?)
 
 
 ## **Translations**
