@@ -16,13 +16,13 @@ const replacer = async (content) => {
 	const handlerOne = /handlers\.text\({(\n\r|\n|\r)?(\s*)?sub_type: (.*?),(\n\r|\n|\r)?(\s*)?message: (.*?),(\n\r|\n|\r)?(\s*)?message_RU: (.*?)(\n\r|\n|\r)?(\s*)?}\)/;
 	let hOne = handlerOne.exec(modified);
 	while(hOne){
-		modified = modified.replace(hOne[0], `extras.sendMessage(${hOne[6]})`);
+		modified = modified.replace(hOne[0], `extras.sendMessage(mod, ${hOne[6]})`);
 		hOne = handlerOne.exec(modified);
 	}
 	const handlerTwo = /handlers\.text\({(\n\r|\n|\r)?(\s*)?sub_type: (.*?),(\n\r|\n|\r)?(\s*)?message_RU: (.*?),(\n\r|\n|\r)?(\s*)?message: (.*?)(\n\r|\n|\r)?(\s*)?}\)/;
 	let hTwo = handlerTwo.exec(modified);
 	while(hTwo){
-		modified = modified.replace(hTwo[0], `extras.sendMessage(${hTwo[9]})`);
+		modified = modified.replace(hTwo[0], `extras.sendMessage(mod, ${hTwo[9]})`);
 		hTwo = handlerTwo.exec(modified);
 	}
 

@@ -17,13 +17,13 @@ exports.guide = (mod, extras) => {
 
 		timer1 = mod.setTimeout(() => {
 			if(!is_hp_74_39){
-				extras.sendMessage("Shield in 5 seconds!");
+				extras.sendMessage(mod, "Shield in 5 seconds!");
 			}
 		}, 85000);
 
 		timer2 = mod.setTimeout(() => {
 			if(!is_hp_74_39){
-				extras.sendMessage("Shield in 15 seconds!");
+				extras.sendMessage(mod, "Shield in 15 seconds!");
 			}
 		}, 75000);
 	}
@@ -44,7 +44,7 @@ exports.guide = (mod, extras) => {
 				is_hp_74_39 = false;
 				mod.setTimeout(() => print_shield = true, 15000);
 
-				extras.sendMessage("Ready for Shield");
+				extras.sendMessage(mod, "Ready for Shield");
 			}
 		}
 	}

@@ -12,25 +12,24 @@ exports.guide = (mod, extras) => {
 		switch(skillid){
 			case 3119: // red inside
 				if(debuff === 1){
-					extras.sendMessage("OUT (blue)");
+					extras.sendMessage(mod, "OUT (red inside)");
 				}
 				if(debuff === 2){
-					extras.sendMessage("IN (red)");
+					extras.sendMessage(mod, "IN (red inside)");
 				}
 				break;
 
 			case 3220: // blue inside
 				if(debuff === 1){
-					extras.sendMessage("IN (blue)");
+					extras.sendMessage(mod, "IN (blue inside)");
 				}
 				if(debuff === 2){
-					extras.sendMessage("OUT (red)");
+					extras.sendMessage(mod, "OUT (blue inside)");
 				}
 				break;
 
 			case 30231000: // red debuff
 				debuff = 1;
-
 				mod.clearTimeout(timer1);
 				mod.clearTimeout(timer2);
 
@@ -39,7 +38,6 @@ exports.guide = (mod, extras) => {
 
 			case 30231001: // blue debuff
 				debuff = 2;
-
 				mod.clearTimeout(timer2);
 				mod.clearTimeout(timer1);
 

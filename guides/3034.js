@@ -24,7 +24,7 @@ exports.guide = (mod, extras) => {
 		if(orb_notice){
 			orb_notice = false;
 
-			extras.sendMessage("Throwing Orb");
+			extras.sendMessage(mod, "Throwing Orb");
 
 			mod.setTimeout(() => orb_notice = true, 13000);
 		}
@@ -103,7 +103,7 @@ exports.guide = (mod, extras) => {
 		if(code){
 			message += `, Code: ${mech_reverse ? "0" : "1"}`;
 		}
-		extras.sendMessage(message);
+		extras.sendMessage(mod, message);
 	}
 
 	// S-attacks
@@ -114,18 +114,18 @@ exports.guide = (mod, extras) => {
 		const delay = boss_seventy ? 2000 : 0;
 		let duration = boss_seventy ? 800 : 900;
 		if([1160, 1190].includes(skillid)){
-			extras.sendMessage("Right Safe");
+			extras.sendMessage(mod, "Right Safe");
 		}
 		if([1170, 1180].includes(skillid)){
-			extras.sendMessage("Left Safe");
+			extras.sendMessage(mod, "Left Safe");
 		}
 		if([1160, 1170, 1180, 1190].includes(skillid) && boss_seventy){ // <70%
 			if(mech_reverse){
-				extras.sendMessage("Triple-S | Out");
-				extras.sendMessage("Out");
+				extras.sendMessage(mod, "Triple-S | Out");
+				extras.sendMessage(mod, "Out");
 			} else {
-				extras.sendMessage("Triple-S | In");
-				extras.sendMessage("In");
+				extras.sendMessage(mod, "Triple-S | In");
+				extras.sendMessage(mod, "In");
 			}
 			mod.setTimeout(() => { create.circle(false, 445, 0, 0, 10, 300, 2000); }, 5000);
 			duration = 2000;

@@ -38,18 +38,18 @@ exports.guide = (mod, extras) => {
 			powerMsg = `{${Level}}`;
 
 			if(Level == 4){
-				extras.sendMessage("Fully charged!");
+				extras.sendMessage(mod, "Fully charged!");
 			} else if(Level == 2 && steptwo){
-				extras.sendMessage("Fully charged!");
+				extras.sendMessage(mod, "Fully charged!");
 			}
 
 			if(powerMsg !== null && skillid !== 399){
 				if(!steptwo && Level !== 4){
-					extras.sendMessage(powerMsg);
+					extras.sendMessage(mod, powerMsg);
 				}
 
 				if(steptwo && Level !== 2){
-					extras.sendMessage(powerMsg);
+					extras.sendMessage(mod, powerMsg);
 				}
 			}
 			if(skillid === 399){steptwo = true;}

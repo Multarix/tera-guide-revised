@@ -11,13 +11,13 @@ exports.guide = (mod, extras) => {
 
 	function skilld_event(skillid, ent){
 		if(skillid == 90442304){
-			extras.sendMessage("Stun");
-			extras.sendMessage("Stun");
+			extras.sendMessage(mod, "Stun");
+			extras.sendMessage(mod, "Stun");
 		}
 
 		if(notice && skillid == 305){
 			notice = false;
-			extras.sendMessage("Laser");
+			extras.sendMessage(mod, "Laser");
 
 			mod.setTimeout(() => notice = true, 4000);
 		}
@@ -78,7 +78,7 @@ exports.guide = (mod, extras) => {
 
 	function print_th(){
 		if(print){
-			extras.sendMessage("Laser (loading)");
+			extras.sendMessage(mod, "Laser (loading)");
 		}
 
 		print = false;
@@ -86,7 +86,7 @@ exports.guide = (mod, extras) => {
 
 	function print_end(){
 		if(printend){
-			extras.sendMessage("Laser (loading)");
+			extras.sendMessage(mod, "Laser (loading)");
 			mod.setTimeout(extras.sendMessage, 30000, "Laser (loading)");
 		}
 		printend = false;

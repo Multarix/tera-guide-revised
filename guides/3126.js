@@ -62,7 +62,7 @@ exports.guide = (mod, extras) => {
 
 		timer1 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Debuff 20 seconds");
+				extras.sendMessage(mod, "Debuff 20 seconds");
 			}
 		}, 50000);
 
@@ -71,34 +71,34 @@ exports.guide = (mod, extras) => {
 				mod.setTimeout(() => {
 					extras.sendMessage((`${debuff_messages[debuff % 2].message}`));
 				}, 2000);
-				extras.sendMessage("Debuff 50 seconds");
+				extras.sendMessage(mod, "Debuff 50 seconds");
 			}
 		}, 70000);
 
 		timer3 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 15 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 15 seconds");
 			}
 		}, 55000);
 
 		timer4 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 10 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 10 seconds");
 			}
 		}, 60000);
 
 		timer5 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 5 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 5 seconds");
 			}
 		}, 65000);
 
 		if(blue){
-			extras.sendMessage((`${mech_messages[(qbacting + debuff + 1) % 2].message}`));
+			extras.sendMessage(mod, (`${mech_messages[(qbacting + debuff + 1) % 2].message}`));
 
 			spawn_marker((qbacting + debuff + 1) % 2);
 		} else if(red){
-			extras.sendMessage((`${mech_messages[(qbacting + debuff) % 2].message}`));
+			extras.sendMessage(mod, (`${mech_messages[(qbacting + debuff) % 2].message}`));
 
 			spawn_marker((qbacting + debuff) % 2);
 		}

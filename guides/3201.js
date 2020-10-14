@@ -17,7 +17,7 @@ exports.guide = (mod, extras) => {
 
 			mod.setTimeout(() => {
 				if(boss === 1){
-					extras.sendMessage("Debuff reload");
+					extras.sendMessage(mod, "Debuff reload");
 					boss = null;
 				}
 			}, 80000);
@@ -28,7 +28,7 @@ exports.guide = (mod, extras) => {
 
 			mod.setTimeout(() => {
 				if(boss === 0){
-					extras.sendMessage("Debuff reload");
+					extras.sendMessage(mod, "Debuff reload");
 					boss = null;
 				}
 			}, 80000);
@@ -39,13 +39,13 @@ exports.guide = (mod, extras) => {
 			mod.setTimeout(() => notice = true, 4000);
 
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon...");
+				extras.sendMessage(mod, "Debuff coming soon...");
 			}, 55000);
 		}
 
 		if(notice && skillid === 234){
 			mod.setTimeout(() => {
-				extras.sendMessage("Debuff coming soon...");
+				extras.sendMessage(mod, "Debuff coming soon...");
 			}, 55000);
 		}
 	}

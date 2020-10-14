@@ -60,37 +60,37 @@ exports.guide = (mod, extras) => {
 
 		timer1 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Debuff 20 seconds");
+				extras.sendMessage(mod, "Debuff 20 seconds");
 			}
 		}, 70000);
 		timer2 = mod.setTimeout(() => {
 			if(debuff != null){
 				mod.setTimeout(() => {
-					extras.sendMessage((`${debuff_messages[debuff % 2].message}`));
+					extras.sendMessage(mod, (`${debuff_messages[debuff % 2].message}`));
 				}, 2000);
-				extras.sendMessage("Debuff 50 seconds");
+				extras.sendMessage(mod, "Debuff 50 seconds");
 			}
 		}, 40000);
 		timer3 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 15 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 15 seconds");
 			}
 		}, 75000);
 		timer4 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 10 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 10 seconds");
 			}
 		}, 80000);
 		timer5 = mod.setTimeout(() => {
 			if(debuff != null){
-				extras.sendMessage("Warning! Debuff 5 seconds");
+				extras.sendMessage(mod, "Warning! Debuff 5 seconds");
 			}
 		}, 85000);
 		if(blue){
-			extras.sendMessage((`${mech_messages[(qbacting + debuff + 1) % 2].message}`));
+			extras.sendMessage(mod, (`${mech_messages[(qbacting + debuff + 1) % 2].message}`));
 			spawn_marker((qbacting + debuff + 1) % 2);
 		} else if(red){
-			extras.sendMessage((`${mech_messages[(qbacting + debuff) % 2].message}`));
+			extras.sendMessage(mod, (`${mech_messages[(qbacting + debuff) % 2].message}`));
 			spawn_marker((qbacting + debuff) % 2);
 		}
 	}
@@ -172,10 +172,10 @@ exports.guide = (mod, extras) => {
 		if([213, 214].includes(skillid)){ // Ice inside
 			mod.setTimeout(() => {
 				if(debuff != null){
-					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
+					extras.sendMessage(mod, mod, `Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
 					spawn_marker((qbacting + debuff + 1) % 2);
 				} else {
-					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message})`);
+					extras.sendMessage(mod, mod, `Fire inside (${qbacting_messages[qbacting].message})`);
 				}
 			}, 500);
 			blue = true;
@@ -186,10 +186,10 @@ exports.guide = (mod, extras) => {
 		if([212, 215].includes(skillid)){ // Fire inside
 			mod.setTimeout(() => {
 				if(debuff != null){
-					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
+					extras.sendMessage(mod, mod, `Fire inside (${qbacting_messages[qbacting].message}) | ${mech_messages[(qbacting + debuff) % 2].message}`);
 					spawn_marker((qbacting + debuff) % 2);
 				} else {
-					extras.sendMessage(mod, `Fire inside (${qbacting_messages[qbacting].message})`);
+					extras.sendMessage(mod, mod, `Fire inside (${qbacting_messages[qbacting].message})`);
 				}
 			}, 500);
 
