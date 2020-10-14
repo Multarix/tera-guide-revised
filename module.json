@@ -1,20 +1,20 @@
 {
-    "disableAutoUpdate": true,
-    "name": "Guide-Mod",
-    "options": {
-        "niceName": "Guide",
-        "guiName": "Tera Guide",
-        "settingsFile": "config.json",
-        "settingsMigrator": "settings_migrator.js",
-        "settingsVersion": "1.0",
-				"reloadable": true
-    },
-    "author": "Multairx",
-    "description": "Display attack notifications and attack zones of boss monsters",
-    "servers": ["https://raw.githubusercontent.com/multarix/tera-guide-revised/master/"],
-    "supportUrl": "https://github.com/multarix/tera-guide-revised/issues",
-    "dependencies": {
-        "library": "https://raw.githubusercontent.com/tera-toolbox-mods/library/master/module.json"
-    },
-    "version": "1.0"
+	"disableAutoUpdate": false,
+	"name": "Guide-Mod",
+	"options": {
+		"niceName": "Guide",
+		"guiName": "Tera Guide",
+		"settingsFile": "config.json",
+		"settingsMigrator": "settings_migrator.js",
+		"settingsVersion": "1.0",
+		"reloadable": true
+	},
+	"author": "Multairx",
+	"description": "Display attack notifications and attack zones of boss monsters",
+	"servers": ["https://raw.githubusercontent.com/multarix/tera-guide-revised/master/"],
+	"supportUrl": "https://github.com/multarix/tera-guide-revised/issues",
+	"dependencies": {
+		"library": "https://raw.githubusercontent.com/tera-toolbox-mods/library/master/module.json"
+	},
+	"version": "1.0"
 }
