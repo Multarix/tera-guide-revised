@@ -12,19 +12,19 @@ exports.guide = (mod, extras) => {
 		switch(skillid){
 			case 3119: // red inside
 				if(debuff === 1){
-					extras.sendMessage(mod, "OUT (red inside)");
+					extras.sendMessage(mod, "OUT");
 				}
 				if(debuff === 2){
-					extras.sendMessage(mod, "IN (red inside)");
+					extras.sendMessage(mod, "IN");
 				}
 				break;
 
 			case 3220: // blue inside
 				if(debuff === 1){
-					extras.sendMessage(mod, "IN (blue inside)");
+					extras.sendMessage(mod, "IN");
 				}
 				if(debuff === 2){
-					extras.sendMessage(mod, "OUT (blue inside)");
+					extras.sendMessage(mod, "OUT");
 				}
 				break;
 
