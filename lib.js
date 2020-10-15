@@ -234,7 +234,7 @@ class spawn {
 				case "item":
 					that.extras.spawnHandler(that.mod, that.extras, {
 						spawnType: "S_SPAWN_DROPITEM",
-						spawnVersion: 9,
+						spawnVersion: (that.mod.majorPatchVersion <= 99) ? 9 : 8,
 						despawnType: "S_DESPAWN_DROPITEM",
 						despawnVersion: 4,
 						id: item,
