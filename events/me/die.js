@@ -1,4 +1,5 @@
 module.exports = (mod, extras) => {
+	if(!mod.settings.enabled || !extras.active_guide || !extras.verbose) return;
 	const { player } = mod.require.library;
 
 	const eventKey = `death`;
