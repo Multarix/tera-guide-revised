@@ -3,7 +3,7 @@
 // made by michengs / HSDN
 
 exports.guide = (mod, extras) => {
-	const { HIGHLIGHT_ITEM } = module.parent.exports.spawn;
+	const { HIGHLIGHT_ITEM } = require("../lib.js");
 
 	let timer1 = null;
 	let timer2 = null;

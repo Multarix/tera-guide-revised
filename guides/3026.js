@@ -4,7 +4,7 @@
 
 exports.guide = (mod, extras) => {
 	const { player } = mod.require.library;
-	const { MARKER_ITEM } = module.parent.exports.spawn;
+	const { MARKER_ITEM } = require("../lib.js");
 
 	let debuff = null;
 	let timer1 = null;

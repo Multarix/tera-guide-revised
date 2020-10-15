@@ -4,7 +4,6 @@
 
 exports.guide = (mod, extras) => {
 
-
 	let thirdboss_fifty = false;
 
 	function thirdboss_message_event(skillid){

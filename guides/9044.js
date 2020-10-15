@@ -4,7 +4,6 @@
 
 exports.guide = (mod, extras) => {
 
-
 	let print = false;
 	let notice = true;
 	let printend = false;
