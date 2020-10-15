@@ -12,7 +12,7 @@ module.exports = (mod, extras, evt) => {
 	let entai = {};
 
 	abnormalType:{
-		if(source_ent && player.isMe(evt.target)){ // If the mob/boss applies an abnormality to me
+		if(player.isMe(evt.target) && source_ent){ // If the mob/boss applies an abnormality to me
 			abnType = "am";
 			entai = source_ent;
 			break abnormalType;
@@ -20,7 +20,7 @@ module.exports = (mod, extras, evt) => {
 
 		if(player.isMe(evt.target) && (evt.source || 0) == 0){ // If "nothing"/server applies an abnormality to me
 			abnType = "ae";
-			entai = { huntingZoneId: 0, templateId: 0 };
+			entai = Object.assign({ huntingZoneId: 0, templateId: 0 }, player);
 			break abnormalType;
 		}
 
