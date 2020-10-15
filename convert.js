@@ -55,7 +55,8 @@ const replacer = async (content) => {
 		.replace(/dispatch/g, "mod")
 		.replace(/position: "heal"/g, `position: "healer"`)
 		.replace(/function: "marker"/g, `"function": "marker"`)
-		.replace(/handlers\.event\(/g, `extras.eventHandler(`);
+		.replace(/handlers\.event\(/g, `extras.eventHandler(`)
+		.replace(/module.parent.exports.spawn;/g, `require("../lib.js);`);
 
 
 	const itemReplace = /function: "item", args: \[(.*?), (.*?), (.*?), (.*?), (.*?)\]/;
