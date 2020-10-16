@@ -7,7 +7,7 @@ module.exports = function TeraGuide(mod){
 
 	// Extra stuff that we need
 	const extras = {
-		guides: {}, // The list of guides that we have
+		guides: [], // The list of guides that we have
 		active_guide: false, // The current active guide, if it doesn't exist, it should be false
 		lastLocation: 0, // The last location we were at
 		verbose: null, // If the dungeon has been disabled
