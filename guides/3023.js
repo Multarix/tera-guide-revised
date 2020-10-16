@@ -44,7 +44,7 @@ exports.guide = (mod, extras) => {
 				timer2 = mod.setTimeout(() => debuff = 0, 70000);
 				break;
 
-			case 99020020: // debuff removed
+			case "death": // debuff removed
 				debuff = 0;
 				mod.clearTimeout(timer1);
 				mod.clearTimeout(timer2);
@@ -103,7 +103,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 6000] }],
 		"am-3023-1000-30231000": [{ type: "function", function: firstboss_debuff_event, args: [30231000] }],
 		"am-3023-1000-30231001": [{ type: "function", function: firstboss_debuff_event, args: [30231001] }],
-		"death": [{ type: "function", function: firstboss_debuff_event, args: [99020020] }], // Debuff removed
+		"death": [{ type: "function", function: firstboss_debuff_event, args: ["death"] }], // Debuff removed
 		"ae-0-0-30231000": [{ type: "function", function: firstboss_debuff_event, args: [30231000] }], // Red debuff
 		"ae-0-0-30231001": [{ type: "function", function: firstboss_debuff_event, args: [30231001] }], // Blue debuff
 		"s-3023-1000-3107-0": [{ type: "text", message: "Smash" },

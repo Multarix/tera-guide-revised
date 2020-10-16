@@ -199,7 +199,7 @@ exports.guide = (mod, extras) => {
 			mod.setTimeout(() => red = false, 6500);
 		}
 
-		if(skillid === 99020020){ // Death release debuff
+		if(skillid === "death"){ // Death release debuff
 			mod.clearTimeout(timer1);
 			mod.clearTimeout(timer2);
 		}
@@ -277,7 +277,7 @@ exports.guide = (mod, extras) => {
 		"qb-3026-1000-3026004": [{ type: "function", function: skilld_event, args: [3026004] }], // ярость, разные цвета
 		"qb-3026-1000-3126005": [{ type: "function", function: skilld_event, args: [3126005] }], // ужас, одинаковые цвета
 		"qb-3026-1000-3126004": [{ type: "function", function: skilld_event, args: [3126004] }], // ярость, разные цвета
-		"ae-0-0-99020020": [{ type: "function", function: skilld_event, args: [99020020] }],
+		"death": [{ type: "function", function: skilld_event, args: ["death"] }],
 		"am-3026-1000-30260001": [{ type: "function", function: skilld_event, args: [30260001] }], // красный
 		"am-3026-1000-30260002": [{ type: "function", function: skilld_event, args: [30260002] }], // синий
 		"am-3026-1000-31260001": [{ type: "function", function: skilld_event, args: [31260001] }], // красный
