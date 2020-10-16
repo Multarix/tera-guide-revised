@@ -30,8 +30,11 @@ module.exports = (mod, extras, evt) => {
 			break abnormalType;
 		}
 	}
-	if(!abnType) return;
+	if(!abnType){ // Unknown Origin
+		abnType = "au";
+		entai = player;
+	}
 
-	const abnormalKey = `${abnType}-${(abnType === "ae") ? 0 : entai.huntingZoneId}-${(abnType === "ae") ? 0 : entai.templateId}-${evt.id}`;
+	const abnormalKey = `${abnType}-${(["ae", "au"].includes(abnType)) ? 0 : entai.huntingZoneId}-${(["ae", "au"].includes(abnType)) ? 0 : entai.templateId}-${evt.id}`;
 	extras.eventHandler(mod, extras, { event: abnormalKey, target: false, ent: entai, color: "#55e07a" });
 };
