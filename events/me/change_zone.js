@@ -4,6 +4,7 @@ module.exports = (mod, extras, zone, quick) => {
 	extras.bonfire = false;
 
 	if(extras.lastLocation === zone) return; // if the zone is the same as the last one, return
+	extras.despawnAll(mod, extras);
 	mod.clearAllTimeouts();
 	mod.clearAllIntervals();
 	extras.hookData.unload();

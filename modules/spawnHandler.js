@@ -1,8 +1,9 @@
 module.exports = (mod, extras, evtData) => {
 	const { library } = mod.require.library;
 
-	const sendEvent = (type, version, obj) => {
+	const sendEvent = (type, version, obj, despawn) => {
 		mod.send(type, version, obj);
+		if(despawn) extras.spawnedObjects.delete(obj.gameId);
 	};
 
 	if(evtData.spawnType !== "S_SPAWN_BONFIRE"){ // We want to be able to spawn bonfires anywhere no matter what
@@ -81,6 +82,7 @@ module.exports = (mod, extras, evtData) => {
 			return mod.error(`Invalid spawnType for spawn handler: ${evtData.spawnType}`);
 	}
 
-	sendEvent(spawnType, spawnVersion, spawnEvent);
-	mod.setTimeout(sendEvent, evtData.duration, despawnType, despawnVersion, despawnEvent);
+	sendEvent(spawnType, spawnVersion, spawnEvent, false);
+	const eventTimer = mod.setTimeout(sendEvent, evtData.duration, despawnType, despawnVersion, despawnEvent, true);
+	extras.spawnedObjects.set(uniqueIdent, { type: despawnType, version: despawnVersion, event: despawnEvent, timer: eventTimer });
 };

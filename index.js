@@ -7,7 +7,7 @@ module.exports = function TeraGuide(mod){
 
 	// Extra stuff that we need
 	const extras = {
-		guides: [], // The list of guides that we have
+		guides: {}, // The list of guides that we have
 		active_guide: false, // The current active guide, if it doesn't exist, it should be false
 		lastLocation: 0, // The last location we were at
 		verbose: null, // If the dungeon has been disabled
@@ -17,10 +17,12 @@ module.exports = function TeraGuide(mod){
 		mobHP: {}, // Mob hps
 		bonfire: false, // bonfire stuff
 		entity: false, // For using spawning inside of functions for guides
-		uint64: 0xFFFFFFFA,
+		uint64: 0xFFFFFFFA, // unint64 for spawning objects
 		spawnHandler: require(path.resolve(__dirname, "./modules/spawnHandler.js")),
 		sendMessage: require(path.resolve(__dirname, "./modules/sendMessage.js")),
 		eventHandler: require(path.resolve(__dirname, "./modules/eventHandler.js")),
+		despawnAll: require(path.resolve(__dirname, "./modules/despawnAll.js")),
+		spawnedObjects: new Map(),
 		debug: { // Debug object for debugging stuff later
 			abnormal: false,
 			skill: false,
@@ -30,9 +32,9 @@ module.exports = function TeraGuide(mod){
 		},
 		hookData: {
 			hooks: {}, // An object that contains all our hook information
-			hookArray: [],
+			hookArray: [], // An array of our currently loaded hooks
 			loaded: false, // If the hooks are currently loaded
-			load: function(){ // For loading hooks
+			load: function(){ // Function to load hooks
 				if(this.loaded || this.hookArray.length) return;
 				for(let h in this.hooks){
 					h = this.hooks[h];
@@ -40,7 +42,7 @@ module.exports = function TeraGuide(mod){
 				}
 				this.loaded = true;
 			},
-			unload: function(){ // For unloading hooks
+			unload: function(){ // Function to unload hooks
 				if(!this.loaded || !this.hookArray.length) return;
 				for(const h of this.hookArray){
 					mod.unhook(h);
@@ -296,12 +298,14 @@ module.exports = function TeraGuide(mod){
 	});
 
 	this.destructor = async () => { // When the mod gets unloaded
+		extras.despawnAll(mod, extras);
 		mod.clearAllTimeouts(); // Clear all timers
 		mod.clearAllIntervals();
 		cmd.remove("guide"); // Remove chat command
 		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/spawnHandler.js"))]; // Remove the spawnHandler requirement
 		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/sendMessage.js"))]; // Remove the sendMessage requirement
 		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/eventHandler.js"))]; // Remove the eventHandler requirement
+		delete require.cache[require.resolve(path.resolve(__dirname, "./modules/despawnAll.js"))]; // Remove the eventHandler requirement
 		extras.hookData.unload(); // Attempt unloading all hooks
 	};
 };
