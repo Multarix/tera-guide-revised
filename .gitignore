@@ -4,3 +4,5 @@ SHAGen.exe
 SHAGen.exe.config
 Newtonsoft.Json.dll
 generated-manifest.json
+manifest.js
+z_manifest.bat
