@@ -20,7 +20,7 @@ module.exports = (mod, extras, evt) => {
 
 		if(player.isMe(evt.target) && (evt.source || 0) == 0){ // If "nothing"/server applies an abnormality to me
 			abnType = "ae";
-			entai = Object.assign({ huntingZoneId: 0, templateId: 0 }, player);
+			entai = player;
 			break abnormalType;
 		}
 
@@ -32,6 +32,6 @@ module.exports = (mod, extras, evt) => {
 	}
 	if(!abnType) return;
 
-	const abnormalKey = `${abnType}-${entai.huntingZoneId}-${entai.templateId}-${evt.id}`;
+	const abnormalKey = `${abnType}-${(abnType === "ae") ? 0 : entai.huntingZoneId}-${(abnType === "ae") ? 0 : entai.templateId}-${evt.id}`;
 	extras.eventHandler(mod, extras, { event: abnormalKey, target: false, ent: entai, color: "#55e07a" });
 };
