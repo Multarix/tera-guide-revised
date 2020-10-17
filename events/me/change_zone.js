@@ -8,13 +8,12 @@ module.exports = (mod, extras, zone, quick) => {
 	mod.clearAllTimeouts();
 	mod.clearAllIntervals();
 	extras.hookData.unload();
-
-	if(extras.guides.includes(extras.lastLocation.toString())) extras.active_guide = false;
+	extras.active_guide = false;
 
 	extras.lastLocation = zone; // Set the last location to this current location
 	if(extras.entity) extras.entity = false; // Set entity to false
 
-	if(!extras.guides.includes(zone.toString())) return extras.active_guide = false; // if the zone is not a dungeon, return
+	if(!extras.guides.includes(zone.toString())) return;
 
 	const dungeon = mod.settings.dungeons[zone.toString()];
 	extras.verbose = dungeon.verbose;

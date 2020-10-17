@@ -13,7 +13,7 @@
 		"events/hooks/S_BOSS_GAGE_INFO.js": "68a0000b938767f7a35717a3ad5cd85f9141fda35a7119d081a8210819a6bd0d",
 		"events/hooks/S_DUNGEON_EVENT_MESSAGE.js": "ed8f48fd31f6c3df8f60b9e9f032d21edb248fd66d503fac6c9ff8a9a8701d9e",
 		"events/hooks/S_QUEST_BALLOON.js": "333588ea67bccf900da0dcca879de3174b8a5d22a56765cad93feba346a863e4",
-		"events/me/change_zone.js": "fcc54249376288ff222b0358a3a60cd8b1487fa44ce5371fbaf6fb0efef9fed7",
+		"events/me/change_zone.js": "391b53d900f5843773d5598e73a3b333a1189f80a5bf19c10808407de9cd715b",
 		"events/me/die.js": "e9892a8433ad81a7f703cc41d608cafe71c5332fa9e1f364b2eca36d5e8fa39d",
 		"events/me/ressurect.js": "7c483329c5a754ef447529c2227799efbe2c6597c39e7b1f5d89e5c8799e50d7",
 		"guides/3023.js": "42110a184bae063b27ee679b91a124be5d8ab0dda5db87713f0d945e692438f2",
