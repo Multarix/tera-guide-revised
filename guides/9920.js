@@ -53,8 +53,8 @@ exports.guide = (mod, extras) => {
 		{ type: "spawn", function: "marker", args: [false, 90, -250, 2500, true, null] },
 		{ type: "spawn", function: "vector", args: [553, 0, 0, 180, 500, 2500] },
 		{ type: "spawn", function: "vector", args: [553, 0, 0, 0, 500, 1500] },
-		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 18, 143, 5000], delay: 1500 },
-		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 12, 293, 5000], delay: 1500 }];
+		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 143, 5000], delay: 1500 },
+		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 293, 5000], delay: 1500 }];
 
 	const SPAWNING_SECOND_CIRCLE_FLOWERS = [{ type: "text", position: "tank", message: "Left Safe > Outward Waves" },
 		{ type: "text", position: "dps", message: "Right Safe > Outward Waves" },
@@ -62,8 +62,8 @@ exports.guide = (mod, extras) => {
 		{ type: "spawn", function: "marker", args: [false, 270, -250, 2500, true, null] },
 		{ type: "spawn", function: "vector", args: [553, 0, 0, 180, 500, 2500] },
 		{ type: "spawn", function: "vector", args: [553, 0, 0, 0, 500, 1500] },
-		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 18, 157, 5000], delay: 1500 },
-		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 12, 307, 5000], delay: 1500 }];
+		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 157, 5000], delay: 1500 },
+		{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 307, 5000], delay: 1500 }];
 
 	return {
 		// 1 BOSS

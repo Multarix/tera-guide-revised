@@ -144,7 +144,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] }],
 		"s-3201-2000-232-0": [{ type: "text", message: "In Safe" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 3, 1000, 3000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 1000, 3000] }],
 		"s-3201-2000-234-0": [{ type: "function", function: secondboss_debuff_event, args: [234] }],
 		"s-3201-2000-236-0": [{ type: "text", message: "Counter" }]
 	};

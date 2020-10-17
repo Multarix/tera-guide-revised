@@ -100,7 +100,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "semi", args: [90, 270, 553, 0, 0, 10, 300, 2000], delay: 100 }],
 		"s-3023-1000-116-0": [{ type: "text", message: "Kaia's Shield", position: "priest" },
 			{ type: "text", message: "Thrall of Protection", position: "mystic" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 6000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 500, 6000] }],
 		"am-3023-1000-30231000": [{ type: "function", function: firstboss_debuff_event, args: [30231000] }],
 		"am-3023-1000-30231001": [{ type: "function", function: firstboss_debuff_event, args: [30231001] }],
 		"death": [{ type: "function", function: firstboss_debuff_event, args: ["death"] }], // Debuff removed
@@ -115,10 +115,10 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 320, 5000] }],
 		"s-3023-1000-3119-0": [{ type: "function", function: firstboss_debuff_event, args: [3119] },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 270, 4000] },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 575, 4000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 575, 4000] }],
 		"s-3023-1000-3220-0": [{ type: "function", function: firstboss_debuff_event, args: [3220] },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 270, 4000] },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 575, 4000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 575, 4000] }],
 
 		// 2 BOSS
 		"nd-3023-2000": [{ type: "stop_timers" },
@@ -136,7 +136,7 @@ exports.guide = (mod, extras) => {
 			{ type: "text", message: "Big jump (Thrall of Protection)", position: "mystic" },
 			{ type: "text", delay: 110000, message: "Big jump soon...", position: "healer" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 500, 6000] },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 750, 6000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 750, 6000] }],
 		"s-3023-2000-202-0": [{ type: "text", message: "Backstab" },
 			{ type: "spawn", function: "vector", args: [553, 90, 80, 180, 500, 3000] },
 			{ type: "spawn", function: "vector", args: [553, 270, 80, 180, 500, 3000] }],

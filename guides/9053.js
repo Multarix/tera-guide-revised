@@ -18,9 +18,9 @@ exports.guide = (mod, extras) => {
 			{ type: "text", message: "Thrall of Protection", position: "mystic" },
 			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 10, 500, 6000] }],
 		"s-453-999-120-0": [{ type: "text", message: "AoE Waves" },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 14, 200, 5700] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 200, 5700] },
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 390, 6700] },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 590, 7700] }]
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 590, 7700] }]
 	};
 };
 

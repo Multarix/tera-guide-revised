@@ -153,8 +153,8 @@ exports.guide = (mod, extras) => {
 		// In-Out identification
 		if([212, 213, 214, 215].includes(skillid)){
 			boss_ent = ent;
-			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 440, 8000], delay: 200 },
-				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 4, 840, 8000], delay: 200 }]);
+			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 8000], delay: 200 },
+				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 840, 8000], delay: 200 }]);
 		}
 
 		if([212, 214].includes(skillid)){ // Fire claw (141, 142)
@@ -215,13 +215,13 @@ exports.guide = (mod, extras) => {
 		"112-0": [{ type: "text", message: "Ice DOT" }],
 		"110-0": [{ type: "text", message: "Fire DOT" }],
 		"108-0": [{ type: "text", message: "Turn Right (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"158-0": [{ type: "text", message: "Turn Right (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"109-0": [{ type: "text", message: "Turn Left (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"159-0": [{ type: "text", message: "Turn Left (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"120-0": [{ type: "text", message: "Together" }],
 		"145-0": [{ type: "text", message: "Stun" }],
 		"157-0": [{ type: "text", message: "Change" }],
@@ -259,7 +259,7 @@ exports.guide = (mod, extras) => {
 			{ type: "text", delay: 1200, message: "Dodge" }],
 
 		"206-0": [{ type: "text", message: "Jump Back" }],
-		"206-2": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 350, 3000] }],
+		"206-2": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 350, 3000] }],
 		"137-0": [{ type: "text", message: "Knockdown" }],
 		"138-0": [{ type: "text", message: "AOE" }],
 		"139-0": [{ type: "text", message: "60 degrees (Fire to all)" },

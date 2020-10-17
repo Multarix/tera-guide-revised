@@ -48,7 +48,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] }],
 		"s-3101-2000-232-0": [{ type: "text", message: "In Safe" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 3, 875, 3000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 875, 3000] }],
 		"s-3101-2000-234-0": [{ type: "text", message: "Debuffs" }],
 		"s-3101-2000-235-0": [{ type: "text", message: "Debuffs" }]
 	};

@@ -19,7 +19,7 @@ exports.guide = (mod, extras) => {
 		"nd-735-2000": [{ type: "stop_timers" },
 			{ type: "despawn_all" }],
 		"s-735-2000-102-0": [{ type: "text", message: "Pizza Cutter" },
-			{ type: "spawn", function: "circle", args: [true, 553, 0, 300, 12, 228, 3000] }],
+			{ type: "spawn", function: "circle", args: [true, 553, 0, 300, 10, 228, 3000] }],
 		"s-735-2000-105-0": [{ type: "text", message: "360" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 278, 4000] }],
 		"s-735-2000-108-0": [{ type: "text", message: "Back Swipe" },
@@ -27,7 +27,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 120, 380, 2000] }],
 		"s-735-2000-301-0": [{ type: "text", message: "Throwing Orb" }],
 		"s-735-2000-304-0": [{ type: "text", message: "Get Out" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 400, 4000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 400, 4000] }],
 		"s-735-2007-201-0": [{ type: "spawn", function: "vector", args: [912, 0, 0, 0, 500, 4000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 0, 90, 500, 4000] },
 			{ type: "spawn", function: "vector", args: [912, 0, 0, 180, 500, 4000] },
@@ -97,7 +97,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "point", args: [553, 340, 210, 3000] },
 			{ type: "spawn", function: "vector", args: [553, 350, 210, 0, 290, 3000] }],
 		"s-735-3000-129-0": [{ type: "text", position: "tank", message: "Dodge" }],
-		"s-735-3000-305-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 300, 7000] }],
+		"s-735-3000-305-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 7000] }],
 		"s-735-3000-321-0": [{ type: "text", message: "Shield!" }],
 		"s-735-3000-324-0": [{ type: "text", message: "Dodge" }]
 	};

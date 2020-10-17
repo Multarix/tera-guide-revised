@@ -245,7 +245,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", "id": 476, "sub_delay": 99999999, "pos": { x: -31846, y: 59444, z: 0 } },
 			{ type: "spawn", "id": 476, "sub_delay": 99999999, "pos": { x: -32379, y: 59750, z: 0 } }],
 		"s-3034-2000-102-0": [{ type: "text", message: "Pizza Cutter" },
-			{ type: "spawn", function: "circle", args: [true, 553, 0, 300, 12, 228, 3000] }],
+			{ type: "spawn", function: "circle", args: [true, 553, 0, 300, 10, 228, 3000] }],
 		"s-3034-2000-105-0": [{ type: "text", message: "360" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 278, 5000] }],
 		"s-3034-2000-108-0": [{ type: "text", message: "Back Swipe" },
@@ -253,7 +253,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "vector", args: [553, 0, 0, 120, 380, 2000] }],
 		"s-3034-2000-301-0": [{ type: "function", function: throwing_orb_event }],
 		"s-3034-2000-304-0": [{ type: "text", message: "Get Out" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 400, 4000] }],
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 400, 4000] }],
 		"s-3034-2000-305-0": [{ type: "text", message: "In | Out" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 200, 3000] }],
 		// Safe: |||2|2||| > ||||1|||| > ||3|||3||
@@ -342,10 +342,10 @@ exports.guide = (mod, extras) => {
 		"qb-3034-3000-3034312": [{ type: "text", message: "!!! Radar !!!" }],
 		"s-3034-3000-324-0": [{ type: "text", message: "OUT" },
 			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 250, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 12, 200, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 14, 150, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 18, 100, 3000] },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 50, 50, 3000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 200, 3000] },
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 150, 3000] },
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 100, 3000] },
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 50, 3000] }],
 		"s-3034-3000-325-0": [{ type: "text", message: "IN" },
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 3000] }]
 	};

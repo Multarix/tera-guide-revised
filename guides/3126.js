@@ -163,7 +163,7 @@ exports.guide = (mod, extras) => {
 		if([212, 213, 214, 215].includes(skillid)){
 			boss_ent = ent;
 
-			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 440, 11000], delay: 200 },
+			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 11000], delay: 200 },
 				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 4, 840, 11000], delay: 200 }]);
 		}
 
@@ -239,13 +239,13 @@ exports.guide = (mod, extras) => {
 		"112-0": [{ type: "text", message: "Ice DOT" }],
 		"110-0": [{ type: "text", message: "Fire DOT" }],
 		"108-0": [{ type: "text", message: "Turn Right (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"158-0": [{ type: "text", message: "Turn Right (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"109-0": [{ type: "text", message: "Turn Left (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"159-0": [{ type: "text", message: "Turn Left (Repel)" },
-			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 8, 440, 2000] }],
+			{ type: "spawn", function: "circle", args: [false, 912, 0, 0, 10, 440, 2000] }],
 		"120-0": [{ type: "text", message: "Together" }],
 		"145-0": [{ type: "text", message: "Stun" }],
 		"157-0": [{ type: "text", message: "Change" }],
@@ -277,7 +277,7 @@ exports.guide = (mod, extras) => {
 			{ type: "spawn", function: "circle", args: [false, 553, 0, 500, 10, 270, 4500] },
 			{ type: "spawn", function: "circle", args: [false, 553, 180, 500, 10, 270, 4750] }],
 		// AOE лед (малый)
-		"154-0": [{ type: "text", message: "Ice Storm" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 500, 6000] }],
+		"154-0": [{ type: "text", message: "Ice Storm" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 500, 6000] }],
 		// AOE огонь (малый)
 		"155-0": [{ type: "text", message: "Fire (Knockdown)" },
 			{ type: "text", delay: 1200, message: "Dodge" }],

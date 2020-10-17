@@ -36,11 +36,11 @@ exports.guide = (mod, extras) => {
 		"s-970-3000-1304-0": [{ type: "text", message: "Get Ready! (for in out mechanic)" }],
 		"s-970-3000-1303-0": [{ type: "text", message: "Get Ready! (for in out mechanic)" }],
 		// GO OUT then come in
-		"s-970-3000-2113-0": [{ type: "text", message: "Out > In" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 300, 5000] }],
-		"s-970-3000-1113-0": [{ type: "text", message: "Out > In" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 300, 5000] }],
+		"s-970-3000-2113-0": [{ type: "text", message: "Out > In" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 5000] }],
+		"s-970-3000-1113-0": [{ type: "text", message: "Out > In" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 5000] }],
 		// STAY IN then go out
-		"s-970-3000-2116-0": [{ type: "text", message: " In > Out" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 300, 5000] }],
-		"s-970-3000-1116-0": [{ type: "text", message: " In > Out" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 15, 300, 5000] }],
+		"s-970-3000-2116-0": [{ type: "text", message: " In > Out" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 5000] }],
+		"s-970-3000-1116-0": [{ type: "text", message: " In > Out" }, { type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 300, 5000] }],
 		// GET RED SKULL
 		"s-970-3000-1318-0": [{ type: "text", message: "Get red skull!" }],
 		"s-970-3000-1317-0": [{ type: "text", message: "Get red skull!" }],

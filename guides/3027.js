@@ -71,16 +71,16 @@ exports.guide = (mod, extras) => {
 
 		// прыжок
 		"s-3027-1000-116-0": [{ type: "text", message: "Jump" },
-			{ type: "spawn", function: "circle", args: [true, 413, 0, 180, 8, 560, 1000] }],
+			{ type: "spawn", function: "circle", args: [true, 413, 0, 180, 10, 560, 1000] }],
 		"s-3027-1000-116-1": [{ type: "text", message: "Dodge" },
-			{ type: "spawn", function: "circle", args: [true, 912, 0, 180, 8, 480, 3000] }],
+			{ type: "spawn", function: "circle", args: [true, 912, 0, 180, 10, 480, 3000] }],
 
 		// 3 оборота -> прыжок (145 -> 139 -> 140)
 		"s-3027-1000-145-0": [{ type: "text", message: "3x360 | Jump" }],
 		"s-3027-1000-139-0": [{ type: "text", delay: 1000, message: "Jump" },
-			{ type: "spawn", function: "circle", args: [true, 413, 0, 180, 8, 660, 1000], delay: 1000 }],
+			{ type: "spawn", function: "circle", args: [true, 413, 0, 180, 10, 660, 1000], delay: 1000 }],
 		"s-3027-1000-140-0": [{ type: "text", message: "Dodge" },
-			{ type: "spawn", function: "circle", args: [true, 912, 0, 180, 8, 480, 3000] }],
+			{ type: "spawn", function: "circle", args: [true, 912, 0, 180, 10, 480, 3000] }],
 
 		// 109 -> 402 -> 130
 		"s-3027-1000-109-0": [{ type: "text", message: "Forward Jump" }],
@@ -104,9 +104,9 @@ exports.guide = (mod, extras) => {
 
 		// стяжка -> бублики (350 -> 302)
 		"s-3027-1000-350-0": [{ type: "text", message: "Red: Donuts (Out > In)" },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 12, 240, 5000] },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 480, 5000] },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 3, 950, 5000] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 240, 5000] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 480, 5000] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 950, 5000] },
 			{ type: "spawn", function: "item", args: [HIGHLIGHT_ITEM, 0, 0, 1000], delay: 3800 },
 			{ type: "text", delay: 3800, message: "In" },
 			{ type: "spawn", function: "marker", args: [false, 180, 100, 1000, false, ["CENTER", "IN"]], delay: 3800 },
@@ -116,7 +116,7 @@ exports.guide = (mod, extras) => {
 			{ type: "text", delay: 58000, message: "Mechanics soon..." }],
 		// стяжка -> волна (357 -> 110)
 		"s-3027-1000-357-0": [{ type: "text", message: "Purple: Get Out" },
-			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 20, 500, 5000], delay: 2000 },
+			{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 500, 5000], delay: 2000 },
 			{ type: "text", delay: 58000, message: "Mechanics soon..." }],
 
 		// "s-3027-1000-114-0": [{ type: "text", message: "Eviscerate (slow)" }],

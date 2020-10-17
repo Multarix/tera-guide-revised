@@ -53,9 +53,9 @@ exports.guide = (mod, extras) => {
 		"s-3203-1000-107-0": [{ type: "text", message: "Bait" },
 			{ type: "function", function: back_kick_event, args: [107] }],
 		"s-3203-1000-110-0": [{ type: "text", message: "Spin" },
-			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 12, 420, 3000] }],
+			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 10, 420, 3000] }],
 		"s-3203-1000-114-0": [{ type: "text", message: "Leap (Knockdown)" },
-			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 12, 240, 2000] }],
+			{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 10, 240, 2000] }],
 		// "s-3203-1000-154-0": [{ type: "text", message: "Jumping Kick" }], // 154 310 116
 		// 310 116
 		"s-3203-1000-310-0": [{ type: "text", message: "Back Flip | Haymaker" },
@@ -79,17 +79,17 @@ exports.guide = (mod, extras) => {
 		// Donuts
 		"qb-3203-1000-32031008": [{ type: "text", message: "Donuts: Out > In > Dodge" }], // 32031008 303/304 117 155
 		"qb-3203-1000-32031009": [{ type: "text", message: "Donuts: In > Out > Dodge" }], // 32031009 303/304 118 155
-		"s-3203-1000-303-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 630, 7000] },
+		"s-3203-1000-303-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 630, 7000] },
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 12, 250, 5000] },
 			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 490, 5000] }],
-		"s-3203-1000-304-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 8, 630, 7000] },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 12, 250, 5000] },
-			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 8, 490, 5000] }],
+		"s-3203-1000-304-0": [{ type: "spawn", function: "circle", args: [false, 553, 0, 0, 10, 630, 7000] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 250, 5000] },
+			{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 490, 5000] }],
 		"s-3203-1000-155-0": [{ type: "text", delay: 400, message: "Dodge" }],
 
 		// Stun 142 148 129
 		"s-3203-1000-142-0": [{ type: "text", message: "Stun | Back Wave" }],
-		"s-3203-1000-148-0": [{ type: "spawn", function: "circle", args: [true, 912, 0, -10, 12, 300, 3000] }],
+		"s-3203-1000-148-0": [{ type: "spawn", function: "circle", args: [true, 912, 0, -10, 10, 300, 3000] }],
 		"s-3203-1000-129-0": [{ type: "text", message: "Back Wave" },
 			{ type: "spawn", function: "vector", args: [912, 90, 210, 390, 300, 2000] },
 			{ type: "spawn", function: "vector", args: [912, 90, 140, 380, 350, 2000] },
@@ -101,7 +101,7 @@ exports.guide = (mod, extras) => {
 
 		// Jump 143-0 143-1
 		"s-3203-1000-143-0": [{ type: "text", message: "Jump (Stun)" }],
-		"s-3203-1000-143-1": [{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 14, 240, 2000] }],
+		"s-3203-1000-143-1": [{ type: "spawn", function: "circle", args: [true, 553, 0, 0, 10, 240, 2000] }],
 
 		// AoE 313 314
 		"s-3203-1000-313-0": [{ type: "text", message: "AOE" }],
@@ -109,10 +109,10 @@ exports.guide = (mod, extras) => {
 
 		// Explosion 32031003 152 / 135
 		"s-3203-1000-152-0": [{ type: "text", message: "Explosion (Stun)" },
-			{ type: "spawn", function: "circle", args: [true, 912, 0, 0, 8, 460, 2500] },
+			{ type: "spawn", function: "circle", args: [true, 912, 0, 0, 10, 460, 2500] },
 			{ type: "text", delay: 58000, message: "Explosion soon..." }],
 		"s-3203-1000-135-0": [{ type: "text", message: "Explosion (Stun)" },
-			{ type: "spawn", function: "circle", args: [true, 912, 0, 0, 8, 460, 2500] },
+			{ type: "spawn", function: "circle", args: [true, 912, 0, 0, 10, 460, 2500] },
 			{ type: "text", delay: 58000, message: "Explosion soon..." }],
 
 		// Debuff
