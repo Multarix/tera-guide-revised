@@ -15,7 +15,7 @@
 		"events/hooks/S_QUEST_BALLOON.js": "333588ea67bccf900da0dcca879de3174b8a5d22a56765cad93feba346a863e4",
 		"events/me/change_zone.js": "391b53d900f5843773d5598e73a3b333a1189f80a5bf19c10808407de9cd715b",
 		"events/me/die.js": "e9892a8433ad81a7f703cc41d608cafe71c5332fa9e1f364b2eca36d5e8fa39d",
-		"events/me/ressurect.js": "7c483329c5a754ef447529c2227799efbe2c6597c39e7b1f5d89e5c8799e50d7",
+		"events/me/resurrect.js": "1905e7bd7c203156426f04dfc4aabeca4a0f518766416e78b1acb7b5f1cbd0f4",
 		"guides/3023.js": "e9d2cf592ac04cd2993cc503360f73fca0054e292c6dac59b5b6abd41f4ede00",
 		"guides/3026.js": "42a318071269a35b7fbead515816351bc7a5fa4ba75d2b54ad35d796621ea68a",
 		"guides/3027.js": "8c196fd5468c1ecc07be0d6f55bbab27e289b4c93450d625b6c1292f9aef1590",
