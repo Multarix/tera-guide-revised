@@ -108,9 +108,9 @@ const replacer = async (content) => {
 	let circle = circleReplace.exec(modified);
 	while(circle){
 		if(parseInt(circle[7]) > 0){
-			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}], delay: ${circle[7]}`);
+			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, 10, ${circle[6]}, ${circle[8]}], delay: ${circle[7]}`);
 		} else {
-			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, ${circle[5]}, ${circle[6]}, ${circle[8]}]`);
+			modified = modified.replace(circle[0], `function: "circle", args: [${circle[1]}, ${circle[2]}, ${circle[3]}, ${circle[4]}, 10, ${circle[6]}, ${circle[8]}]`);
 		}
 
 		circle = circleReplace.exec(modified);
