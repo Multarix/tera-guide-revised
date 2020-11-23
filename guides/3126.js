@@ -1,6 +1,7 @@
 // Corrupted Skynest (Hard)
 //
 // made by michengs / HSDN / ZC
+//
 
 exports.guide = (mod, extras) => {
 	const { player } = mod.require.library;
@@ -50,7 +51,7 @@ exports.guide = (mod, extras) => {
 			caption = "OUT";
 		}
 
-		extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
+		extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 135 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 225 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 315 + boss_offset, distance, 4000, true, [caption, "SAFE"]] }], boss_ent);
@@ -163,21 +164,21 @@ exports.guide = (mod, extras) => {
 		if([212, 213, 214, 215].includes(skillid)){
 			boss_ent = ent;
 
-			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 11000], delay: 200 },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 11000], delay: 200 },
 				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 4, 840, 11000], delay: 200 }]);
 		}
 
 		if([212, 214].includes(skillid)){ // Fire claw (141,  142)
 			boss_offset = 10;
 
-			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 190, 840, 11000], delay: 200 },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "vector", args: [553, 0, 0, 190, 840, 11000], delay: 200 },
 				{ type: "spawn", function: "vector", args: [553, 0, 0, 10, 840, 11000], delay: 200 }]);
 		}
 
 		if([213, 215].includes(skillid)){ // Ice claw (143,  144)
 			boss_offset = -10;
 
-			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 170, 840, 11000], delay: 200 },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "vector", args: [553, 0, 0, 170, 840, 11000], delay: 200 },
 				{ type: "spawn", function: "vector", args: [553, 0, 0, 350, 840, 11000], delay: 200 }]);
 		}
 

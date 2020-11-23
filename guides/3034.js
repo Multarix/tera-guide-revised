@@ -131,7 +131,7 @@ exports.guide = (mod, extras) => {
 			duration = 2000;
 		}
 		if([1160, 1161, 1162, 1163, 1190, 1191, 1192, 1193, 2220, 2222, 2231].includes(skillid)){ // right safe
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 160, 300, duration, true, null] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 160, 300, duration, true, null] },
 				{ type: "spawn", function: "marker", args: [false, 340, 300, duration, true, null] },
 				{ type: "spawn", function: "point", args: [202, 170, 200, duration] },
 				{ type: "spawn", function: "point", args: [202, 350, 200, duration] },
@@ -149,7 +149,7 @@ exports.guide = (mod, extras) => {
 				{ type: "spawn", function: "vector", args: [912, 350, 210, 0, 290, duration] }]);
 		}
 		if([1170, 1171, 1172, 1173, 1180, 1181, 1182, 1183, 2230, 2232, 2221].includes(skillid)){ // left safe
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 20, 300, duration, true, null] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 20, 300, duration, true, null] },
 				{ type: "spawn", function: "marker", args: [false, 200, 300, duration, true, null] },
 				{ type: "spawn", function: "point", args: [202, 10, 200, duration] },
 				{ type: "spawn", function: "point", args: [202, 190, 200, duration] },

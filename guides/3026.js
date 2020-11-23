@@ -48,7 +48,7 @@ exports.guide = (mod, extras) => {
 			caption = "OUT";
 		}
 
-		extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
+		extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 45 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 135 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 225 + boss_offset, distance, 4000, true, [caption, "SAFE"]] },
 			{ type: "spawn", function: "marker", args: [false, 315 + boss_offset, distance, 4000, true, [caption, "SAFE"]] }]);
@@ -107,7 +107,7 @@ exports.guide = (mod, extras) => {
 	function skilld_event(skillid, ent){
 		const abnormality_change = (added, event) => {
 			// Fire/Ice debuff
-			if(player.isMe(event.target.toString()) && [30260001, 30260002, 31260001, 31260002].includes(event.id)){
+			if(player.isMe(event.target.toString()) && [30260001, 30260002, 31260001, 31260002].includes(event.id)){ // Error: event is undefined
 				if(added){
 					debuff_added(event.id);
 				} else {
@@ -153,19 +153,19 @@ exports.guide = (mod, extras) => {
 		// In-Out identification
 		if([212, 213, 214, 215].includes(skillid)){
 			boss_ent = ent;
-			extras.eventHandler([{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 8000], delay: 200 },
-				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 840, 8000], delay: 200 }]);
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 440, 8000], delay: 200 },
+				{ type: "spawn", function: "circle", args: [false, 445, 0, 0, 10, 840, 8000], delay: 200 }]); // Error: Library undefiend
 		}
 
 		if([212, 214].includes(skillid)){ // Fire claw (141, 142)
 			boss_offset = 10;
-			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 190, 840, 8000], delay: 200 },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "vector", args: [553, 0, 0, 190, 840, 8000], delay: 200 },
 				{ type: "spawn", function: "vector", args: [553, 0, 0, 10, 840, 8000], delay: 200 }]);
 		}
 
 		if([213, 215].includes(skillid)){ // Ice claw (143, 144)
 			boss_offset = -10;
-			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 0, 0, 170, 840, 8000], delay: 200 },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "vector", args: [553, 0, 0, 170, 840, 8000], delay: 200 },
 				{ type: "spawn", function: "vector", args: [553, 0, 0, 350, 840, 8000], delay: 200 }]);
 		}
 
@@ -205,7 +205,7 @@ exports.guide = (mod, extras) => {
 		}
 
 		if(!debuff_tracker_started){
-			extras.hookData.hookArray.push(mod.hook("S_ABNORMALITY_BEGIN", 4, abnormality_change(true)));
+			extras.hookData.hookArray.push(mod.hook("S_ABNORMALITY_BEGIN", 4, abnormality_change(true))); // Error
 			extras.hookData.hookArray.push(mod.hook("S_ABNORMALITY_END", 1, abnormality_change(false)));
 			debuff_tracker_started = true;
 		}

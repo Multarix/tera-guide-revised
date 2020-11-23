@@ -1,6 +1,7 @@
 // Bahaar's Sanctum
 //
 // made by michengs
+//
 
 exports.guide = (mod, extras) => {
 
@@ -23,7 +24,7 @@ exports.guide = (mod, extras) => {
 
 		// Wawes
 		if([1121, 2121, 1140, 2140, 1123, 2123, 1142, 2142, 1122, 2122, 1141, 2141].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "vector", args: [553, 90, 50, 0, 500, 6000] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "vector", args: [553, 90, 50, 0, 500, 6000] },
 				{ type: "spawn", function: "vector", args: [553, 270, 50, 0, 500, 6000] },
 				{ type: "spawn", function: "vector", args: [553, 90, 50, 180, 500, 6000] },
 				{ type: "spawn", function: "vector", args: [553, 270, 50, 180, 500, 6000] },
@@ -33,39 +34,39 @@ exports.guide = (mod, extras) => {
 
 		// Left
 		if([1121, 2121].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 37, 125, 2533, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 37, 125, 2533, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 143, 125, 2533, false, ["safe", "safe"]] }]);
 		}
 
 		// Right
 		if([1140, 2140].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 323, 125, 2533, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 323, 125, 2533, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 217, 125, 2533, false, ["safe", "safe"]] }]);
 		}
 
 		// 2nd fast 123 142
 		// Left
 		if([1123, 2123].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 37, 125, 2500, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 37, 125, 2500, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 143, 125, 2500, false, ["safe", "safe"]] }]);
 		}
 
 		// Right
 		if([1142, 2142].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 323, 125, 2500, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 323, 125, 2500, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 217, 125, 2500, false, ["safe", "safe"]] }]);
 		}
 
 		// 3rd fast 122 141
 		// Left
 		if([1122, 2122].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 37, 125, 2533, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 37, 125, 2533, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 143, 125, 2533, false, ["safe", "safe"]] }]);
 		}
 
 		// Right
 		if([1141, 2141].includes(skillid)){
-			extras.eventHandler([{ type: "spawn", function: "marker", args: [false, 323, 125, 2533, false, ["safe", "safe"]] },
+			extras.eventHandler(mod, extras, [{ type: "spawn", function: "marker", args: [false, 323, 125, 2533, false, ["safe", "safe"]] },
 				{ type: "spawn", function: "marker", args: [false, 217, 125, 2533, false, ["safe", "safe"]] }]);
 		}
 	}
