@@ -1,5 +1,5 @@
 # **Tera Guide**
-THIS MODULE IS MOST LIKELY NOT UP TO DATE, I QUIT THE GAME QUIT SOME TIME AGO
+THIS MODULE IS MOST LIKELY NOT UP TO DATE, I QUIT THE GAME SOME TIME AGO<br>
 [HSDN'S GUIDE MODULE](https://github.com/hsdn/tera-guide-core)<br>
 It has been mostly re-written and should be more efficient and the code should be much more readable<br>
 <br>
