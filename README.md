@@ -1,5 +1,6 @@
 # **Tera Guide**
-A more organized/ cleaner version of the [tera-guide by HSDN](https://github.com/hsdn/tera-guide)<br>
+THIS MODULE IS MOST LIKELY NOT UP TO DATE, I QUIT THE GAME QUIT SOME TIME AGO
+[HSDN'S GUIDE MODULE](https://github.com/hsdn/tera-guide-core)<br>
 It has been mostly re-written and should be more efficient and the code should be much more readable<br>
 <br>
 This module requires the library module found <u>**[HERE](https://github.com/tera-toolbox-mods/library)**</u><br>
